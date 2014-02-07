@@ -7,9 +7,12 @@
  * user guide available at http://gradle.org/docs/1.10/userguide/tutorial_java_projects.html
  */
 
-/*
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+
+// add support for IDEs
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -29,4 +32,3 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile "junit:junit:4.11"
 }
-*/
