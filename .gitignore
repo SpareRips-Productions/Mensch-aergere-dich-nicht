@@ -8,3 +8,13 @@
 # for gradle
 .gradle
 build/
+
+# for eclipse
+.settings
+.classpath
+.project
+
+# for idea
+*.iml
+*.ipr
+*.iws
