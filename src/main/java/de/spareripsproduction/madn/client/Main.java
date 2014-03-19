@@ -6,6 +6,7 @@ package de.spareripsproduction.madn.client;
 public class Main {
 
     public static void main(String args[]) {
-        System.out.println("This is client main!");
+        Game madn = new Game();
+        madn.run();
     }
 }

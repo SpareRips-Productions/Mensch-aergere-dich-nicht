@@ -1,6 +1,7 @@
 package de.spareripsproduction.tinyengine.logic;
 
 import de.spareripsproduction.tinyengine.Timer;
+import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 
 import java.awt.*;
 
@@ -9,7 +10,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2014-03-11
  */
-public class Fps {
+public class Fps implements RenderInterface{
 
     private static Fps instance;
 
@@ -32,7 +33,7 @@ public class Fps {
         return Fps.instance;
     }
 
-    public void draw(Graphics2D context) {
+    public void render(Graphics2D context) {
         updateFps();
         //remember old states
         Color color = context.getColor();

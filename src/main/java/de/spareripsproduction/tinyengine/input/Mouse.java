@@ -27,7 +27,7 @@ public class Mouse {
 
         Color color = context.getColor();
         context.setColor(Color.green);
-        context.drawString(position, 1, bottomY-1);
+        context.drawString(position, 1, bottomY-3);
 
         context.setColor(color);
     }
