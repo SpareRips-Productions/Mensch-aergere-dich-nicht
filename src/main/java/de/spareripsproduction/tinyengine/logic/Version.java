@@ -24,8 +24,8 @@ public class Version implements RenderInterface {
     }
 
     public void render(Graphics2D context) {
-        int bottomY = de.spareripsproduction.tinyengine.Window.singleton().getHeight();
-        int bottomX = de.spareripsproduction.tinyengine.Window.singleton().getWidth();
+        int bottomY = GameWindow.singleton().getHeight();
+        int bottomX = GameWindow.singleton().getWidth();
         String versionString = this.getFullVersionDescription();
         int stringLength = context.getFontMetrics().stringWidth(versionString);
 
@@ -55,7 +55,7 @@ public class Version implements RenderInterface {
      * @return v{VESION}#{BUILD}-{CODENAME}
      */
     public String getFullVersionDescription() {
-        return String.format("v%s#%d-%s",this.getVersion(), this.getBuild(), this.getCodeName());
+        return String.format("v%s-\"%s\"",this.getVersion(), this.getCodeName());
     }
 
 

@@ -22,7 +22,7 @@ public class Game {
     private int delay;
 
     public Game(String title, int width, int height) {
-        Window.singleton(title, width, height);
+        GameWindow.singleton(title, width, height);
         lastLoop = 0;
         delay = 10;
     }
@@ -52,9 +52,9 @@ public class Game {
                 updater.update();
             }
             //render
-            int height = Window.singleton().getHeight();
-            int width = Window.singleton().getWidth();
-            Graphics2D context = Window.singleton().getGraphicsContext();
+            int height = GameWindow.singleton().getHeight();
+            int width = GameWindow.singleton().getWidth();
+            Graphics2D context = GameWindow.singleton().getGraphicsContext();
             context.setColor(Color.black);
             context.fillRect(0, 0, width, height);
 
@@ -62,7 +62,7 @@ public class Game {
                 renderer.render(context);
             }
 
-            Window.singleton().repaint();
+            GameWindow.singleton().repaint();
             long delta = lastLoop+delay-Timer.getTime();
             if(delta > 0) {
                 Timer.sleep(delta);
