@@ -1,5 +1,7 @@
 package de.spareripsproduction.tinyengine.input;
 
+import de.spareripsproduction.tinyengine.GameWindow;
+
 import java.awt.*;
 
 /**
@@ -23,7 +25,7 @@ public class Mouse {
 
     public static void drawLocation(Graphics context) {
         String position = String.format("Mouse: %d, %d", Mouse.getX(), Mouse.getY());
-        int bottomY = de.spareripsproduction.tinyengine.Window.singleton().getHeight();
+        int bottomY = GameWindow.singleton().getHeight();
 
         Color color = context.getColor();
         context.setColor(Color.green);

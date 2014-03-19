@@ -11,26 +11,26 @@ import java.awt.image.BufferStrategy;
  * @version 1.0
  * @since 2014-03-08
  */
-public class Window extends Canvas{
+public class GameWindow extends Canvas{
 
     private BufferStrategy strategy;
 
     private JFrame frame;
 
-    private static Window instance;
+    private static GameWindow instance;
 
-    public static Window singleton() {
-        return singleton("Window", 800, 600);
+    public static GameWindow singleton() {
+        return singleton("GameWindow", 800, 600);
     }
 
-    public static Window singleton(String title, int width, int height) {
-        if(Window.instance == null) {
-            Window.instance = new Window(title, width, height);
+    public static GameWindow singleton(String title, int width, int height) {
+        if(GameWindow.instance == null) {
+            GameWindow.instance = new GameWindow(title, width, height);
         }
-        return Window.instance;
+        return GameWindow.instance;
     }
 
-    public Window(String title, int width, int height) {
+    public GameWindow(String title, int width, int height) {
 
         frame = new JFrame(title);
 

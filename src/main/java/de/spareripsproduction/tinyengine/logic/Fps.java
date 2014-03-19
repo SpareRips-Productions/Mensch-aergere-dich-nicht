@@ -12,25 +12,16 @@ import java.awt.*;
  */
 public class Fps implements RenderInterface{
 
-    private static Fps instance;
-
     private long lastUpdated;
 
     private int framesCount;
 
     private int fps;
 
-    private Fps() {
+    public Fps() {
         this.lastUpdated = Timer.getTime();
         this.framesCount = 0;
         this.fps = 0;
-    }
-
-    public static Fps singleton() {
-        if(Fps.instance == null){
-            Fps.instance = new Fps();
-        }
-        return Fps.instance;
     }
 
     public void render(Graphics2D context) {
