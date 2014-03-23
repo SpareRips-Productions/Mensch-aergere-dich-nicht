@@ -3,6 +3,8 @@ package de.spareripsproduction.madn.client.scene;
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.Timer;
+import de.spareripsproduction.tinyengine.gui.TELabel;
+import de.spareripsproduction.tinyengine.gui.TESwitch;
 import de.spareripsproduction.tinyengine.input.Keyboard;
 
 import java.awt.*;
@@ -23,12 +25,34 @@ public class IntroScene extends Scene {
 
     private long lastAlphaUpdate;
 
+    private TELabel firstTitleLabel;
+
+    private TELabel secondTitleLabel;
+
+    private TELabel pressSpaceLabel;
+
+    private TESwitch tmpSwitch;
+
+    public void load() {
+        int fontSize = 85;
+        Font titleFont = new Font("Arizonia-Regular", Font.PLAIN, fontSize);
+        this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 0, titleFont);
+        this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
+
+        fontSize = 30;
+        Font pressSpaceFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
+        this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
+
+        this.tmpSwitch = new TESwitch(5, 5, 90, 50, 5,pressSpaceFont);
+    }
+    public void unload() {
+        this.firstTitleLabel = null;
+        this.secondTitleLabel = null;
+        this.pressSpaceLabel = null;
+    }
+
     @Override
     public void update() {
-        if(Keyboard.isPressed(KeyEvent.VK_SPACE)) {
-            Game.getInstance().loadScene(Scene.SCENE_MENU);
-        }
-
         if(this.lastAlphaUpdate == 0) {
             this.lastAlphaUpdate = Timer.getTime();
         }
@@ -49,6 +73,25 @@ public class IntroScene extends Scene {
             this.lastAlphaUpdate = Timer.getTime();
 
         }
+        //update Labels -> align them correct
+        int width = GameWindow.getInstance().getWidth();
+        int height = GameWindow.getInstance().getHeight();
+
+        this.firstTitleLabel.setY(height / 2 - this.firstTitleLabel.getHeight() / 2);
+        this.firstTitleLabel.verticalAlignCenter(0, width);
+
+        this.secondTitleLabel.setY(this.firstTitleLabel.getY()+ firstTitleLabel.getHeight());
+        this.secondTitleLabel.verticalAlignCenter(0, width);
+
+        this.pressSpaceLabel.setY(height*9/10 - this.pressSpaceLabel.getHeight()/2);
+        this.pressSpaceLabel.verticalAlignCenter(0, width);
+
+        if(Keyboard.isPressed(KeyEvent.VK_SPACE)) {
+            Game.getInstance().loadScene(Scene.SCENE_MENU);
+        }
+
+        this.tmpSwitch.setY(height-this.tmpSwitch.getHeight()-5);
+        this.tmpSwitch.update();
     }
 
     @Override
@@ -58,40 +101,19 @@ public class IntroScene extends Scene {
 
     private void renderStart(Graphics g) {
         Color color = g.getColor();
-        Font font = g.getFont();
 
         /*** Draw Title ***/
-        int fontSize = 85;
         g.setColor(Color.white);
-        g.setFont(new Font("Arizonia-Regular", Font.PLAIN, fontSize));
+        this.firstTitleLabel.render((Graphics2D) g);
+        this.secondTitleLabel.render((Graphics2D) g);
 
-
-        String firstLine = "Mensch ärgere";
-        int firstLineWidth = g.getFontMetrics().stringWidth(firstLine);
-        int centerFirstLineX = GameWindow.singleton().getWidth()/2 - firstLineWidth/2;
-        int centerFirstLineY = GameWindow.singleton().getHeight()/2 - fontSize/2;
-        g.drawString(firstLine, centerFirstLineX, centerFirstLineY);
-
-        String secondLine = "dich nicht!";
-        int secondLineWidth = g.getFontMetrics().stringWidth(secondLine);
-        int centerSecondLineX = GameWindow.singleton().getWidth()/2 - secondLineWidth/2;
-        int centerSecondLineY = centerFirstLineY + fontSize + fontSize/100;
-        g.drawString(secondLine, centerSecondLineX, centerSecondLineY);
+        this.tmpSwitch.render((Graphics2D) g);
 
         /*** draw press any key ***/
         g.setColor(new Color(1, 1, 1, this.alpha));
-        g.setFont(new Font("PressStart2P-Regular", Font.PLAIN, 30));
-        String startString = ">>Press Space";
-        int startStringLength = g.getFontMetrics().stringWidth(startString);
-        int centerStartX = GameWindow.singleton().getWidth()/2 - startStringLength/2;
-        int centerStartY = GameWindow.singleton().getHeight()*9/10-15;
-        g.drawString(startString, centerStartX, centerStartY);
-
+        this.pressSpaceLabel.render((Graphics2D) g);
 
         /*** reset ***/
         g.setColor(color);
-        g.setFont(font);
-
-
     }
 }
