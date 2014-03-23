@@ -20,7 +20,7 @@ public class Keyboard implements AWTEventListener{
         Toolkit.getDefaultToolkit().addAWTEventListener(this, AWTEvent.KEY_EVENT_MASK);
     }
 
-    protected static Keyboard singleton() {
+    protected static Keyboard getInstance() {
         if(Keyboard.instance == null) {
             Keyboard.instance = new Keyboard();
         }
@@ -29,28 +29,11 @@ public class Keyboard implements AWTEventListener{
 
     public static boolean isPressed(int key) {
 
-        return Keyboard.singleton().isKeyPressed(key);
+        return Keyboard.getInstance().isKeyPressed(key);
     }
 
     protected boolean isKeyPressed(int key) {
         return (key < 1024 && key >= 0) && keys[key];
-    }
-
-    /**
-     * Set the status of the key
-     *
-     * @param key The code of the key to set
-     * @param pressed The new status of the key
-     */
-    public static void setPressed(int key, boolean pressed) {
-        Keyboard.singleton().setKeyPressed(key, pressed);
-    }
-
-    protected void setKeyPressed(int key, boolean pressed) {
-        if(key < 1024 && key >= 0) {
-            keys[key] = pressed;
-        }
-
     }
 
     /******** Respond to key events ********/
@@ -64,7 +47,7 @@ public class Keyboard implements AWTEventListener{
         if (e.isConsumed()) {
             return;
         }
-        keys[e.getKeyCode()] = true;
+        this.keys[e.getKeyCode()] = true;
     }
 
     /**
@@ -97,13 +80,13 @@ public class Keyboard implements AWTEventListener{
      */
     public void eventDispatched(AWTEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
-            keyPressed((KeyEvent) e);
+            this.keyPressed((KeyEvent) e);
         }
         if (e.getID() == KeyEvent.KEY_RELEASED) {
-            keyReleased((KeyEvent) e);
+            this.keyReleased((KeyEvent) e);
         }
         if(e.getID() == KeyEvent.KEY_TYPED) {
-            keyTyped((KeyEvent) e);
+            this.keyTyped((KeyEvent) e);
         }
     }
 

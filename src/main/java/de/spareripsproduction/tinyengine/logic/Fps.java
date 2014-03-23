@@ -2,8 +2,10 @@ package de.spareripsproduction.tinyengine.logic;
 
 import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
+import de.spareripsproduction.tinyengine.gui.TELabel;
 
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 /**
  * @author Thomas Hampe <thomas@hampe.co>
@@ -18,10 +20,13 @@ public class Fps implements RenderInterface{
 
     private int fps;
 
+    private TELabel fpsLabel;
+
     public Fps() {
         this.lastUpdated = Timer.getTime();
         this.framesCount = 0;
         this.fps = 0;
+        this.fpsLabel = new TELabel("100FPS", 1, 15, new Font("PressStart2P-Regular", Font.PLAIN, 12));
     }
 
     public void render(Graphics2D context) {
@@ -29,7 +34,7 @@ public class Fps implements RenderInterface{
         //remember old states
         Color color = context.getColor();
         context.setColor(Color.green);
-        context.drawString(getFps()+"FPS", 1, 15);
+        this.fpsLabel.render(context);
 
         //reset
         context.setColor(color);
@@ -47,6 +52,7 @@ public class Fps implements RenderInterface{
             framesCount = 0;
             lastUpdated = now;
         }
+        this.fpsLabel.setText(String.format("%dFPS", this.getFps()));
     }
 
 }

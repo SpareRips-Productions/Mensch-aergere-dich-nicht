@@ -73,7 +73,7 @@ public class Sprite {
      * @param x The x location at which to draw the sprite
      * @param y The y location at which to draw the sprite
      */
-    public void draw(Graphics g,int x,int y) {
+    public void render(Graphics g,int x,int y) {
         g.drawImage(image,x,y,null);
     }
 }

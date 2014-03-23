@@ -20,7 +20,7 @@ public class SpriteStore {
         store = new HashMap<String, Sprite>();
     }
 
-    public static SpriteStore singleton() {
+    public static SpriteStore getInstance() {
         if(SpriteStore.instance == null) {
             SpriteStore.instance = new SpriteStore();
         }

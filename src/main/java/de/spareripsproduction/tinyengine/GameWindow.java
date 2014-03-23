@@ -19,11 +19,11 @@ public class GameWindow extends Canvas{
 
     private static GameWindow instance;
 
-    public static GameWindow singleton() {
-        return singleton("GameWindow", 800, 600);
+    public static GameWindow getInstance() {
+        return getInstance("GameWindow", 800, 600);
     }
 
-    public static GameWindow singleton(String title, int width, int height) {
+    public static GameWindow getInstance(String title, int width, int height) {
         if(GameWindow.instance == null) {
             GameWindow.instance = new GameWindow(title, width, height);
         }
@@ -40,10 +40,10 @@ public class GameWindow extends Canvas{
         panel.add(this);
 
         //ignore refresh
-        setIgnoreRepaint(true);
+        this.setIgnoreRepaint(true);
 
         frame.pack();
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setVisible(true);
 
         frame.addWindowListener(new WindowAdapter() {
@@ -73,5 +73,9 @@ public class GameWindow extends Canvas{
     public void repaint() {
         getGraphicsContext().dispose();
         strategy.show();
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 }
