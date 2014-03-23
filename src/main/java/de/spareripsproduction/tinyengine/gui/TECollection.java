@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 2014-03-22
  */
-public class TECollection extends TEView{
+public class TECollection extends TEView {
 
     protected ArrayList<TEView> collection;
 
@@ -32,7 +32,7 @@ public class TECollection extends TEView{
         this.collection.clear();
     }
 
-    public TEView get(int index){
+    public TEView get(int index) {
         return this.collection.get(index);
     }
 
@@ -41,13 +41,13 @@ public class TECollection extends TEView{
     }
 
     public void render(Graphics2D context) {
-        for(TEView view : this.collection) {
+        for (TEView view : this.collection) {
             view.render(context);
         }
     }
 
     public void update() {
-        for(TEView view : this.collection) {
+        for (TEView view : this.collection) {
             view.update();
         }
     }

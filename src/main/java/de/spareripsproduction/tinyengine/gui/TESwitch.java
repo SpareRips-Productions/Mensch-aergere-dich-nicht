@@ -1,10 +1,8 @@
 package de.spareripsproduction.tinyengine.gui;
 
 import de.spareripsproduction.tinyengine.Timer;
-import de.spareripsproduction.tinyengine.input.Mouse;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * @author Thomas Hampe <thomas@hampe.co>
@@ -31,17 +29,22 @@ public class TESwitch extends TEButton {
         Color color = context.getColor();
         Stroke stroke = context.getStroke();
 
-        if(this.isClicked()) {
+        if (this.isClicked()) {
             context.setColor(this.getClickedColor());
-        }else {
+        } else {
             context.setColor(this.getColor());
         }
         context.setStroke(new BasicStroke(this.getBorderSize()));
-        context.drawRect(this.getX()+this.getBorderSize()/2, this.getY()+this.getBorderSize()/2, this.getWidth()-this.getBorderSize(), this.getHeight()-this.getBorderSize());
+        context.drawRect(
+                this.getX() + this.getBorderSize() / 2,
+                this.getY() + this.getBorderSize() / 2,
+                this.getWidth() - this.getBorderSize(),
+                this.getHeight() - this.getBorderSize()
+        );
 
-        if(this.state) {
+        if (this.state) {
             this.renderEnabledState(context);
-        }else {
+        } else {
             this.renderDisabledState(context);
         }
 
@@ -53,7 +56,7 @@ public class TESwitch extends TEButton {
 
     public void update() {
         super.update();
-        if(this.isClicked() && (Timer.getTime() - this.lastClick) > 200) {
+        if (this.isClicked() && (Timer.getTime() - this.lastClick) > 200) {
             this.state = !this.state;
             this.lastClick = Timer.getTime();
 
@@ -64,23 +67,23 @@ public class TESwitch extends TEButton {
     private void renderEnabledState(Graphics2D context) {
         context.setColor(this.getColor());
         context.fillRect(
-                this.getX()+this.getWidth()/2,
-                this.getY()+this.getBorderSize(),
-                this.getWidth()/2-this.getBorderSize(),
-                this.getHeight()-2*this.getBorderSize()
+                this.getX() + this.getWidth() / 2,
+                this.getY() + this.getBorderSize(),
+                this.getWidth() / 2 - this.getBorderSize(),
+                this.getHeight() - 2 * this.getBorderSize()
         );
         context.setColor(this.getClickedColor());
         context.fillRect(
-                this.getX()+this.getBorderSize(),
-                this.getY()+this.getBorderSize(),
-                this.getWidth()/2-this.getBorderSize(),
-                this.getHeight()-2*this.getBorderSize()
+                this.getX() + this.getBorderSize(),
+                this.getY() + this.getBorderSize(),
+                this.getWidth() / 2 - this.getBorderSize(),
+                this.getHeight() - 2 * this.getBorderSize()
         );
 
         context.setColor(this.getColor());
         this.label.setText("1");
-        this.label.horizontalAlignCenter(this.getY(), this.getY()+this.getHeight());
-        this.label.verticalAlignCenter(this.getX(), this.getX() + this.getWidth()/2);
+        this.label.horizontalAlignCenter(this.getY(), this.getY() + this.getHeight());
+        this.label.verticalAlignCenter(this.getX(), this.getX() + this.getWidth() / 2);
         this.label.render(context);
 
     }
@@ -94,8 +97,11 @@ public class TESwitch extends TEButton {
                 this.getHeight() - 2 * this.getBorderSize()
         );
         this.label.setText("0");
-        this.label.horizontalAlignCenter(this.getY(), this.getY()+this.getHeight());
-        this.label.verticalAlignCenter(this.getX()+this.getWidth()/2, this.getX() + this.getWidth());
+        this.label.horizontalAlignCenter(this.getY(), this.getY() + this.getHeight());
+        this.label.verticalAlignCenter(
+                this.getX() + this.getWidth() / 2,
+                this.getX() + this.getWidth()
+        );
         this.label.render(context);
 
 

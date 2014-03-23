@@ -2,16 +2,14 @@ package de.spareripsproduction.tinyengine.input;
 
 import java.awt.*;
 import java.awt.event.AWTEventListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-22
  */
-public class Mouse implements AWTEventListener{
+public class Mouse implements AWTEventListener {
 
     private static Mouse instance;
 
@@ -20,7 +18,7 @@ public class Mouse implements AWTEventListener{
     private Point mouseLocation;
 
     public static Mouse getInstance() {
-        if(Mouse.instance == null) {
+        if (Mouse.instance == null) {
             Mouse.instance = new Mouse();
         }
         return Mouse.instance;
@@ -40,13 +38,13 @@ public class Mouse implements AWTEventListener{
 
     public Mouse() {
         this.buttons = new Point[4];
-        this.mouseLocation = new Point(0,0);
+        this.mouseLocation = new Point(0, 0);
         Toolkit.getDefaultToolkit().addAWTEventListener(this, AWTEvent.MOUSE_EVENT_MASK);
         Toolkit.getDefaultToolkit().addAWTEventListener(this, AWTEvent.MOUSE_MOTION_EVENT_MASK);
     }
 
     private Point getButtonPosition(int button) {
-        return (button >0 && button < 4) ? this.buttons[button] : null;
+        return (button > 0 && button < 4) ? this.buttons[button] : null;
     }
 
     private boolean isButtonPressed(int button) {
@@ -93,13 +91,13 @@ public class Mouse implements AWTEventListener{
      * @param e The event details
      */
     public void eventDispatched(AWTEvent e) {
-        if(e.getID() == MouseEvent.MOUSE_PRESSED) {
-           this.buttonPressed((MouseEvent) e);
+        if (e.getID() == MouseEvent.MOUSE_PRESSED) {
+            this.buttonPressed((MouseEvent) e);
         }
         if (e.getID() == MouseEvent.MOUSE_RELEASED) {
             this.buttonReleased((MouseEvent) e);
         }
-        if(e.getID() == MouseEvent.MOUSE_MOVED) {
+        if (e.getID() == MouseEvent.MOUSE_MOVED) {
             this.moved((MouseEvent) e);
         }
 

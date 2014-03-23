@@ -9,19 +9,19 @@ import java.awt.event.KeyEvent;
  * @version 1.0
  * @since 2014-03-10
  */
-public class Keyboard implements AWTEventListener{
+public class Keyboard implements AWTEventListener {
 
     private boolean[] keys;
 
     private static Keyboard instance;
 
     private Keyboard() {
-        keys = new boolean[1024];
+        this.keys = new boolean[1024];
         Toolkit.getDefaultToolkit().addAWTEventListener(this, AWTEvent.KEY_EVENT_MASK);
     }
 
     protected static Keyboard getInstance() {
-        if(Keyboard.instance == null) {
+        if (Keyboard.instance == null) {
             Keyboard.instance = new Keyboard();
         }
         return Keyboard.instance;
@@ -63,7 +63,7 @@ public class Keyboard implements AWTEventListener{
         KeyEvent nextPress = (KeyEvent) Toolkit.getDefaultToolkit().getSystemEventQueue().peekEvent(KeyEvent.KEY_PRESSED);
 
         if ((nextPress == null) || (nextPress.getWhen() != e.getWhen())) {
-            keys[e.getKeyCode()] = false;
+            this.keys[e.getKeyCode()] = false;
         }
 
     }
@@ -85,7 +85,7 @@ public class Keyboard implements AWTEventListener{
         if (e.getID() == KeyEvent.KEY_RELEASED) {
             this.keyReleased((KeyEvent) e);
         }
-        if(e.getID() == KeyEvent.KEY_TYPED) {
+        if (e.getID() == KeyEvent.KEY_TYPED) {
             this.keyTyped((KeyEvent) e);
         }
     }

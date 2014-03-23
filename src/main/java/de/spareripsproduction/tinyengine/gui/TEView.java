@@ -12,9 +12,9 @@ import java.awt.*;
  */
 public class TEView implements RenderInterface, UpdateInterface {
 
-    private int x,y;
+    private int x, y;
 
-    private int width,height;
+    private int width, height;
 
     public TEView(int x, int y, int width, int height) {
         this.x = x;
@@ -23,7 +23,7 @@ public class TEView implements RenderInterface, UpdateInterface {
         this.height = height;
     }
 
-    public  TEView(int x, int y) {
+    public TEView(int x, int y) {
         this(x, y, 0, 0);
     }
 
@@ -68,11 +68,11 @@ public class TEView implements RenderInterface, UpdateInterface {
     }
 
     public void verticalAlignCenter(int x1, int x2) {
-        this.setX(x1+(x2-x1)/2-this.getWidth()/2);
+        this.setX(x1 + (x2 - x1) / 2 - this.getWidth() / 2);
     }
 
     public void verticalAlignRight(int x) {
-        this.setX(x-this.getWidth());
+        this.setX(x - this.getWidth());
     }
 
     public void horizontalAlignCenter(int y1, int y2) {
@@ -80,7 +80,7 @@ public class TEView implements RenderInterface, UpdateInterface {
     }
 
     protected boolean insideView(Point p) {
-        return  (p.getX() >= this.getX() && p.getX() <= this.getX()+this.getWidth())
-            &&  (p.getY() >= this.getY() && p.getY() <= this.getY()+this.getHeight());
+        return (p.getX() >= this.getX() && p.getX() <= this.getX() + this.getWidth())
+                && (p.getY() >= this.getY() && p.getY() <= this.getY() + this.getHeight());
     }
 }

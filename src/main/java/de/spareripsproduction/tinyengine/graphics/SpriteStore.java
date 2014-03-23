@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class SpriteStore {
 
-    private HashMap<String,Sprite> store;
+    private HashMap<String, Sprite> store;
 
     private static SpriteStore instance;
 
@@ -21,7 +21,7 @@ public class SpriteStore {
     }
 
     public static SpriteStore getInstance() {
-        if(SpriteStore.instance == null) {
+        if (SpriteStore.instance == null) {
             SpriteStore.instance = new SpriteStore();
         }
         return SpriteStore.instance;
@@ -34,16 +34,16 @@ public class SpriteStore {
             return store.get(ref);
         }
         URL url = this.getClass().getClassLoader().getResource(ref);
-        if(url == null) {
+        if (url == null) {
             url = this.getClass().getClassLoader().getResource("sprites/notFound.png");
-            if(url == null) {
+            if (url == null) {
                 Core.log("Fallback 'notFound.png' not found!!!");
                 Core.exit(1);
             }
             return get("sprites/notFound.png");
         }
         Sprite sprite = new Sprite(url);
-        store.put(ref,sprite);
+        store.put(ref, sprite);
 
         return sprite;
     }

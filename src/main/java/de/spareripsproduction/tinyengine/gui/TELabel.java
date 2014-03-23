@@ -17,11 +17,11 @@ public class TELabel extends TEView {
 
     public TELabel(String text, int x, int y, Font font) {
         super(x, y, 0, 0);
-        this.text   = text;
+        this.text = text;
         this.setFont(font);
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this.getFont().getSize();
     }
 
@@ -61,7 +61,7 @@ public class TELabel extends TEView {
 
     public void horizontalAlignCenter(int y1, int y2) {
         super.horizontalAlignCenter(y1, y2);
-        this.setY(this.getY()+ this.getHeight());
+        this.setY(this.getY() + this.getHeight());
     }
 
 }

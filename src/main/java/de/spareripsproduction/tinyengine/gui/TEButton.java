@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
  * @version 1.0
  * @since 2014-03-21
  */
-public class TEButton extends TEView{
+public class TEButton extends TEView {
 
     private int borderSize;
 
@@ -29,7 +29,7 @@ public class TEButton extends TEView{
     public TEButton(String label, int x, int y, int width, int height, int borderSize, Font labelFont) {
         super(x, y, width, height);
         this.setBorderSize(borderSize);
-        this.label = new TELabel(label, this.getX()+this.getBorderSize(), this.getY()+this.getBorderSize(), labelFont);
+        this.label = new TELabel(label, this.getX() + this.getBorderSize(), this.getY() + this.getBorderSize(), labelFont);
         this.clicked = false;
         this.clickedColor = Color.green;
         this.highlightColor = Color.blue;
@@ -37,7 +37,7 @@ public class TEButton extends TEView{
     }
 
     public int getBorderSize() {
-        return borderSize;
+        return this.borderSize;
     }
 
     public void setBorderSize(int borderSize) {
@@ -48,23 +48,27 @@ public class TEButton extends TEView{
         Color color = context.getColor();
         Stroke stroke = context.getStroke();
 
-        if(this.isClicked()) {
+        if (this.isClicked()) {
             context.setColor(this.clickedColor);
-        } else if(this.isHighlighted()) {
+        } else if (this.isHighlighted()) {
             context.setColor(this.highlightColor);
         } else {
             context.setColor(this.color);
         }
         context.setStroke(new BasicStroke(this.getBorderSize()));
-        context.drawRect(this.getX()+this.getBorderSize()/2, this.getY()+this.getBorderSize()/2, this.getWidth()-this.getBorderSize(), this.getHeight()-this.getBorderSize());
+        context.drawRect(
+                this.getX() + this.getBorderSize() / 2,
+                this.getY() + this.getBorderSize() / 2,
+                this.getWidth() - this.getBorderSize(),
+                this.getHeight() - this.getBorderSize()
+        );
 
 
         context.setColor(this.color);
         this.label.verticalAlignCenter(this.getX(), this.getX() + this.getWidth());
-        int centerY = (this.getHeight()-this.label.getHeight())/2;
-        this.label.setY(this.getY()+this.getHeight()-centerY);
+        int centerY = (this.getHeight() - this.label.getHeight()) / 2;
+        this.label.setY(this.getY() + this.getHeight() - centerY);
         this.label.render(context);
-
 
         context.setColor(color);
         context.setStroke(stroke);
@@ -74,11 +78,10 @@ public class TEButton extends TEView{
         super.update();
 
         // check if clicked inside in mouse
-        if(Mouse.isClicked(MouseEvent.BUTTON1)) {
+        if (Mouse.isClicked(MouseEvent.BUTTON1)) {
             Point p = Mouse.position(MouseEvent.BUTTON1);
-            this.clicked = this.insideView(p)
-            ;
-        }else {
+            this.clicked = this.insideView(p);
+        } else {
             this.clicked = false;
         }
         // check if mouse inside button
@@ -94,14 +97,14 @@ public class TEButton extends TEView{
     }
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
     public Color getHighlightColor() {
-        return highlightColor;
+        return this.highlightColor;
     }
 
     public Color getClickedColor() {
-        return clickedColor;
+        return this.clickedColor;
     }
 }
