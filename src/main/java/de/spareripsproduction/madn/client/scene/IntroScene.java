@@ -31,11 +31,10 @@ public class IntroScene extends Scene {
 
     private TELabel pressSpaceLabel;
 
-    private TESwitch tmpSwitch;
 
     public void load() {
-        int fontSize = 85;
-        Font titleFont = new Font("Arizonia-Regular", Font.PLAIN, fontSize);
+        int fontSize = 50;
+        Font titleFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
         this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 0, titleFont);
         this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
 
@@ -43,7 +42,6 @@ public class IntroScene extends Scene {
         Font pressSpaceFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
         this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
 
-        this.tmpSwitch = new TESwitch(5, 5, 90, 50, 5,pressSpaceFont);
     }
     public void unload() {
         this.firstTitleLabel = null;
@@ -80,7 +78,7 @@ public class IntroScene extends Scene {
         this.firstTitleLabel.setY(height / 2 - this.firstTitleLabel.getHeight() / 2);
         this.firstTitleLabel.verticalAlignCenter(0, width);
 
-        this.secondTitleLabel.setY(this.firstTitleLabel.getY()+ firstTitleLabel.getHeight());
+        this.secondTitleLabel.setY(this.firstTitleLabel.getY() + firstTitleLabel.getHeight() + 10);
         this.secondTitleLabel.verticalAlignCenter(0, width);
 
         this.pressSpaceLabel.setY(height*9/10 - this.pressSpaceLabel.getHeight()/2);
@@ -90,8 +88,6 @@ public class IntroScene extends Scene {
             Game.getInstance().loadScene(Scene.SCENE_MENU);
         }
 
-        this.tmpSwitch.setY(height-this.tmpSwitch.getHeight()-5);
-        this.tmpSwitch.update();
     }
 
     @Override
@@ -106,8 +102,6 @@ public class IntroScene extends Scene {
         g.setColor(Color.white);
         this.firstTitleLabel.render((Graphics2D) g);
         this.secondTitleLabel.render((Graphics2D) g);
-
-        this.tmpSwitch.render((Graphics2D) g);
 
         /*** draw press any key ***/
         g.setColor(new Color(1, 1, 1, this.alpha));
