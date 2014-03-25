@@ -5,6 +5,7 @@ import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.gui.TELabel;
 import de.spareripsproduction.tinyengine.gui.TESwitch;
+import de.spareripsproduction.tinyengine.gui.TETextField;
 import de.spareripsproduction.tinyengine.input.Keyboard;
 
 import java.awt.*;
@@ -43,6 +44,7 @@ public class IntroScene extends Scene {
         this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
 
     }
+
     public void unload() {
         this.firstTitleLabel = null;
         this.secondTitleLabel = null;
