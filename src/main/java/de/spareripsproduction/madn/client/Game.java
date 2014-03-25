@@ -3,10 +3,9 @@ package de.spareripsproduction.madn.client;
 import de.spareripsproduction.madn.client.scene.*;
 import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
-import de.spareripsproduction.tinyengine.input.Mouse;
 import de.spareripsproduction.tinyengine.logic.Fps;
+import de.spareripsproduction.tinyengine.logic.GitVersion;
 import de.spareripsproduction.tinyengine.logic.UpdateInterface;
-import de.spareripsproduction.tinyengine.logic.Version;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class Game
     public static final String ENV_DEV = "dev";
     public static final String ENV_PROD = "prod";
 
-    private Version version;
+    private GitVersion version;
 
     private String environment = ENV_DEV;
 
@@ -34,9 +33,13 @@ public class Game
 
     private static Game instance;
 
-    private Game() {
+    public Game() {
         super("Mensch ärgere dich nicht", 800, 600);
-        this.version = new Version("0.0.2", 2, "King in the North");
+        FontManager.loadFont("fonts/Arizonia-Regular.ttf", "Arizonia-Regular");
+        FontManager.loadFont("fonts/Arizonia-Regular.ttf", "Arizonia-Regular");
+
+
+        this.version = new GitVersion();
         this.fps = new Fps();
         this.setRenderer(this);
         this.setUpdater(this);
@@ -44,7 +47,6 @@ public class Game
         this.initScenes();
         this.loadScene(Scene.SCENE_INTRO);
 
-        FontManager.loadFont("fonts/Arizonia-Regular.ttf", "Arizonia-Regular");
     }
 
     private Game(String environment) {
@@ -81,7 +83,13 @@ public class Game
 
     public boolean loadScene(String sceneName) {
         if(this.scenes.containsKey(sceneName)) {
+            // check for the first scene
+            if(this.activeScene != null) {
+                this.activeScene.unload();
+            }
             this.activeScene = this.scenes.get(sceneName);
+            this.activeScene.load();
+            this.activeScene.update();
             return true;
         }
         return false;

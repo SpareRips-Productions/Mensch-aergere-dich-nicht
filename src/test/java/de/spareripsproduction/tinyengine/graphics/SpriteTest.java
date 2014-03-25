@@ -12,13 +12,13 @@ public class SpriteTest {
 
     @Test
     public void testGetWidth() throws Exception {
-        Sprite sprite = SpriteStore.singleton().get("sprites/test.png");
+        Sprite sprite = SpriteStore.getInstance().get("sprites/test.png");
         Assert.assertEquals("Sprite::getWidth: width not correct", 232, sprite.getWidth());
     }
 
     @Test
     public void testGetHeight() throws Exception {
-        Sprite sprite = SpriteStore.singleton().get("sprites/test.png");
+        Sprite sprite = SpriteStore.getInstance().get("sprites/test.png");
         Assert.assertEquals("Sprite::getWidth: width not correct", 242, sprite.getHeight());
 
     }

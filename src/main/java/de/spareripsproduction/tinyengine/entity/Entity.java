@@ -1,7 +1,9 @@
 package de.spareripsproduction.tinyengine.entity;
 
+import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 import de.spareripsproduction.tinyengine.graphics.Sprite;
 import de.spareripsproduction.tinyengine.graphics.SpriteStore;
+import de.spareripsproduction.tinyengine.logic.UpdateInterface;
 
 import java.awt.*;
 
@@ -10,10 +12,10 @@ import java.awt.*;
  * @version 1.0
  * @since 2014-03-08
  */
-public class Entity {
+public class Entity implements RenderInterface, UpdateInterface {
 
-    protected float x,y;
-    protected float width,height;
+    protected float x, y;
+    protected float width, height;
 
     protected Sprite sprite;
 
@@ -26,31 +28,31 @@ public class Entity {
                 spriteRef,
                 x,
                 y,
-                (float) SpriteStore.singleton().get(spriteRef).getWidth(),
-                (float) SpriteStore.singleton().get(spriteRef).getHeight()
+                (float) SpriteStore.getInstance().get(spriteRef).getWidth(),
+                (float) SpriteStore.getInstance().get(spriteRef).getHeight()
         );
     }
 
-    public Entity(String spriteRef, float x, float y, float width, float height){
-        this.sprite = SpriteStore.singleton().get(spriteRef);
-        this.setLocation(x,y);
-        this.setSize(width,height);
+    public Entity(String spriteRef, float x, float y, float width, float height) {
+        this.sprite = SpriteStore.getInstance().get(spriteRef);
+        this.setLocation(x, y);
+        this.setSize(width, height);
     }
 
     public float getX() {
-        return x;
+        return this.x;
     }
 
     public float getY() {
-        return y;
+        return this.y;
     }
 
     public float getHeight() {
-        return height;
+        return this.height;
     }
 
     public float getWidth() {
-        return width;
+        return this.width;
     }
 
     public void setLocation(float x, float y) {
@@ -64,22 +66,25 @@ public class Entity {
     }
 
     public void move(float dX, float dY) {
-        this.setLocation(this.getX()+dX,this.getY()+dY);
+        this.setLocation(this.getX() + dX, this.getY() + dY);
     }
 
     public Rectangle getHitBox() {
-        return new Rectangle((int)x,(int)y,(int)width,(int)height);
+        return new Rectangle((int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight());
     }
 
     public boolean collidesWith(Entity e) {
-        return getHitBox().intersects(e.getHitBox());
+        return this.getHitBox().intersects(e.getHitBox());
     }
 
 
-    public void draw(Graphics context) {
-        sprite.draw(context, (int) this.getX(), (int) this.getY());
+    public void render(Graphics2D context) {
+        this.sprite.render(context, (int) this.getX(), (int) this.getY());
     }
 
-    public void update(){}
+    public void update() {
+
+    }
+
 
 }

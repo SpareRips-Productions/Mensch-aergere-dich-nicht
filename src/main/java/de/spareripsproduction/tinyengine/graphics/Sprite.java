@@ -14,7 +14,9 @@ import java.net.URL;
  * @since 2014-03-09
  */
 public class Sprite {
-    /** The image to be drawn for this sprite */
+    /**
+     * The image to be drawn for this sprite
+     */
     private Image image;
 
     /**
@@ -26,8 +28,7 @@ public class Sprite {
         BufferedImage sourceImage = null;
         try {
             sourceImage = ImageIO.read(url);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Core.log(e.getMessage());
 
         }
@@ -35,10 +36,10 @@ public class Sprite {
         Image image = null;
         try {
             GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-            image = gc.createCompatibleImage(sourceImage.getWidth(),sourceImage.getHeight(),Transparency.BITMASK);
+            image = gc.createCompatibleImage(sourceImage.getWidth(), sourceImage.getHeight(), Transparency.BITMASK);
             // draw our source image into the accelerated image
-            image.getGraphics().drawImage(sourceImage,0,0,null);
-        }catch (NullPointerException e) {
+            image.getGraphics().drawImage(sourceImage, 0, 0, null);
+        } catch (NullPointerException e) {
             //should never because of sourceImage is surrounded by try catch
             Core.log("You failed, go home!!!");
         }
@@ -53,7 +54,7 @@ public class Sprite {
      * @return The width in pixels of this sprite
      */
     public int getWidth() {
-        return image.getWidth(null);
+        return this.image.getWidth(null);
     }
 
     /**
@@ -63,7 +64,7 @@ public class Sprite {
      */
     public int getHeight() {
 
-        return image.getHeight(null);
+        return this.image.getHeight(null);
     }
 
     /**
@@ -73,7 +74,7 @@ public class Sprite {
      * @param x The x location at which to draw the sprite
      * @param y The y location at which to draw the sprite
      */
-    public void draw(Graphics g,int x,int y) {
-        g.drawImage(image,x,y,null);
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(image, x, y, null);
     }
 }
