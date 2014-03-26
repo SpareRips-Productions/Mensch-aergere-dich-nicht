@@ -13,8 +13,6 @@ import java.util.List;
 /**
  * Created by marian on 12/03/14.
  */
-public class Player {
-
 public class Player implements UpdateInterface {
     private TEButton btnDice;
     private List<GameFigure> gameFigureList = new ArrayList<GameFigure>();
