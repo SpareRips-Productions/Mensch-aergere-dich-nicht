@@ -18,3 +18,10 @@ build/
 *.iml
 *.ipr
 *.iws
+target
+out/production/Mensch-aergere-dich-nicht/fonts/Arizonia-Regular.ttf
+out/production/Mensch-aergere-dich-nicht/fonts/PressStart2P-Regular.ttf
+out/production/Mensch-aergere-dich-nicht/git.properties
+out/production/Mensch-aergere-dich-nicht/sprites/notFound.png
+out/production/Mensch-aergere-dich-nicht/sprites/test.png
+src/main/java/de/spareripsproduction/madn/client/scene/SettingsScene.java

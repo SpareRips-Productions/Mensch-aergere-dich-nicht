@@ -6,6 +6,14 @@ import java.awt.*;
  * Created by marian on 12/03/14.
  */
 public class GameScene extends Scene {
+
+    public void load() {
+
+    }
+    public void unload() {
+
+    }
+
     @Override
     public void update() {
 
