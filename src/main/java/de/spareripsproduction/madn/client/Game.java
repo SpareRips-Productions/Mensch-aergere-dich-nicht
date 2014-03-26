@@ -30,6 +30,7 @@ public class Game
     private HashMap<String,Scene> scenes;
 
     private Scene activeScene;
+    public Scene activeScene;
 
     private static Game instance;
 
