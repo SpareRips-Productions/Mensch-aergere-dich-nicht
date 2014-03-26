@@ -101,8 +101,8 @@ public class Game
         this.scenes = new HashMap<String, Scene>();
         this.scenes.put(Scene.SCENE_GAME, new GameScene());
         this.scenes.put(Scene.SCENE_INTRO, new IntroScene());
-        this.scenes.put(Scene.SCENE_LOBBY, new LobbyScene());
         this.scenes.put(Scene.SCENE_MENU, new MenuScene());
         this.scenes.put(Scene.SCENE_SCORE, new ScoreScene());
+        this.scenes.put(Scene.SCENE_SETTINGS,new SettingsScene());
     }
 }

@@ -25,10 +25,7 @@ public class MenuScene extends Scene implements ActionListener {
 
         this.btnCollection = new TECollectionVertical(0,0, 20);
         this.btnCollection.addView(new TEButton("Join Game", 0, 0, 300, 50, 5, menuFont));
-        this.btnCollection.addView(new TEButton("Host Game", 0, 0, 300, 50, 5, menuFont));
-        this.btnCollection.addView(new TEButton("Start Game", 0, 0, 300, 50, 5, menuFont));
         this.btnCollection.addView(new TEButton("Settings", 0, 0, 300, 50, 5, menuFont));
-        this.btnCollection.addView(new TEButton("Exit", 0, 0, 300, 50, 5, menuFont));
     }
     public void unload() {
         this.header = null;
@@ -53,13 +50,9 @@ public class MenuScene extends Scene implements ActionListener {
                 switch (counter) {
                     case 0:
                         Game.getInstance().loadScene(SCENE_LOBBY);
-                        Game.getInstance().loadScene(SCENE_GAME);
                         return;
                     case 1:
-                        //Game.getInstance().loadScene();
-                        return;
-                    case 2:
-                        //Exit Game
+                        Game.getInstance().loadScene(SCENE_SETTINGS);
                         return;
 
                 }
