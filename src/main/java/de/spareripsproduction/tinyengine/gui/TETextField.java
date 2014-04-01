@@ -186,4 +186,8 @@ public class TETextField extends TEView implements KeyListener {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
     }
+
+    public String getText(){
+        return this.label.getText();
+    }
 }
