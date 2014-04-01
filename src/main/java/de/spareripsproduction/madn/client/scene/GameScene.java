@@ -1,5 +1,7 @@
 package de.spareripsproduction.madn.client.scene;
 
+import de.spareripsproduction.madn.client.graphics.Board;
+
 import java.awt.*;
 
 /**
@@ -7,20 +9,22 @@ import java.awt.*;
  */
 public class GameScene extends Scene {
 
-    public void load() {
+    protected Board board;
 
+    public void load() {
+        this.board = new Board();
     }
     public void unload() {
-
+        this.board = null;
     }
 
     @Override
     public void update() {
-
+        this.board.update();
     }
 
     @Override
     public void render(Graphics g) {
-
+        this.board.render(g);
     }
 }
