@@ -57,10 +57,6 @@ public class MenuScene extends Scene implements ActionListener {
                     case 1:
                         Game.getInstance().loadScene(SCENE_SETTINGS);
                         return;
-                    case 1:
-                        Game.getInstance().loadScene(SCENE_SETTINGS);
-                        return;
-
                 }
             }
             counter++;

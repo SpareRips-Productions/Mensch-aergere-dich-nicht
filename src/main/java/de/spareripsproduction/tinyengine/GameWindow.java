@@ -80,6 +80,7 @@ public class GameWindow extends Canvas {
                 System.exit(0);
             }
         });
+        this.frame.setLocationRelativeTo(null);
 
         this.requestFocus();
 

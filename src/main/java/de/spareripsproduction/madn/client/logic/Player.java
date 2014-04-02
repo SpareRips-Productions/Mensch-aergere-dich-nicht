@@ -19,10 +19,10 @@ public class Player implements UpdateInterface {
     private Font menuFont = new Font("PressStart2P-Regular", Font.PLAIN, 20);
 
     public Player() {
-        gameFigureList.add(new GameFigure());
-        gameFigureList.add(new GameFigure());
-        gameFigureList.add(new GameFigure());
-        gameFigureList.add(new GameFigure());
+        gameFigureList.add(new GameFigure(this, Color.red));
+        gameFigureList.add(new GameFigure(this, Color.red));
+        gameFigureList.add(new GameFigure(this, Color.red));
+        gameFigureList.add(new GameFigure(this, Color.red));
     }
 
     public void setPlayerActive() {
