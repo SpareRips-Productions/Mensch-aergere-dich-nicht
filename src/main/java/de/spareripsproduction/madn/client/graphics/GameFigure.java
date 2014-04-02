@@ -1,3 +1,4 @@
+
 package de.spareripsproduction.madn.client.graphics;
 
 import de.spareripsproduction.madn.client.logic.Player;
@@ -13,9 +14,13 @@ public class GameFigure implements RenderAndUpdateable {
     public static final String COLOR_BLUE = "blue";
     public static final String COLOR_GREEN = "green";
 
-
     public Player owner;
+
     public Color color;
+
+    private boolean clicked;
+
+    private boolean highlighted;
 
     public GameFigure(Player owner, Color color) {
         this.owner = owner;

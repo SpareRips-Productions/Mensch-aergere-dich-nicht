@@ -20,10 +20,10 @@ public class Board extends Entity implements RenderAndUpdateable {
     public Board(int x, int y) {
         super("sprites/board.png", x, y);
         this.playerList = new ArrayList<Player>();
-        this.playerList.add(new Player(Settings.Player1Name, Color.red, new Point(0, 0)));
-        this.playerList.add(new Player(Settings.Player2Name, Color.green, new Point(500, 0)));
-        this.playerList.add(new Player(Settings.Player3Name, Color.blue, new Point(500, 500)));
-        this.playerList.add(new Player(Settings.Player4Name, Color.yellow, new Point(0, 500)));
+        this.playerList.add(new Player(Settings.Player1Name, Color.red, new Point(toX(0), toY(0))));
+        this.playerList.add(new Player(Settings.Player2Name, Color.green, new Point(toX(9), toY(0))));
+        this.playerList.add(new Player(Settings.Player3Name, Color.blue, new Point(toX(9), toY(9))));
+        this.playerList.add(new Player(Settings.Player4Name, Color.yellow, new Point(toX(0), toY(9))));
 
         this.fields = new Field[40];
         pffffff(this.fields);
