@@ -6,8 +6,15 @@ import java.awt.*;
  * Created by marian on 12/03/14.
  */
 public class SpawnField extends Field {
-    public SpawnField(int x, int y) {
-        super(x, y);
+
+
+
+    public SpawnField(String spriteRef, int x, int y) {
+        super(spriteRef, x, y);
+    }
+
+    public SpawnField initRedSpawnField(int x, int y) {
+        return new SpawnField("", x, y);
     }
 
     @Override
