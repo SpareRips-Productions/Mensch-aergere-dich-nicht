@@ -13,12 +13,15 @@ public class TELabel extends TEView {
 
     private String text;
 
+    protected Color textColor;
+
     private Font font;
 
     public TELabel(String text, int x, int y, Font font) {
         super(x, y, 0, 0);
         this.text = text;
         this.setFont(font);
+
     }
 
     public int getHeight() {
@@ -51,9 +54,11 @@ public class TELabel extends TEView {
 
     public void render(Graphics2D context) {
         Font contextFont = context.getFont();
+        context.setColor(this.textColor);
 
         context.setFont(this.getFont());
         context.drawString(this.text, this.getX(), this.getY());
+
 
         context.setFont(contextFont);
     }
