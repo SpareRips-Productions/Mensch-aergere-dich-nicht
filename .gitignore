@@ -27,3 +27,4 @@ out/production/Mensch-aergere-dich-nicht/sprites/test.png
 src/main/java/de/spareripsproduction/madn/client/scene/SettingsScene.java
 src/main/java/de/spareripsproduction/madn/client/graphics/.idea/
 out/
+*.db
