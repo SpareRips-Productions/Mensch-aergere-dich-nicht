@@ -18,17 +18,4 @@ public class SpawnField extends Field {
         super(spriteRef, x, y);
     }
 
-    public SpawnField initRedSpawnField(int x, int y) {
-        return new SpawnField("", x, y);
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
 }

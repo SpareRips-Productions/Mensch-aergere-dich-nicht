@@ -72,10 +72,10 @@ public class SettingsScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
         g.setColor(Color.white);
-        this.backButton.render((Graphics2D)g);
-        this.LabelCollection.render((Graphics2D)g);
+        this.backButton.render(g);
+        this.LabelCollection.render(g);
     }
 
 }

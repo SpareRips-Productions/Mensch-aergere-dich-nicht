@@ -65,13 +65,13 @@ public class MenuScene extends Scene implements ActionListener {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
 
         Color color = g.getColor();
         g.setColor(Color.black);
-        this.backgroundImage.render((Graphics2D) g);
-        this.header.render((Graphics2D) g);
-        this.btnCollection.render((Graphics2D) g);
+        this.backgroundImage.render(g);
+        this.header.render(g);
+        this.btnCollection.render(g);
 
         /*** reset ***/
         g.setColor(color);

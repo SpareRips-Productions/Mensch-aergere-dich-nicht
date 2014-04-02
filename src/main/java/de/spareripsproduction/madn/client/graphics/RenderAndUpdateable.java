@@ -8,5 +8,5 @@ import java.awt.*;
 public interface RenderAndUpdateable {
 
     public void update();
-    public void render(Graphics g);
+    public void render(Graphics2D g);
 }

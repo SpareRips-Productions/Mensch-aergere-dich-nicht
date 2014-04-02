@@ -24,11 +24,6 @@ public class HomeEntryField extends SpawnField {
     }
 
     @Override
-    public void render(Graphics g) {
-
-    }
-
-    @Override
     public void render(Graphics2D g) {
         super.render(g);
         for(Field f: this.fields) {
