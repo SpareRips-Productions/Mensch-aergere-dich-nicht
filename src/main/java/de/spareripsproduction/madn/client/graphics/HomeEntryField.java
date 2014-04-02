@@ -7,14 +7,14 @@ import java.awt.*;
 /**
  * Created by marian on 12/03/14.
  */
-public class HomeEntryField extends Field {
+public class HomeEntryField extends SpawnField {
     public Field[] fields;
 
     public HomeEntryField(String spriteRef, int x, int y, int offsetX, int offsetY) {
-        super(spriteRef, x, y);
+        super("sprites/normalField.png", x, y);
         this.fields = new Field[4];
         for (int i = 1; i < 5; i++) {
-            this.fields[i - 1] = new NormalField(offsetX + i * 50, offsetY + i * 50);
+            this.fields[i - 1] = new NormalField(spriteRef, (offsetX * i * 45)+x, (offsetY * i * 45) + y);
         }
     }
 
@@ -26,5 +26,13 @@ public class HomeEntryField extends Field {
     @Override
     public void render(Graphics g) {
 
+    }
+
+    @Override
+    public void render(Graphics2D g) {
+        super.render(g);
+        for(Field f: this.fields) {
+            f.render(g);
+        }
     }
 }

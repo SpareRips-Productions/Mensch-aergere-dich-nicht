@@ -28,14 +28,14 @@ public class Board extends Entity implements RenderAndUpdateable {
         this.fields = new Field[40];
         pffffff(this.fields);
 
-        this.fields[0] = new SpawnField(GameFigure.COLOR_RED, this.fields[0].getIntX(), this.fields[0].getIntY());
-        this.fields[10] = new SpawnField(GameFigure.COLOR_GREEN, this.fields[10].getIntX(), this.fields[10].getIntY());
-        this.fields[20] = new SpawnField(GameFigure.COLOR_BLUE, this.fields[20].getIntX(), this.fields[20].getIntY());
-        this.fields[30] = new SpawnField(GameFigure.COLOR_YELLOW, this.fields[30].getIntX(), this.fields[30].getIntY());
-        this.fields[39] = new HomeEntryField(GameFigure.COLOR_RED, this.fields[39].getIntX(), this.fields[39].getIntY(), 1, 0);
-        this.fields[9] = new HomeEntryField(GameFigure.COLOR_GREEN, this.fields[9].getIntX(), this.fields[9].getIntY(), 0, 1);
-        this.fields[19] = new HomeEntryField(GameFigure.COLOR_BLUE,this.fields[19].getIntX(), this.fields[19].getIntY(), -1, 0);
-        this.fields[29] = new HomeEntryField(GameFigure.COLOR_YELLOW,this.fields[29].getIntX(), this.fields[29].getIntY(), 0, -1);
+        this.fields[0] = new SpawnField(SpawnField.SPRITE_RED, this.fields[0].getIntX(), this.fields[0].getIntY());
+        this.fields[10] = new SpawnField(SpawnField.SPRITE_GREEN, this.fields[10].getIntX(), this.fields[10].getIntY());
+        this.fields[20] = new SpawnField(SpawnField.SPRITE_BLUE, this.fields[20].getIntX(), this.fields[20].getIntY());
+        this.fields[30] = new SpawnField(SpawnField.SPRITE_YELLOW, this.fields[30].getIntX(), this.fields[30].getIntY());
+        this.fields[39] = new HomeEntryField(SpawnField.SPRITE_RED, this.fields[39].getIntX(), this.fields[39].getIntY(), 1, 0);
+        this.fields[9] = new HomeEntryField(SpawnField.SPRITE_GREEN, this.fields[9].getIntX(), this.fields[9].getIntY(), 0, 1);
+        this.fields[19] = new HomeEntryField(SpawnField.SPRITE_BLUE,this.fields[19].getIntX(), this.fields[19].getIntY(), -1, 0);
+        this.fields[29] = new HomeEntryField(SpawnField.SPRITE_YELLOW,this.fields[29].getIntX(), this.fields[29].getIntY(), 0, -1);
     }
 
     private void pffffff(Field[] fields) {

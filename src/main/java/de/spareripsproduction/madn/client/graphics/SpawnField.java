@@ -1,5 +1,7 @@
 package de.spareripsproduction.madn.client.graphics;
 
+import de.spareripsproduction.madn.client.logic.Player;
+
 import java.awt.*;
 
 /**
@@ -7,7 +9,10 @@ import java.awt.*;
  */
 public class SpawnField extends Field {
 
-
+    public static final String SPRITE_RED = "sprites/SpawnFieldRed.png";
+    public static final String SPRITE_YELLOW = "sprites/SpawnFieldYellow.png";
+    public static final String SPRITE_BLUE = "sprites/SpawnFieldBlue.png";
+    public static final String SPRITE_GREEN = "sprites/SpawnFieldGreen.png";
 
     public SpawnField(String spriteRef, int x, int y) {
         super(spriteRef, x, y);
