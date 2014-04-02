@@ -42,6 +42,9 @@ public class TELabel extends TEView {
         return font;
     }
 
+    public int getY(){
+        return super.getY() + this.getHeight();
+    }
     public void setFont(Font font) {
         this.font = font;
     }
@@ -57,11 +60,6 @@ public class TELabel extends TEView {
 
     private Graphics getContext() {
         return GameWindow.getInstance().getGraphicsContext();
-    }
-
-    public void horizontalAlignCenter(int y1, int y2) {
-        super.horizontalAlignCenter(y1, y2);
-        this.setY(this.getY() + this.getHeight());
     }
 
 }

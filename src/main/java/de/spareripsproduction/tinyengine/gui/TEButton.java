@@ -66,8 +66,7 @@ public class TEButton extends TEView {
 
         context.setColor(this.color);
         this.label.verticalAlignCenter(this.getX(), this.getX() + this.getWidth());
-        int centerY = (this.getHeight() - this.label.getHeight()) / 2;
-        this.label.setY(this.getY() + this.getHeight() - centerY);
+        this.label.horizontalAlignCenter(this.getY(),this.getY()+ this.getHeight());
         this.label.render(context);
 
         context.setColor(color);
