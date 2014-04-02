@@ -174,6 +174,8 @@ public class TETextField extends TEView implements KeyListener {
                 this.label.setText(text+c);
             }else if(c == KeyEvent.VK_BACK_SPACE && text.length() > 0) {
                 this.label.setText(text.substring(0, text.length()-1));
+            }else if(c == KeyEvent.VK_ENTER){
+                this.active = false;
             }
         }
 
