@@ -11,12 +11,13 @@ public class HomeEntryField extends Field {
     public Field[] fields;
     public Player owner;
 
-    public HomeEntryField(int x, int y, int offsetX, int offsetY) {
+    public HomeEntryField(int x, int y, int offsetX, int offsetY, Player owner) {
         super(x, y);
         this.fields = new Field[4];
         for (int i = 1; i < 5; i++) {
             this.fields[i - 1] = new NormalField(offsetX + i * 50, offsetY + i * 50);
         }
+        this.owner = owner;
     }
 
     @Override

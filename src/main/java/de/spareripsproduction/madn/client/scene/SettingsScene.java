@@ -24,15 +24,14 @@ public class SettingsScene extends Scene {
         this.pLabel2 = new TELabel("Spieler 2: ",50,40,menuFont);
         this.pLabel3 = new TELabel("Spieler 3: ",50,60,menuFont);
         this.pLabel4 = new TELabel("Spieler 4: ",50,80,menuFont);
-        this.p1Text = new TETextField(Settings.Player1Name,100,100,200,50,menuFont,10,5);
-        this.p2Text = new TETextField(Settings.Player2Name,100,100,200,50,menuFont,10,5);
-        this.p3Text = new TETextField(Settings.Player3Name,100,100,200,50,menuFont,10,5);
-        this.p4Text = new TETextField(Settings.Player4Name,100,100,200,50,menuFont,10,5);
-
-        LabelCollection = new TECollectionVertical(0,0,10);
+        this.p1Text = new TETextField(Settings.Player1Name,100,100,200,50,menuFont,10,3);
+        this.p2Text = new TETextField(Settings.Player2Name,100,100,200,50,menuFont,10,3);
+        this.p3Text = new TETextField(Settings.Player3Name,100,100,200,50,menuFont,10,3);
+        this.p4Text = new TETextField(Settings.Player4Name,100,100,200,50,menuFont,10,3);
+        LabelCollection = new TECollectionVertical(0,0,30);
 
         LabelCollection.addView(this.pLabel1);
-        LabelCollection.addView((this.p1Text));
+        LabelCollection.addView(this.p1Text);
         LabelCollection.addView(this.pLabel2);
         LabelCollection.addView(this.p2Text);
         LabelCollection.addView(this.pLabel3);
