@@ -1,18 +1,20 @@
 package de.spareripsproduction.madn.client.graphics;
 
-import de.spareripsproduction.madn.client.logic.Player;
-
 import java.awt.*;
 
 /**
  * Created by marian on 12/03/14.
  */
 public class SpawnField extends Field {
-    public Player owner;
 
-    public SpawnField(int x, int y, Player owner) {
-        super(x, y);
-        this.owner = owner;
+
+
+    public SpawnField(String spriteRef, int x, int y) {
+        super(spriteRef, x, y);
+    }
+
+    public SpawnField initRedSpawnField(int x, int y) {
+        return new SpawnField("", x, y);
     }
 
     @Override

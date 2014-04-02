@@ -28,14 +28,14 @@ public class Board extends Entity implements RenderAndUpdateable {
         this.fields = new Field[40];
         pffffff(this.fields);
 
-        this.fields[0] = new SpawnField(this.fields[0].location.x, this.fields[0].location.y, this.playerList.get(0));
-        this.fields[10] = new SpawnField(this.fields[10].location.x, this.fields[10].location.y, this.playerList.get(1));
-        this.fields[20] = new SpawnField(this.fields[20].location.x, this.fields[20].location.y, this.playerList.get(2));
-        this.fields[30] = new SpawnField(this.fields[30].location.x, this.fields[30].location.y, this.playerList.get(3));
-        this.fields[39] = new HomeEntryField(this.fields[39].location.x, this.fields[39].location.y, 1, 0, this.playerList.get(0));
-        this.fields[9] = new HomeEntryField(this.fields[9].location.x, this.fields[9].location.y, 0, 1, this.playerList.get(1));
-        this.fields[19] = new HomeEntryField(this.fields[19].location.x, this.fields[19].location.y, -1, 0, this.playerList.get(2));
-        this.fields[29] = new HomeEntryField(this.fields[29].location.x, this.fields[29].location.y, 0, -1, this.playerList.get(3));
+        this.fields[0] = new SpawnField(GameFigure.COLOR_RED, this.fields[0].getIntX(), this.fields[0].getIntY());
+        this.fields[10] = new SpawnField(GameFigure.COLOR_GREEN, this.fields[10].getIntX(), this.fields[10].getIntY());
+        this.fields[20] = new SpawnField(GameFigure.COLOR_BLUE, this.fields[20].getIntX(), this.fields[20].getIntY());
+        this.fields[30] = new SpawnField(GameFigure.COLOR_YELLOW, this.fields[30].getIntX(), this.fields[30].getIntY());
+        this.fields[39] = new HomeEntryField(GameFigure.COLOR_RED, this.fields[39].getIntX(), this.fields[39].getIntY(), 1, 0);
+        this.fields[9] = new HomeEntryField(GameFigure.COLOR_GREEN, this.fields[9].getIntX(), this.fields[9].getIntY(), 0, 1);
+        this.fields[19] = new HomeEntryField(GameFigure.COLOR_BLUE,this.fields[19].getIntX(), this.fields[19].getIntY(), -1, 0);
+        this.fields[29] = new HomeEntryField(GameFigure.COLOR_YELLOW,this.fields[29].getIntX(), this.fields[29].getIntY(), 0, -1);
     }
 
     private void pffffff(Field[] fields) {
@@ -97,6 +97,11 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     @Override
     public void render(Graphics g) {
+    }
+
+    @Override
+    public void render(Graphics2D g) {
+        super.render(g);
         for (Player p : this.playerList) {
             p.render(g);
         }
