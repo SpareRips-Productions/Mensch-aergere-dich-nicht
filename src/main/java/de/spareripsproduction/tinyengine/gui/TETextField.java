@@ -54,7 +54,7 @@ public class TETextField extends TEView implements KeyListener {
         this.borderSize = borderSize;
         this.borderColor = borderColor;
         this.activeBorderColor = Color.gray;
-        this.hoverBorderColor = Color.blue;
+        this.hoverBorderColor = Color.red;
         this.backgroundColor = backgroundColor;
         this.textColor = textColor;
 
@@ -72,7 +72,7 @@ public class TETextField extends TEView implements KeyListener {
             int size,
             int borderSize
     ) {
-        this(text, x, y, width, height, font, size, borderSize, Color.white, Color.white, Color.black);
+        this(text, x, y, width, height, font, size, borderSize, Color.black, Color.white, Color.black);
     }
 
     public void update() {
