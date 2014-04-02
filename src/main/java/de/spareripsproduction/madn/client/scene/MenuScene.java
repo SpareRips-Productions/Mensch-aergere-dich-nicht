@@ -49,7 +49,10 @@ public class MenuScene extends Scene implements ActionListener {
             if(btn.isClicked()) {
                 switch (counter) {
                     case 0:
-                        Game.getInstance().loadScene(SCENE_LOBBY);
+                        Game.getInstance().loadScene(Scene.SCENE_GAME);
+                        return;
+                    case 1:
+                        Game.getInstance().loadScene(SCENE_SETTINGS);
                         return;
                     case 1:
                         Game.getInstance().loadScene(SCENE_SETTINGS);

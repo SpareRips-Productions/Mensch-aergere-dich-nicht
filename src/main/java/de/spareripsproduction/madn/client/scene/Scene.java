@@ -12,7 +12,7 @@ public abstract class Scene implements RenderAndUpdateable {
     public static final String SCENE_MENU   = "menu";
     public static final String SCENE_SCORE  = "score";
     public static final String SCENE_INTRO  = "intro";
-    public static final String SCENE_SETTINGS = "settings";
+    public static final String SCENE_SETTINGS  = "settings";
 
     public abstract void load();
     public abstract void unload();
