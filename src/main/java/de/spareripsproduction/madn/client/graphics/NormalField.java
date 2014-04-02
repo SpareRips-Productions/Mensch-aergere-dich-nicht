@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class NormalField extends Field {
     public NormalField(int x, int y) {
-        super(x, y);
+        super("normalField.png", x, y);
     }
 
     @Override
@@ -17,5 +17,6 @@ public class NormalField extends Field {
 
     @Override
     public void render(Graphics g) {
+        this.render((Graphics2D) g);
     }
 }
