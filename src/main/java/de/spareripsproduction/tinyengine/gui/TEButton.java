@@ -27,7 +27,7 @@ public class TEButton extends TEView {
     private Color color;
 
     public TEButton(String label, int x, int y, int width, int height, int borderSize, Font labelFont) {
-        this(label, x, y, width, height, borderSize, labelFont, Color.white, Color.green, Color.blue);
+        this(label, x, y, width, height, borderSize, labelFont, Color.black, Color.green, Color.red);
 
     }
 
