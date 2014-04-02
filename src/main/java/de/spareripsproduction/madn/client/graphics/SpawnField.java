@@ -8,20 +8,14 @@ import java.awt.*;
  * Created by marian on 12/03/14.
  */
 public class SpawnField extends Field {
-    public Player owner;
 
-    public SpawnField(int x, int y, Player owner) {
-        super(x, y);
-        this.owner = owner;
+    public static final String SPRITE_RED = "sprites/SpawnFieldRed.png";
+    public static final String SPRITE_YELLOW = "sprites/SpawnFieldYellow.png";
+    public static final String SPRITE_BLUE = "sprites/SpawnFieldBlue.png";
+    public static final String SPRITE_GREEN = "sprites/SpawnFieldGreen.png";
+
+    public SpawnField(String spriteRef, int x, int y) {
+        super(spriteRef, x, y);
     }
 
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
 }

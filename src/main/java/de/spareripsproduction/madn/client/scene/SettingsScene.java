@@ -76,7 +76,7 @@ public class SettingsScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
         g.setColor(Color.black);
         this.backgroundImage.render((Graphics2D) g);
         this.backButton.render((Graphics2D)g);

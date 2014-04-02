@@ -7,15 +7,11 @@ import java.awt.*;
  */
 public class NormalField extends Field {
     public NormalField(int x, int y) {
-        super(x, y);
+        this("sprites/normalField.png", x, y);
     }
 
-    @Override
-    public void update() {
-
+    public NormalField(String spriteRef, int x, int y) {
+        super(spriteRef, x, y);
     }
 
-    @Override
-    public void render(Graphics g) {
-    }
 }
