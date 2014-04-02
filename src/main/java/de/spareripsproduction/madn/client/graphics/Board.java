@@ -1,5 +1,7 @@
 package de.spareripsproduction.madn.client.graphics;
 
+import de.spareripsproduction.tinyengine.entity.Entity;
+
 import java.awt.*;
 import java.util.*;
 import de.spareripsproduction.madn.client.logic.*;
@@ -7,7 +9,7 @@ import de.spareripsproduction.madn.client.logic.*;
 /**
  * Created by marian on 12/03/14.
  */
-public class Board implements RenderAndUpdateable {
+public class Board extends Entity implements RenderAndUpdateable {
     public Field[] fields;
     public java.util.List<Player> playerList;
 
@@ -36,6 +38,10 @@ public class Board implements RenderAndUpdateable {
 
     private boolean inBetween(int i, int min, int max) {
         return i >= min && i <= max;
+    }
+
+    public Board(int x, int y) {
+        super("sprites/board.png", x, y);
     }
 
     @Override

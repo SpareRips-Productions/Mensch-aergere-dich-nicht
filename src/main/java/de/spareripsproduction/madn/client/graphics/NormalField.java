@@ -17,6 +17,5 @@ public class NormalField extends Field {
 
     @Override
     public void render(Graphics g) {
-
     }
 }
