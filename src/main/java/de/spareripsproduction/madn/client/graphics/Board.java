@@ -13,7 +13,8 @@ public class Board extends Entity implements RenderAndUpdateable {
     public Field[] fields;
     public java.util.List<Player> playerList;
 
-    public Board() {
+    public Board(int x, int y) {
+        super("sprites/board.png", x, y);
         this.playerList = new ArrayList<Player>();
         this.playerList.add(new Player(Settings.Player1Name, Color.red, new Point(0, 0)));
         this.playerList.add(new Player(Settings.Player2Name, Color.green, new Point(500, 0)));
@@ -22,9 +23,9 @@ public class Board extends Entity implements RenderAndUpdateable {
 
         this.fields = new Field[40];
         for (int i = 0; i < 40; i++) {
-            int x = 0;
-            int y = 0;
-            this.fields[i] = new NormalField(x, y);
+            int x1 = 0;
+            int y1 = 0;
+            this.fields[i] = new NormalField(x1, y1);
         }
         this.fields[0] = new SpawnField(0, 0, this.playerList.get(0));
         this.fields[10] = new SpawnField(0, 0, this.playerList.get(1));
@@ -38,10 +39,6 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     private boolean inBetween(int i, int min, int max) {
         return i >= min && i <= max;
-    }
-
-    public Board(int x, int y) {
-        super("sprites/board.png", x, y);
     }
 
     @Override

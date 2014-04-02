@@ -20,10 +20,10 @@ public class GameScene extends Scene {
     private Board board;
 
     public void load() {
-        playerList.add(new Player());
-        playerList.add(new Player());
-        playerList.add(new Player());
-        playerList.add(new Player());
+        //playerList.add(new Player());
+        //playerList.add(new Player());
+        //playerList.add(new Player());
+        //playerList.add(new Player());
         this.board = new Board(5, 5);
     }
     public void unload() {

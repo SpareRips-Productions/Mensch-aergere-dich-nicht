@@ -2,6 +2,7 @@ package de.spareripsproduction.madn.client.logic;
 
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.GameFigure;
+import de.spareripsproduction.madn.client.graphics.RenderAndUpdateable;
 import de.spareripsproduction.madn.client.scene.GameScene;
 import de.spareripsproduction.tinyengine.gui.*;
 import de.spareripsproduction.tinyengine.logic.UpdateInterface;
