@@ -97,24 +97,24 @@ public class IntroScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
         this.renderStart(g);
     }
 
-    private void renderStart(Graphics g) {
+    private void renderStart(Graphics2D g) {
         /*** Draw Background ***/
-        this.backgroundImage.render((Graphics2D) g);
+        this.backgroundImage.render(g);
 
         Color color = g.getColor();
 
         /*** Draw Title ***/
         g.setColor(Color.white);
-        this.firstTitleLabel.render((Graphics2D) g);
-        this.secondTitleLabel.render((Graphics2D) g);
+        this.firstTitleLabel.render(g);
+        this.secondTitleLabel.render(g);
 
         /*** draw press any key ***/
         g.setColor(new Color(1, 1, 1, this.alpha));
-        this.pressSpaceLabel.render((Graphics2D) g);
+        this.pressSpaceLabel.render(g);
 
         /*** reset ***/
         g.setColor(color);

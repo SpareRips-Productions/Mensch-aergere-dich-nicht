@@ -96,10 +96,6 @@ public class Board extends Entity implements RenderAndUpdateable {
     }
 
     @Override
-    public void render(Graphics g) {
-    }
-
-    @Override
     public void render(Graphics2D g) {
         super.render(g);
         for (Player p : this.playerList) {

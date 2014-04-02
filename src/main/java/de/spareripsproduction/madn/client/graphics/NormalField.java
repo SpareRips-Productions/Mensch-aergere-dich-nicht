@@ -14,13 +14,4 @@ public class NormalField extends Field {
         super(spriteRef, x, y);
     }
 
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-        this.render((Graphics2D) g);
-    }
 }

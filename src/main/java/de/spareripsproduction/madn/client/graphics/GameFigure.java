@@ -28,7 +28,7 @@ public class GameFigure implements RenderAndUpdateable {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
 
     }
 }

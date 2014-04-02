@@ -36,7 +36,7 @@ public class GameScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
-        this.board.render((Graphics2D) g);
+    public void render(Graphics2D g) {
+        this.board.render(g);
     }
 }
