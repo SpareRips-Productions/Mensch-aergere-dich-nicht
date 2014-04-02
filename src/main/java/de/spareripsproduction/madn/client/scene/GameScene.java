@@ -39,4 +39,6 @@ public class GameScene extends Scene {
     public void render(Graphics2D g) {
         this.board.render(g);
     }
+
+    public Board getBoard() { return this.board; }
 }

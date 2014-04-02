@@ -19,11 +19,6 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     public Board(int x, int y) {
         super("sprites/board.png", x, y);
-        this.playerList = new ArrayList<Player>();
-        this.playerList.add(new Player(Settings.Player1Name, Color.red, new Point(toX(0), toY(0))));
-        this.playerList.add(new Player(Settings.Player2Name, Color.green, new Point(toX(9), toY(0))));
-        this.playerList.add(new Player(Settings.Player3Name, Color.blue, new Point(toX(9), toY(9))));
-        this.playerList.add(new Player(Settings.Player4Name, Color.yellow, new Point(toX(0), toY(9))));
 
         this.fields = new Field[40];
         pffffff(this.fields);
@@ -36,6 +31,14 @@ public class Board extends Entity implements RenderAndUpdateable {
         this.fields[9] = new HomeEntryField(SpawnField.SPRITE_GREEN, this.fields[9].getIntX(), this.fields[9].getIntY(), 0, 1);
         this.fields[19] = new HomeEntryField(SpawnField.SPRITE_BLUE,this.fields[19].getIntX(), this.fields[19].getIntY(), -1, 0);
         this.fields[29] = new HomeEntryField(SpawnField.SPRITE_YELLOW,this.fields[29].getIntX(), this.fields[29].getIntY(), 0, -1);
+
+        this.playerList = new ArrayList<Player>();
+        this.playerList.add(new Player(Settings.Player1Name, GameFigure.COLOR_RED, new Point(toX(0), toY(0)), this.fields[0]));
+        this.playerList.add(new Player(Settings.Player2Name, GameFigure.COLOR_GREEN, new Point(toX(7), toY(0)), this.fields[10]));
+        this.playerList.add(new Player(Settings.Player3Name, GameFigure.COLOR_BLUE, new Point(toX(7), toY(9)), this.fields[20]));
+        this.playerList.add(new Player(Settings.Player4Name, GameFigure.COLOR_YELLOW, new Point(toX(0), toY(9)), this.fields[30]));
+
+        this.playerList.get(0).setPlayerActive();
     }
 
     private void pffffff(Field[] fields) {
