@@ -27,13 +27,28 @@ public class TEButton extends TEView {
     private Color color;
 
     public TEButton(String label, int x, int y, int width, int height, int borderSize, Font labelFont) {
+        this(label, x, y, width, height, borderSize, labelFont, Color.white, Color.green, Color.blue);
+
+    }
+
+    public TEButton(
+            String label,
+            int x, int y,
+            int width,
+            int height,
+            int borderSize,
+            Font labelFont,
+            Color color,
+            Color clickedColor,
+            Color highlightColor
+    ) {
         super(x, y, width, height);
         this.setBorderSize(borderSize);
         this.label = new TELabel(label, this.getX() + this.getBorderSize(), this.getY() + this.getBorderSize(), labelFont);
         this.clicked = false;
-        this.clickedColor = Color.green;
-        this.highlightColor = Color.blue;
-        this.color = Color.white;
+        this.clickedColor = clickedColor;
+        this.highlightColor = highlightColor;
+        this.color = color;
     }
 
     public int getBorderSize() {

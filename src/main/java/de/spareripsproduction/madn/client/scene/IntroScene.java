@@ -3,6 +3,7 @@ package de.spareripsproduction.madn.client.scene;
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.Timer;
+import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.TELabel;
 import de.spareripsproduction.tinyengine.gui.TESwitch;
 import de.spareripsproduction.tinyengine.gui.TETextField;
@@ -32,11 +33,15 @@ public class IntroScene extends Scene {
 
     private TELabel pressSpaceLabel;
 
+    private Entity backgroundImage;
 
     public void load() {
+
+        this.backgroundImage = new Entity("sprites/title.png", 0, 0);
+
         int fontSize = 50;
         Font titleFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
-        this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 0, titleFont);
+        this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 100, titleFont);
         this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
 
         fontSize = 30;
@@ -77,7 +82,6 @@ public class IntroScene extends Scene {
         int width = GameWindow.getInstance().getWidth();
         int height = GameWindow.getInstance().getHeight();
 
-        this.firstTitleLabel.setY(height / 2 - this.firstTitleLabel.getHeight() / 2);
         this.firstTitleLabel.verticalAlignCenter(0, width);
 
         this.secondTitleLabel.setY(this.firstTitleLabel.getY() + firstTitleLabel.getHeight() + 10);
@@ -98,6 +102,9 @@ public class IntroScene extends Scene {
     }
 
     private void renderStart(Graphics g) {
+        /*** Draw Background ***/
+        this.backgroundImage.render((Graphics2D) g);
+
         Color color = g.getColor();
 
         /*** Draw Title ***/
