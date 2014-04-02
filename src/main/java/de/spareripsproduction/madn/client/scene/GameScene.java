@@ -44,4 +44,6 @@ public class GameScene extends Scene {
         this.board.render(g);
         this.dice.render(g);
     }
+
+    public Board getBoard() { return this.board; }
 }
