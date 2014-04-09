@@ -3,6 +3,8 @@ package de.spareripsproduction.madn.client.graphics;
 
 import de.spareripsproduction.madn.client.logic.Player;
 import de.spareripsproduction.tinyengine.entity.Entity;
+import de.spareripsproduction.tinyengine.graphics.Sprite;
+import de.spareripsproduction.tinyengine.graphics.SpriteStore;
 import de.spareripsproduction.tinyengine.input.Mouse;
 
 import java.awt.*;
@@ -26,9 +28,20 @@ public class GameFigure extends Entity implements RenderAndUpdateable {
 
     private boolean highlighted;
 
+    private Sprite hoverSprite;
+
     public GameFigure(String SpriteRef, int x, int y, Player owner) {
         super(SpriteRef, x, y);
         this.owner = owner;
+        if(SpriteRef.equals(COLOR_RED)) {
+            hoverSprite = SpriteStore.getInstance().get("sprites/figureRedHover.png");
+        } else if(SpriteRef.equals(COLOR_BLUE)) {
+            hoverSprite = SpriteStore.getInstance().get("sprites/figureBlueHover.png");
+        } else if(SpriteRef.equals(COLOR_GREEN)) {
+            hoverSprite = SpriteStore.getInstance().get("sprites/figureGreenHover.png");
+        } else if(SpriteRef.equals(COLOR_YELLOW)) {
+            hoverSprite = SpriteStore.getInstance().get("sprites/figureYellowHover.png");
+        }
     }
 
     @Override
@@ -57,4 +70,13 @@ public class GameFigure extends Entity implements RenderAndUpdateable {
     public boolean isClickAble() { return this.clickAble; }
 
     public void setClickAble(boolean value) { this.clickAble = value; }
+
+    public void render(Graphics2D g) {
+        if(isHighlighted()) {
+            hoverSprite.render(g, (int) this.getX(), (int) this.getY());
+        } else {
+            super.render(g);
+        }
+
+    }
 }
