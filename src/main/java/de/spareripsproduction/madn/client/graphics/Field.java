@@ -13,4 +13,19 @@ public abstract class Field extends Entity implements RenderAndUpdateable {
     public Field(String spriteRef, int x, int y) {
         super(spriteRef, x, y);
     }
+
+    public void update() {
+        if(gameFigure != null) {
+            gameFigure.update();
+        }
+        super.update();
+    }
+
+    public void render(Graphics2D g) {
+        if(gameFigure != null) {
+            gameFigure.render(g);
+        }
+
+        super.render(g);
+    }
 }
