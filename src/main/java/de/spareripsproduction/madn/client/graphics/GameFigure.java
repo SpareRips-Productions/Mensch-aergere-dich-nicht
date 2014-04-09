@@ -13,10 +13,10 @@ import java.awt.event.MouseEvent;
  */
 public class GameFigure extends Entity implements RenderAndUpdateable {
 
-    public static final String COLOR_RED = "red";
-    public static final String COLOR_YELLOW = "yellow";
-    public static final String COLOR_BLUE = "blue";
-    public static final String COLOR_GREEN = "green";
+    public static final String COLOR_RED = "sprites/figureRed.png";
+    public static final String COLOR_YELLOW = "sprites/figureYellow.png";
+    public static final String COLOR_BLUE = "sprites/figureBlue.png";
+    public static final String COLOR_GREEN = "sprites/figureGreen.png";
 
     public Player owner;
 
@@ -44,11 +44,6 @@ public class GameFigure extends Entity implements RenderAndUpdateable {
             // check if mouse inside button
             this.highlighted = new Rectangle(this.getIntX(), this.getIntY(), this.getIntWidth(), this.getIntHeight()).contains(Mouse.location());
         }
-    }
-
-    @Override
-    public void render(Graphics2D g) {
-
     }
 
     public boolean isClicked() {

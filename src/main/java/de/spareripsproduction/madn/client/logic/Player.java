@@ -149,12 +149,19 @@ public class Player implements RenderAndUpdateable {
                 }
             }
         }
+
+        for (GameFigure g : this.gameFigureList) {
+            g.update();
+        }
     }
 
     @Override
     public void render(Graphics2D g) {
         if (this.btnDice != null) {
             this.btnDice.render(g);
+        }
+        for (GameFigure f : this.gameFigureList) {
+            f.render(g);
         }
     }
 }
