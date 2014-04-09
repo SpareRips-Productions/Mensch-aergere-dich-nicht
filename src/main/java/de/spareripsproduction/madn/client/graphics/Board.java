@@ -96,6 +96,9 @@ public class Board extends Entity implements RenderAndUpdateable {
         for (Player p : this.playerList) {
             p.update();
         }
+        for (Field f : this.fields) {
+            f.update();
+        }
     }
 
     @Override

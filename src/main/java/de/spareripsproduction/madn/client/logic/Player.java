@@ -34,14 +34,14 @@ public class Player implements RenderAndUpdateable {
     }
 
     public void setPlayerActive() {
-        this.btnDice = new TEButton("Wuerfel", 0, 0, 300, 50, 5, menuFont);
+        this.btnDice = new TEButton("", ((GameScene)Game.getInstance().activeScene).dice.getX(), ((GameScene)Game.getInstance().activeScene).dice.getY(), 40, 40, 5, menuFont);
     }
 
     private void setNextPlayer() {
         GameScene scene = (GameScene)Game.getInstance().activeScene;
-        int index = scene.playerList.indexOf(this);
-        index = (index + 1) % scene.playerList.size();
-        scene.playerList.get(index).setPlayerActive();
+        int index = scene.getBoard().playerList.indexOf(this);
+        index = (index + 1) % scene.getBoard().playerList.size();
+        scene.getBoard().playerList.get(index).setPlayerActive();
     }
 
     private boolean gameFigureAbleToMove(GameFigure gameFigure, int count) {
@@ -88,6 +88,12 @@ public class Player implements RenderAndUpdateable {
                 index = i;
                 break;
             }
+        }
+
+        if (index == -1) {
+            this.spawnField.gameFigure = gameFigure;
+            this.gameFigureList.remove(gameFigure);
+            return;
         }
 
         board.fields[index].gameFigure = null;
@@ -137,7 +143,7 @@ public class Player implements RenderAndUpdateable {
                 }
             }
         } else {
-            for (GameFigure f : this.gameFigureList) {
+            for (GameFigure f : new ArrayList<GameFigure>(this.gameFigureList)) {
                 if (f.isClickAble() && f.isClicked()) {
                     gameFigureMove(f, this.lastDiceRoll);
 
