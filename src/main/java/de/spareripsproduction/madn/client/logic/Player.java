@@ -125,10 +125,15 @@ public class Player implements RenderAndUpdateable {
                 GameScene scene = (GameScene)Game.getInstance().activeScene;
                 this.lastDiceRoll = scene.dice.getNextNumber();
 
+                int gfAbleToMove = 0;
                 for (GameFigure g : this.gameFigureList) {
                     if (gameFigureAbleToMove(g, this.lastDiceRoll)) {
                         g.setClickAble(true);
+                        gfAbleToMove++;
                     }
+                }
+                if (gfAbleToMove == 0) {
+                    //Kein Spielfigure ziehbar
                 }
             }
         } else {
