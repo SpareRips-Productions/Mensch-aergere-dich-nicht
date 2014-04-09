@@ -18,7 +18,7 @@ public class GameScene extends Scene {
     public List<Player> playerList = new ArrayList<Player>();
     public Dice dice;
 
-    private Board board;
+    public Board board;
 
     public void load() {
         //playerList.add(new Player());
@@ -26,9 +26,9 @@ public class GameScene extends Scene {
         //playerList.add(new Player());
         //playerList.add(new Player());
         this.dice = new Dice(0,0);
-        this.board = new Board(5, 5);
-        this.dice.setX((int) this.board.getWidth()/2 - this.dice.getWidth()/2);
-        this.dice.setY((int) this.board.getHeight()/2 - this.dice.getHeight()/2);
+        this.board = new Board(0, 0);
+        this.dice.setX((int) (board.getX()+ this.board.getWidth()/2 - this.dice.getWidth()/2));
+        this.dice.setY((int) (board.getY()+ this.board.getHeight()/2 - this.dice.getHeight()/2));
     }
     public void unload() {
 

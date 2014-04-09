@@ -1,5 +1,6 @@
 package de.spareripsproduction.madn.client.graphics;
 
+import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.entity.Entity;
 
 import java.awt.*;
@@ -19,6 +20,8 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     public Board(int x, int y) {
         super("sprites/board.png", x, y);
+        // center the board
+        this.setLocation(GameWindow.getInstance().getWidth() / 2 - this.getWidth() / 2, GameWindow.getInstance().getHeight() / 2 - this.getHeight() / 2);
 
         this.fields = new Field[40];
         pffffff(this.fields);
@@ -85,10 +88,10 @@ public class Board extends Entity implements RenderAndUpdateable {
     }
 
     private int toX(int x) {
-        return 80 + x * 45;
+        return (int) getX() +80 + x * 45;
     }
     private int toY(int y) {
-        return 45 + y * 45;
+        return (int) getY() + 45 + y * 45;
     }
 
     @Override
