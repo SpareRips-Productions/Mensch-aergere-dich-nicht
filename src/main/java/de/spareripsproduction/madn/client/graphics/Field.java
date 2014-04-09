@@ -17,15 +17,16 @@ public abstract class Field extends Entity implements RenderAndUpdateable {
     public void update() {
         if(gameFigure != null) {
             gameFigure.update();
+            gameFigure.setLocation(this.x, this.y - 50);
         }
         super.update();
     }
 
     public void render(Graphics2D g) {
+        super.render(g);
+
         if(gameFigure != null) {
             gameFigure.render(g);
         }
-
-        super.render(g);
     }
 }

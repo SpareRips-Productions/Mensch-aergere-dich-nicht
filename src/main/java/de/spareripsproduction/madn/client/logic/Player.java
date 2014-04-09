@@ -145,11 +145,11 @@ public class Player implements RenderAndUpdateable {
         } else {
             for (GameFigure f : new ArrayList<GameFigure>(this.gameFigureList)) {
                 if (f.isClickAble() && f.isClicked()) {
-                    gameFigureMove(f, this.lastDiceRoll);
-
                     for (GameFigure fg : this.gameFigureList) {
                         fg.setClickAble(false);
                     }
+
+                    gameFigureMove(f, this.lastDiceRoll);
 
                     setNextPlayer();
                 }
