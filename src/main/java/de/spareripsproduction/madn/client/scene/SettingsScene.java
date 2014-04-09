@@ -67,7 +67,10 @@ public class SettingsScene extends Scene {
         LabelCollection.verticalAlignCenter(0,GameWindow.getInstance().getWidth());
         LabelCollection.update();
         if (this.backButton.isClicked()){
-            Game.getInstance().loadScene(SCENE_MENU);
+            if(validNames() != null){
+                validNames().active = true;
+            }else{
+            Game.getInstance().loadScene(SCENE_MENU);}
         }
         Settings.Player1Name = this.p1Text.getText();
         Settings.Player2Name = this.p2Text.getText();
@@ -81,6 +84,17 @@ public class SettingsScene extends Scene {
         this.backgroundImage.render((Graphics2D) g);
         this.backButton.render((Graphics2D)g);
         this.LabelCollection.render((Graphics2D)g);
+    }
+
+    private TETextField validNames(){
+        TETextField retVal = null;
+
+        if(this.p1Text.getText().length() < 1){ retVal = this.p1Text;}
+        else if(this.p2Text.getText().length() < 1){ retVal = this.p2Text;}
+        else if(this.p3Text.getText().length() < 1){ retVal = this.p3Text;}
+        else if(this.p4Text.getText().length() < 1){ retVal = this.p4Text;}
+
+        return retVal;
     }
 
 }

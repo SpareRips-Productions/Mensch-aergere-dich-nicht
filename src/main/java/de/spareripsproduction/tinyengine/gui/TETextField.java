@@ -16,7 +16,7 @@ public class TETextField extends TEView implements KeyListener {
 
     protected TELabel label;
 
-    protected boolean active;
+    public boolean active;
 
     protected boolean hover;
 
