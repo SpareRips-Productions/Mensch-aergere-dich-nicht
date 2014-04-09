@@ -20,6 +20,7 @@ public class Dice implements RenderAndUpdateable {
 
     private int width,height;
 
+
     public Dice(int x, int y) {
         this.x = x;
         this.y = y;

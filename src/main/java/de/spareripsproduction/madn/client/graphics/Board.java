@@ -14,6 +14,8 @@ public class Board extends Entity implements RenderAndUpdateable {
     public Field[] fields;
     public java.util.List<Player> playerList;
 
+    public Dice dice;
+
     private boolean inBetween(int i, int min, int max) {
         return i >= min && i <= max;
     }
@@ -25,6 +27,10 @@ public class Board extends Entity implements RenderAndUpdateable {
 
         this.fields = new Field[40];
         pffffff(this.fields);
+
+        this.dice = new Dice(0,0);
+        this.dice.setX((int) (this.getX()+ this.getWidth()/2 - this.dice.getWidth()/2));
+        this.dice.setY((int) (this.getY()+ this.getHeight()/2 - this.dice.getHeight()/2));
 
         this.fields[0] = new SpawnField(SpawnField.SPRITE_RED, this.fields[0].getIntX(), this.fields[0].getIntY());
         this.fields[10] = new SpawnField(SpawnField.SPRITE_GREEN, this.fields[10].getIntX(), this.fields[10].getIntY());
@@ -41,7 +47,6 @@ public class Board extends Entity implements RenderAndUpdateable {
         this.playerList.add(new Player(Settings.Player3Name, GameFigure.COLOR_BLUE, new Point(toX(7), toY(9)), this.fields[20]));
         this.playerList.add(new Player(Settings.Player4Name, GameFigure.COLOR_YELLOW, new Point(toX(0), toY(9)), this.fields[30]));
 
-        this.playerList.get(0).setPlayerActive();
     }
 
     private void pffffff(Field[] fields) {
@@ -96,6 +101,7 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     @Override
     public void update() {
+        dice.update();
         for (Player p : this.playerList) {
             p.update();
         }
@@ -113,5 +119,6 @@ public class Board extends Entity implements RenderAndUpdateable {
         for (Field f : this.fields) {
             f.render(g);
         }
+        dice.render(g);
     }
 }

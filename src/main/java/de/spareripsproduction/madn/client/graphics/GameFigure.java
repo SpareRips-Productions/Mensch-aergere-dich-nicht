@@ -56,6 +56,8 @@ public class GameFigure extends Entity implements RenderAndUpdateable {
             }
             // check if mouse inside button
             this.highlighted = new Rectangle(this.getIntX(), this.getIntY(), this.getIntWidth(), this.getIntHeight()).contains(Mouse.location());
+        }else {
+            this.highlighted = false;
         }
     }
 

@@ -34,7 +34,7 @@ public class Player implements RenderAndUpdateable {
     }
 
     public void setPlayerActive() {
-        this.btnDice = new TEButton("", ((GameScene)Game.getInstance().activeScene).dice.getX(), ((GameScene)Game.getInstance().activeScene).dice.getY(), 40, 40, 5, menuFont);
+        this.btnDice = new TEButton("", ((GameScene)Game.getInstance().activeScene).getBoard().dice.getX(), ((GameScene)Game.getInstance().activeScene).getBoard().dice.getY(), 40, 40, 5, menuFont);
     }
 
     private void setNextPlayer() {
@@ -129,7 +129,7 @@ public class Player implements RenderAndUpdateable {
             if (this.btnDice.isClicked()) {
                 this.btnDice = null;
                 GameScene scene = (GameScene)Game.getInstance().activeScene;
-                this.lastDiceRoll = scene.dice.getNextNumber();
+                this.lastDiceRoll = scene.getBoard().dice.getNextNumber();
 
                 int gfAbleToMove = 0;
                 for (GameFigure g : this.gameFigureList) {
