@@ -147,6 +147,6 @@ public class Player implements RenderAndUpdateable {
 
     @Override
     public void render(Graphics2D g) {
-
+        this.btnDice.render(g);
     }
 }
