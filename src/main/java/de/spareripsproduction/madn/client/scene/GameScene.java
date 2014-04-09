@@ -15,7 +15,6 @@ import de.spareripsproduction.tinyengine.GameWindow;
  */
 public class GameScene extends Scene {
 
-    public List<Player> playerList = new ArrayList<Player>();
     public Dice dice;
 
     public Board board;

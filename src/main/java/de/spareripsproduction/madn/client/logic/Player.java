@@ -34,14 +34,14 @@ public class Player implements RenderAndUpdateable {
     }
 
     public void setPlayerActive() {
-        this.btnDice = new TEButton("Wuerfel", 0, 0, 300, 50, 5, menuFont);
+        this.btnDice = new TEButton("", ((GameScene)Game.getInstance().activeScene).dice.getX(), ((GameScene)Game.getInstance().activeScene).dice.getY(), 40, 40, 5, menuFont);
     }
 
     private void setNextPlayer() {
         GameScene scene = (GameScene)Game.getInstance().activeScene;
-        int index = scene.playerList.indexOf(this);
-        index = (index + 1) % scene.playerList.size();
-        scene.playerList.get(index).setPlayerActive();
+        int index = scene.getBoard().playerList.indexOf(this);
+        index = (index + 1) % scene.getBoard().playerList.size();
+        scene.getBoard().playerList.get(index).setPlayerActive();
     }
 
     private boolean gameFigureAbleToMove(GameFigure gameFigure, int count) {
@@ -90,6 +90,12 @@ public class Player implements RenderAndUpdateable {
             }
         }
 
+        if (index == -1) {
+            this.spawnField.gameFigure = gameFigure;
+            this.gameFigureList.remove(gameFigure);
+            return;
+        }
+
         board.fields[index].gameFigure = null;
 
         for (int i = 1; i <= count; i++) {
@@ -125,20 +131,25 @@ public class Player implements RenderAndUpdateable {
                 GameScene scene = (GameScene)Game.getInstance().activeScene;
                 this.lastDiceRoll = scene.dice.getNextNumber();
 
+                int gfAbleToMove = 0;
                 for (GameFigure g : this.gameFigureList) {
                     if (gameFigureAbleToMove(g, this.lastDiceRoll)) {
                         g.setClickAble(true);
+                        gfAbleToMove++;
                     }
+                }
+                if (gfAbleToMove == 0) {
+                    //Kein Spielfigure ziehbar
                 }
             }
         } else {
-            for (GameFigure f : this.gameFigureList) {
+            for (GameFigure f : new ArrayList<GameFigure>(this.gameFigureList)) {
                 if (f.isClickAble() && f.isClicked()) {
-                    gameFigureMove(f, this.lastDiceRoll);
-
                     for (GameFigure fg : this.gameFigureList) {
                         fg.setClickAble(false);
                     }
+
+                    gameFigureMove(f, this.lastDiceRoll);
 
                     setNextPlayer();
                 }
