@@ -25,8 +25,8 @@ public class GameScene extends Scene {
         //playerList.add(new Player());
         //playerList.add(new Player());
         //playerList.add(new Player());
-        this.board = new Board(5, 5);
         this.dice = new Dice(0,0);
+        this.board = new Board(5, 5);
         this.dice.setX((int) this.board.getWidth()/2 - this.dice.getWidth()/2);
         this.dice.setY((int) this.board.getHeight()/2 - this.dice.getHeight()/2);
     }
@@ -36,7 +36,7 @@ public class GameScene extends Scene {
 
     @Override
     public void update() {
-
+        this.board.update();
     }
 
     @Override
