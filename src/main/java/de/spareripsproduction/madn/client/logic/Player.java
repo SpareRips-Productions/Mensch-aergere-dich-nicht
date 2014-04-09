@@ -119,6 +119,7 @@ public class Player implements RenderAndUpdateable {
     @Override
     public void update() {
         if (this.btnDice != null) {
+            this.btnDice.update();
             if (this.btnDice.isClicked()) {
                 this.btnDice = null;
                 GameScene scene = (GameScene)Game.getInstance().activeScene;
@@ -147,6 +148,8 @@ public class Player implements RenderAndUpdateable {
 
     @Override
     public void render(Graphics2D g) {
-
+        if (this.btnDice != null) {
+            this.btnDice.render(g);
+        }
     }
 }
