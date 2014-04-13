@@ -1,12 +1,11 @@
 package de.spareripsproduction.madn.client.scene;
 
 import de.spareripsproduction.madn.client.Game;
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.TELabel;
-import de.spareripsproduction.tinyengine.gui.TESwitch;
-import de.spareripsproduction.tinyengine.gui.TETextField;
 import de.spareripsproduction.tinyengine.input.Keyboard;
 
 import java.awt.*;
@@ -39,13 +38,13 @@ public class IntroScene extends Scene {
 
         this.backgroundImage = new Entity("sprites/title.png", 0, 0);
 
-        int fontSize = 50;
-        Font titleFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
+        int fontSize = 100;
+        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, fontSize);
         this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 100, titleFont);
         this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
 
-        fontSize = 30;
-        Font pressSpaceFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
+        fontSize = 35;
+        Font pressSpaceFont = FontManager.getFont(FontManager.FONT_DROID_SANS, fontSize);
         this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
 
     }
@@ -84,7 +83,7 @@ public class IntroScene extends Scene {
 
         this.firstTitleLabel.verticalAlignCenter(0, width);
 
-        this.secondTitleLabel.setY(this.firstTitleLabel.getY() + firstTitleLabel.getHeight() + 10);
+        this.secondTitleLabel.setY(this.firstTitleLabel.getY() + 10);
         this.secondTitleLabel.verticalAlignCenter(0, width);
 
         this.pressSpaceLabel.setY(height*9/10 - this.pressSpaceLabel.getHeight()/2);

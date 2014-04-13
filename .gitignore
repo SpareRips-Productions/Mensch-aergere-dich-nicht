@@ -28,3 +28,4 @@ src/main/java/de/spareripsproduction/madn/client/scene/SettingsScene.java
 src/main/java/de/spareripsproduction/madn/client/graphics/.idea/
 out/
 *.db
+.idea

@@ -29,7 +29,7 @@ public class GitVersion extends GitRepository implements RenderInterface {
         int width = GameWindow.getInstance().getWidth();
         int height = GameWindow.getInstance().getHeight();
         this.gitVersionLabel.verticalAlignRight(width);
-        this.gitVersionLabel.setY(height - 5);
+        this.gitVersionLabel.setY(height - this.gitVersionLabel.getHeight());
         this.gitVersionLabel.render(context);
 
         context.setColor(color);

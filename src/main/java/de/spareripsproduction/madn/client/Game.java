@@ -35,8 +35,6 @@ public class Game
 
     public Game() {
         super("Mensch ärgere dich nicht", 800, 600);
-        FontManager.loadFont("fonts/Arizonia-Regular.ttf", "Arizonia-Regular");
-        FontManager.loadFont("fonts/Arizonia-Regular.ttf", "Arizonia-Regular");
 
 
         this.version = new GitVersion();

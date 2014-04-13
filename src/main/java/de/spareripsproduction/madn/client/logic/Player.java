@@ -3,6 +3,7 @@ package de.spareripsproduction.madn.client.logic;
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.*;
 import de.spareripsproduction.madn.client.scene.GameScene;
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.gui.*;
 import de.spareripsproduction.tinyengine.logic.UpdateInterface;
 
@@ -18,7 +19,7 @@ public class Player implements RenderAndUpdateable {
     private TEButton btnDice;
     private List<GameFigure> gameFigureList = new ArrayList<GameFigure>();
     private Point gameFigureListDrawPoint;
-    private Font menuFont = new Font("PressStart2P-Regular", Font.PLAIN, 20);
+    private Font menuFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 20);
     private String name;
     private SpawnField spawnField;
     private int lastDiceRoll;

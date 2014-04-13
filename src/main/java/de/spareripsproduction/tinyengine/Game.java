@@ -50,7 +50,6 @@ public class Game {
         this.window = GameWindow.getInstance(title, width, height);
         this.lastLoop = 0;
         this.delay = 10;
-        FontManager.loadFont("fonts/PressStart2P-Regular.ttf", "PressStart2P-Regular");
     }
 
     /**
@@ -84,6 +83,9 @@ public class Game {
             int height = this.getWindow().getHeight();
             int width = this.getWindow().getWidth();
             Graphics2D context = this.getWindow().getGraphicsContext();
+            context.setRenderingHint(
+                    RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             context.setColor(Color.black);
             context.fillRect(0, 0, width, height);
 
