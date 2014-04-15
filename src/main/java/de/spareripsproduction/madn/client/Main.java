@@ -1,7 +1,5 @@
 package de.spareripsproduction.madn.client;
 
-import de.spareripsproduction.tinyengine.input.Mouse;
-
 /**
  * Created by marian on 08/02/14.
  */

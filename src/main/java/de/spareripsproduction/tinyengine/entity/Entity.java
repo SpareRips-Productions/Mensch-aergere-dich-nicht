@@ -40,11 +40,11 @@ public class Entity implements RenderInterface, UpdateInterface {
     }
 
     public int getIntX() {
-        return (int)this.x;
+        return (int)this.getX();
     }
 
     public int getIntY() {
-        return (int)this.y;
+        return (int)this.getY();
     }
 
     public int getIntHeight() {

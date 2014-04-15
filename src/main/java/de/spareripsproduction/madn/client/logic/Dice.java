@@ -1,9 +1,12 @@
 package de.spareripsproduction.madn.client.logic;
 
+import de.spareripsproduction.madn.client.graphics.Board;
 import de.spareripsproduction.madn.client.graphics.RenderAndUpdateable;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
+import de.spareripsproduction.tinyengine.input.Mouse;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 /**
@@ -20,6 +23,7 @@ public class Dice implements RenderAndUpdateable {
 
     private int width,height;
 
+    protected boolean hover, clicked, locked;
 
     public Dice(int x, int y) {
         this.x = x;
@@ -27,6 +31,9 @@ public class Dice implements RenderAndUpdateable {
         this.height = 40;
         this.width = 40;
         this.random = new Random();
+        this.lastNumber = 0;
+        this.reset();
+        this.locked = false;
     }
 
     public int getNextNumber() {
@@ -34,9 +41,23 @@ public class Dice implements RenderAndUpdateable {
         return lastNumber;
     }
 
+    public void reset() {
+        this.lastNumber = 0;
+    }
+
 
     @Override
     public void update() {
+
+        this.hover = !this.locked && this.insideView(Mouse.location());
+
+        if (Mouse.isClicked(MouseEvent.BUTTON1) && isHover() && !this.locked) {
+            this.clicked = true;
+            this.locked = true;
+            getNextNumber();
+        } else {
+            this.clicked = false;
+        }
 
     }
 
@@ -53,7 +74,29 @@ public class Dice implements RenderAndUpdateable {
         Color color = g.getColor();
         Stroke stroke = g.getStroke();
 
-        g.setColor(Color.black);
+        if(isHover()) {
+            g.setColor(Color.magenta);
+
+        }else {
+            switch (Board.getInstance().getActivePlayer().getType()) {
+                case Player.RED_PLAYER:
+                    g.setColor(Color.RED);
+                    break;
+                case Player.BLUE_PLAYER:
+                    g.setColor(Color.blue);
+                    break;
+                case Player.GREEN_PLAYER:
+                    g.setColor(Color.green);
+                    break;
+                case Player.YELLOW_PLAYER:
+                    g.setColor(Color.yellow);
+                    break;
+
+            }
+        }
+
+
+
         g.setStroke(new BasicStroke(2));
         g.drawRect(
                 this.getX()-1,
@@ -61,6 +104,10 @@ public class Dice implements RenderAndUpdateable {
                 this.getWidth()-2,
                 this.getHeight()-2
         );
+
+
+
+        g.setColor(Color.black);
 
         switch (this.lastNumber) {
             case 1:
@@ -158,5 +205,26 @@ public class Dice implements RenderAndUpdateable {
 
     public int getHeight() {
         return height;
+    }
+
+    protected boolean isHover() {
+        return hover;
+    }
+
+    protected boolean isClicked() {
+        return clicked;
+    }
+
+    protected boolean insideView(Point p) {
+        return (p.getX() >= this.getX() && p.getX() <= this.getX() + this.getWidth())
+                && (p.getY() >= this.getY() && p.getY() <= this.getY() + this.getHeight());
+    }
+
+    public void unlock() {
+        this.locked = false;
+    }
+
+    public boolean isLocked() {
+        return locked;
     }
 }

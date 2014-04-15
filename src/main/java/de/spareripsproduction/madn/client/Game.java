@@ -29,7 +29,7 @@ public class Game
 
     private HashMap<String,Scene> scenes;
 
-    public Scene activeScene;
+    private Scene activeScene;
 
     private static Game instance;
 
@@ -101,5 +101,10 @@ public class Game
         this.scenes.put(Scene.SCENE_MENU, new MenuScene());
         this.scenes.put(Scene.SCENE_SCORE, new ScoreScene());
         this.scenes.put(Scene.SCENE_SETTINGS,new SettingsScene());
+        this.scenes.put(Scene.SCENE_CREDITS,new CreditsScene());
+    }
+
+    public Scene getScene(String sceneName) {
+        return this.scenes.get(sceneName);
     }
 }

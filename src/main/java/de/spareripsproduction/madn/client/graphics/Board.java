@@ -1,20 +1,43 @@
 package de.spareripsproduction.madn.client.graphics;
 
-import de.spareripsproduction.tinyengine.GameWindow;
+import de.spareripsproduction.madn.client.graphics.field.Field;
+import de.spareripsproduction.madn.client.graphics.field.HomeEntryField;
+import de.spareripsproduction.madn.client.graphics.field.NormalField;
+import de.spareripsproduction.madn.client.graphics.field.SpawnField;
+import de.spareripsproduction.madn.client.graphics.figure.*;
+import de.spareripsproduction.tinyengine.*;
+import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.entity.Entity;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import de.spareripsproduction.madn.client.logic.*;
+import de.spareripsproduction.tinyengine.input.Keyboard;
 
 /**
  * Created by marian on 12/03/14.
  */
 public class Board extends Entity implements RenderAndUpdateable {
-    public Field[] fields;
-    public java.util.List<Player> playerList;
 
-    public Dice dice;
+    private ArrayList<Field> fields;
+
+    private ArrayList<Player> players;
+
+    private ArrayList<GameFigure> gameFigures;
+
+    private Dice dice;
+
+    private static Board instance;
+
+    private long last = Timer.getTime();
+
+    public static Board getInstance() {
+        if(instance == null) {
+            instance = new Board(0,0);
+        }
+        return instance;
+    }
 
     private boolean inBetween(int i, int min, int max) {
         return i >= min && i <= max;
@@ -25,100 +48,124 @@ public class Board extends Entity implements RenderAndUpdateable {
         // center the board
         this.setLocation(GameWindow.getInstance().getWidth() / 2 - this.getWidth() / 2, GameWindow.getInstance().getHeight() / 2 - this.getHeight() / 2);
 
-        this.fields = new Field[40];
-        pffffff(this.fields);
-
         this.dice = new Dice(0,0);
-        this.dice.setX((int) (this.getX()+ this.getWidth()/2 - this.dice.getWidth()/2));
-        this.dice.setY((int) (this.getY()+ this.getHeight()/2 - this.dice.getHeight()/2));
+        this.dice.setX(GameWindow.getInstance().getWidth() / 2 - this.dice.getWidth() / 2);
+        this.dice.setY(GameWindow.getInstance().getHeight() / 2 - this.dice.getHeight() / 2);
 
-        this.fields[0] = new SpawnField(SpawnField.SPRITE_RED, this.fields[0].getIntX(), this.fields[0].getIntY());
-        this.fields[10] = new SpawnField(SpawnField.SPRITE_GREEN, this.fields[10].getIntX(), this.fields[10].getIntY());
-        this.fields[20] = new SpawnField(SpawnField.SPRITE_BLUE, this.fields[20].getIntX(), this.fields[20].getIntY());
-        this.fields[30] = new SpawnField(SpawnField.SPRITE_YELLOW, this.fields[30].getIntX(), this.fields[30].getIntY());
-        this.fields[39] = new HomeEntryField(SpawnField.SPRITE_RED, this.fields[39].getIntX(), this.fields[39].getIntY(), 1, 0);
-        this.fields[9] = new HomeEntryField(SpawnField.SPRITE_GREEN, this.fields[9].getIntX(), this.fields[9].getIntY(), 0, 1);
-        this.fields[19] = new HomeEntryField(SpawnField.SPRITE_BLUE,this.fields[19].getIntX(), this.fields[19].getIntY(), -1, 0);
-        this.fields[29] = new HomeEntryField(SpawnField.SPRITE_YELLOW,this.fields[29].getIntX(), this.fields[29].getIntY(), 0, -1);
 
-        this.playerList = new ArrayList<Player>();
-        this.playerList.add(new Player(Settings.Player1Name, GameFigure.COLOR_RED, new Point(toX(0), toY(0)), this.fields[0]));
-        this.playerList.add(new Player(Settings.Player2Name, GameFigure.COLOR_GREEN, new Point(toX(7), toY(0)), this.fields[10]));
-        this.playerList.add(new Player(Settings.Player3Name, GameFigure.COLOR_BLUE, new Point(toX(7), toY(9)), this.fields[20]));
-        this.playerList.add(new Player(Settings.Player4Name, GameFigure.COLOR_YELLOW, new Point(toX(0), toY(9)), this.fields[30]));
 
-    }
+        this.fields = new ArrayList<Field>();
+        for(int i = 0; i < 40; i++ ) {
+            if(i%10 == 0) {
+                switch (i/10) {
+                    case 0:
+                        this.fields.add(new SpawnField(SpawnField.SPRITE_RED, i));
+                        break;
+                    case 1:
+                        this.fields.add(new SpawnField(SpawnField.SPRITE_BLUE, i));
+                        break;
+                    case 2:
+                        this.fields.add(new SpawnField(SpawnField.SPRITE_GREEN, i));
+                        break;
+                    case 3:
+                        this.fields.add(new SpawnField(SpawnField.SPRITE_YELLOW, i));
+                        break;
+                }
+            }else {
+                this.fields.add(new NormalField(i));
+            }
+        }
+        // home fields
+        String[] spirtes = {Field.SPRITE_RED, Field.SPRITE_BLUE, Field.SPRITE_GREEN, Field.SPRITE_YELLOW};
+        for(int i = 0; i < 4; i++) {
+           String spriteRef = spirtes[i];
+           for(int j = i*10+40;j < i*10+44; j++){
+                this.fields.add(new HomeEntryField(spriteRef, j));
+           }
+        }
 
-    private void pffffff(Field[] fields) {
-        fields[0] = new NormalField(toX(0), toY(4));
-        fields[1] = new NormalField(toX(1), toY(4));
-        fields[2] = new NormalField(toX(2), toY(4));
-        fields[3] = new NormalField(toX(3), toY(4));
-        fields[4] = new NormalField(toX(4), toY(4));
-        fields[5] = new NormalField(toX(4), toY(3));
-        fields[6] = new NormalField(toX(4), toY(2));
-        fields[7] = new NormalField(toX(4), toY(1));
-        fields[8] = new NormalField(toX(4), toY(0));
-        fields[9] = new NormalField(toX(5), toY(0));
-        fields[10] = new NormalField(toX(6), toY(0));
-        fields[11] = new NormalField(toX(6), toY(1));
-        fields[12] = new NormalField(toX(6), toY(2));
-        fields[13] = new NormalField(toX(6), toY(3));
-        fields[14] = new NormalField(toX(6), toY(4));
-        fields[15] = new NormalField(toX(7), toY(4));
-        fields[16] = new NormalField(toX(8), toY(4));
-        fields[17] = new NormalField(toX(9), toY(4));
-        fields[18] = new NormalField(toX(10), toY(4));
-        fields[19] = new NormalField(toX(10), toY(5));
-        fields[20] = new NormalField(toX(10), toY(6));
-        fields[21] = new NormalField(toX(9), toY(6));
-        fields[22] = new NormalField(toX(8), toY(6));
-        fields[23] = new NormalField(toX(7), toY(6));
-        fields[24] = new NormalField(toX(6), toY(6));
-        fields[25] = new NormalField(toX(6), toY(7));
-        fields[26] = new NormalField(toX(6), toY(8));
-        fields[27] = new NormalField(toX(6), toY(9));
-        fields[28] = new NormalField(toX(6), toY(10));
-        fields[29] = new NormalField(toX(5), toY(10));
-        fields[30] = new NormalField(toX(4), toY(10));
-        fields[31] = new NormalField(toX(4), toY(9));
-        fields[32] = new NormalField(toX(4), toY(8));
-        fields[33] = new NormalField(toX(4), toY(7));
-        fields[34] = new NormalField(toX(4), toY(6));
-        fields[35] = new NormalField(toX(3), toY(6));
-        fields[36] = new NormalField(toX(2), toY(6));
-        fields[37] = new NormalField(toX(1), toY(6));
-        fields[38] = new NormalField(toX(0), toY(6));
-        fields[39] = new NormalField(toX(0), toY(5));
-    }
 
-    private int toX(int x) {
-        return (int) getX() +80 + x * 45;
-    }
-    private int toY(int y) {
-        return (int) getY() + 45 + y * 45;
+        this.gameFigures = new ArrayList<GameFigure>();
+
+        for(int i = 0; i < 4; i++) {
+            this.gameFigures.add(new RedFigure(i));
+            this.gameFigures.add(new BlueFigure(i));
+            this.gameFigures.add(new GreenFigure(i));
+            this.gameFigures.add(new YellowFigure(i));
+        }
+
+        this.players = new ArrayList<Player>();
+        for(int i = 0; i <4; i++) {
+            this.players.add(new Player(i));
+        }
+
     }
 
     @Override
     public void update() {
+        int number = 0;
+
+        /*if(Keyboard.isPressed(KeyEvent.VK_RIGHT) && Timer.getTime()-last > 500){
+            number = this.dice.getNextNumber();
+            last = Timer.getTime();
+            Player activePlayer = this.getActivePlayer();
+            activePlayer.getGameFigures().get(number%4).move(number);
+            activePlayer.nextPlayer();
+        } */
+
+        getActivePlayer().makeMove();
+
         dice.update();
-        for (Player p : this.playerList) {
-            p.update();
+        for (Player player : this.players) {
+            player.update();
         }
-        for (Field f : this.fields) {
-            f.update();
+        for (Field field : this.fields) {
+            field.update();
         }
+        for (GameFigure gameFigure : this.gameFigures) {
+            gameFigure.update();
+        }
+
     }
 
     @Override
     public void render(Graphics2D g) {
         super.render(g);
-        for (Player p : this.playerList) {
-            p.render(g);
+
+        for (Player player : this.players) {
+            player.render(g);
         }
-        for (Field f : this.fields) {
-            f.render(g);
+        for (Field field : this.fields) {
+            field.render(g);
         }
-        dice.render(g);
+        this.dice.render(g);
+
+        for (GameFigure gameFigure : this.gameFigures) {
+            gameFigure.render(g);
+        }
+
+    }
+
+    public ArrayList<GameFigure> getGameFigures() {
+        return gameFigures;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public Player getActivePlayer() {
+        for(Player player : this.getPlayers()) {
+            if(player.isActive()) {
+                return player;
+            }
+        }
+        Player activePlayer = getPlayers().get(0);
+        activePlayer.activate();
+        return activePlayer;
+    }
+
+    public Dice getDice() {
+        return dice;
     }
 }

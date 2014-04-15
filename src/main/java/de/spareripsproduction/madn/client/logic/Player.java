@@ -1,174 +1,180 @@
 package de.spareripsproduction.madn.client.logic;
 
-import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.*;
-import de.spareripsproduction.madn.client.scene.GameScene;
-import de.spareripsproduction.tinyengine.FontManager;
-import de.spareripsproduction.tinyengine.gui.*;
-import de.spareripsproduction.tinyengine.logic.UpdateInterface;
+import de.spareripsproduction.madn.client.graphics.figure.*;
+import de.spareripsproduction.tinyengine.Timer;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by marian on 12/03/14.
  */
 public class Player implements RenderAndUpdateable {
-    private TEButton btnDice;
-    private List<GameFigure> gameFigureList = new ArrayList<GameFigure>();
-    private Point gameFigureListDrawPoint;
-    private Font menuFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 20);
-    private String name;
-    private SpawnField spawnField;
-    private int lastDiceRoll;
 
-    public Player(String name, String SpriteRef, Point gameFigureListDrawPoint, Field spawnField) {
-        this.name = name;
-        this.gameFigureListDrawPoint = gameFigureListDrawPoint;
-        this.gameFigureList.add(new GameFigure(SpriteRef, this.gameFigureListDrawPoint.x, this.gameFigureListDrawPoint.y, this));
-        this.gameFigureList.add(new GameFigure(SpriteRef, this.gameFigureListDrawPoint.x + 45, this.gameFigureListDrawPoint.y, this));
-        this.gameFigureList.add(new GameFigure(SpriteRef, this.gameFigureListDrawPoint.x + 90, this.gameFigureListDrawPoint.y, this));
-        this.gameFigureList.add(new GameFigure(SpriteRef, this.gameFigureListDrawPoint.x + 135, this.gameFigureListDrawPoint.y, this));
-        this.spawnField = (SpawnField)spawnField;
-    }
+    public static final int RED_PLAYER      = 0;
+    public static final int BLUE_PLAYER     = 1;
+    public static final int GREEN_PLAYER    = 2;
+    public static final int YELLOW_PLAYER   = 3;
 
-    public void setPlayerActive() {
-        this.btnDice = new TEButton("", ((GameScene)Game.getInstance().activeScene).getBoard().dice.getX(), ((GameScene)Game.getInstance().activeScene).getBoard().dice.getY(), 40, 40, 5, menuFont);
-    }
+    protected int type;
 
-    private void setNextPlayer() {
-        GameScene scene = (GameScene)Game.getInstance().activeScene;
-        int index = scene.getBoard().playerList.indexOf(this);
-        index = (index + 1) % scene.getBoard().playerList.size();
-        scene.getBoard().playerList.get(index).setPlayerActive();
-    }
+    protected boolean active = false;
 
-    private boolean gameFigureAbleToMove(GameFigure gameFigure, int count) {
-        GameScene scene = (GameScene)Game.getInstance().activeScene;
-        Board board = scene.getBoard();
-        int index = -1;
-        for (int i = 0; i < board.fields.length; i++) {
-            if (board.fields[i].gameFigure == gameFigure) {
-                index = i;
+    protected int rollCount = 3;
+
+    protected String name;
+
+    private ArrayList<GameFigure> gameFigures;
+
+    protected static long last = Timer.getTime();
+
+    public Player(int type) {
+        this.type = type;
+        switch (type) {
+            case RED_PLAYER:
+                name = Settings.Player1Name;
                 break;
+            case BLUE_PLAYER:
+                name = Settings.Player2Name;
+                break;
+            case GREEN_PLAYER:
+                name = Settings.Player3Name;
+                break;
+            case YELLOW_PLAYER:
+                name = Settings.Player4Name;
+                break;
+        }
+    }
+
+
+
+    public void makeMove() {
+        if(isActive()) {
+            if(!canMove() ) {
+                if(Timer.getTime() - last > 500) {
+                    if(getDice().isLocked()) {
+                        this.getDice().unlock();
+                        if(rollCount == 0) {
+                            nextPlayer();
+                        }
+                        if(this.getDice().getLastNumber() != 0) {
+                            rollCount--;
+                        }
+
+
+                    }
+                    last = Timer.getTime();
+                }
+
+
+            }else {
+                for(GameFigure gameFigure : getGameFigures()) {
+                    if(gameFigure.isClicked()) {
+                        gameFigure.move(getDice().getLastNumber());
+
+                        rollCount--;
+                        if(canRollDiceAgain()) {
+                            getDice().unlock();
+                            rollCount = 1;
+                        }
+                        getDice().reset();
+                        if(rollCount == 0) {
+
+                            nextPlayer();
+                        }
+                        break;
+                    }
+                }
             }
         }
+    }
 
-        if (index == -1) {
-            return this.spawnField.gameFigure == null;
+    public void update() {
+
+
+    }
+
+    protected boolean canRollDiceThreeTimes() {
+        boolean result = true;
+        for(GameFigure gameFigure : getGameFigures()) {
+            result = result && gameFigure.getId() == GameFigure.IN_HOUSE_ID;
         }
 
-        for (int i = 1; i <= count; i++) {
-            if (board.fields[index + i] instanceof HomeEntryField) {
-                int fieldToGo = count - i;
+        return result;
+    }
 
-                if (fieldToGo > 4) {
-                    return false;
-                }
+    protected boolean canRollDiceAgain() {
+        return getDice().getLastNumber() == 6;
+    }
 
-                if (((HomeEntryField)board.fields[index + i]).fields[fieldToGo].gameFigure != null) {
-                    return false;
-                }
-
+    protected boolean canMove() {
+        for(GameFigure gameFigure : getGameFigures()) {
+            if(gameFigure.canMove(getDice().getLastNumber())) {
                 return true;
             }
         }
-
-        return board.fields[(index + count) % board.fields.length].gameFigure == null ||
-               board.fields[(index + count) % board.fields.length].gameFigure.owner != this;
+        return false;
     }
 
-    private void gameFigureMove(GameFigure gameFigure, int count) {
-        GameScene scene = (GameScene)Game.getInstance().activeScene;
-        Board board = scene.getBoard();
-        int index = -1;
-        for (int i = 0; i < board.fields.length; i++) {
-            if (board.fields[i].gameFigure == gameFigure) {
-                index = i;
-                break;
-            }
-        }
-
-        if (index == -1) {
-            this.spawnField.gameFigure = gameFigure;
-            this.gameFigureList.remove(gameFigure);
-            return;
-        }
-
-        board.fields[index].gameFigure = null;
-
-        for (int i = 1; i <= count; i++) {
-            if (board.fields[index + i] instanceof HomeEntryField) {
-                int fieldToGo = count - i;
-
-                ((HomeEntryField)board.fields[index + i]).fields[fieldToGo].gameFigure = gameFigure;
-                return;
-            }
-        }
-
-        GameFigure figure = board.fields[(index + count) % board.fields.length].gameFigure;
-        if (figure != null) {
-            int figuresInHood = 0;
-            for (Field f : board.fields) {
-                if (f.gameFigure != null && f.gameFigure.owner == figure.owner) {
-                    figuresInHood++;
-                }
-            }
-
-            figure.setLocation((int)figure.owner.gameFigureListDrawPoint.getX() + 45 * figuresInHood, (int)figure.owner.gameFigureListDrawPoint.getY());
-        }
-
-        board.fields[(index + count) % board.fields.length].gameFigure = gameFigure;
+    protected Dice getDice() {
+        return Board.getInstance().getDice();
     }
 
-    @Override
-    public void update() {
-        if (this.btnDice != null) {
-            this.btnDice.update();
-            if (this.btnDice.isClicked()) {
-                this.btnDice = null;
-                GameScene scene = (GameScene)Game.getInstance().activeScene;
-                this.lastDiceRoll = scene.getBoard().dice.getNextNumber();
-
-                int gfAbleToMove = 0;
-                for (GameFigure g : this.gameFigureList) {
-                    if (gameFigureAbleToMove(g, this.lastDiceRoll)) {
-                        g.setClickAble(true);
-                        gfAbleToMove++;
-                    }
-                }
-                if (gfAbleToMove == 0) {
-                    //Kein Spielfigure ziehbar
-                }
-            }
-        } else {
-            for (GameFigure f : new ArrayList<GameFigure>(this.gameFigureList)) {
-                if (f.isClickAble() && f.isClicked()) {
-                    for (GameFigure fg : this.gameFigureList) {
-                        fg.setClickAble(false);
-                    }
-
-                    gameFigureMove(f, this.lastDiceRoll);
-
-                    setNextPlayer();
-                }
-            }
-        }
-
-        for (GameFigure g : this.gameFigureList) {
-            g.update();
-        }
+    public void activate() {
+        this.rollCount = (canRollDiceThreeTimes()) ? 3 : 1;
+        System.out.println("Player: "+name+"("+rollCount+") is now active");
+        this.active = true;
     }
 
-    @Override
+    public void nextPlayer() {
+        this.active = false;
+        Board.getInstance().getDice().reset();
+        ArrayList<Player> players = Board.getInstance().getPlayers();
+        int playerIndex = players.indexOf(this);
+        players.get((playerIndex+1)%players.size()).activate();
+    }
+
     public void render(Graphics2D g) {
-        if (this.btnDice != null) {
-            this.btnDice.render(g);
+
+    }
+
+    public ArrayList<GameFigure> getGameFigures() {
+        if(gameFigures == null) {
+            gameFigures = new ArrayList<GameFigure>();
+            for(GameFigure gameFigure : Board.getInstance().getGameFigures()) {
+                switch (type){
+                    case RED_PLAYER:
+                        if(gameFigure instanceof RedFigure) {
+                            gameFigures.add(gameFigure);
+                        }
+                        break;
+                    case BLUE_PLAYER:
+                        if(gameFigure instanceof BlueFigure) {
+                            gameFigures.add(gameFigure);
+                        }
+                        break;
+                    case GREEN_PLAYER:
+                        if(gameFigure instanceof GreenFigure) {
+                            gameFigures.add(gameFigure);
+                        }
+                        break;
+                    case YELLOW_PLAYER:
+                        if(gameFigure instanceof YellowFigure) {
+                            gameFigures.add(gameFigure);
+                        }
+                        break;
+                }
+            }
         }
-        for (GameFigure f : this.gameFigureList) {
-            f.render(g);
-        }
+        return gameFigures;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public int getType() {
+        return type;
     }
 }
