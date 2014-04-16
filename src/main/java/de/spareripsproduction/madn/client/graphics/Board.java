@@ -95,7 +95,7 @@ public class Board extends Entity implements RenderAndUpdateable {
         }
 
         this.players = new ArrayList<Player>();
-        for(int i = 0; i <4; i++) {
+        for(int i = 0; i < 4; i++) {
             this.players.add(new Player(i));
         }
 
@@ -103,15 +103,6 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     @Override
     public void update() {
-        int number = 0;
-
-        /*if(Keyboard.isPressed(KeyEvent.VK_RIGHT) && Timer.getTime()-last > 500){
-            number = this.dice.getNextNumber();
-            last = Timer.getTime();
-            Player activePlayer = this.getActivePlayer();
-            activePlayer.getGameFigures().get(number%4).move(number);
-            activePlayer.nextPlayer();
-        } */
 
         getActivePlayer().makeMove();
 

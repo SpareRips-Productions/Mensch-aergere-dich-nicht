@@ -48,7 +48,7 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     }
 
     public void kick() {
-        this.setId(IN_HOUSE_ID);
+        super.setId(IN_HOUSE_ID);
     }
 
     public boolean move(int delta, boolean dryRun) {
@@ -71,16 +71,27 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
             // go home
             if(tmp >= getStartId() && ((getId() < getStartId()) || (getStartId() == 0 && (getId()+delta) >= 40) /* hacky solution for red */) ) {
                 if(tmp-getStartId() < 4) {
-                    if(!dryRun) setId(getHomeStartId()+tmp-getStartId());
+                    tmp = getHomeStartId()+tmp-getStartId();
+                    if(isFieldOccupied(tmp)) {
+                        return false;
+                    }
+                    if(!dryRun) setId(tmp);
                     return true;
                 }
             } else {
+                if(isFieldOccupied(tmp)) {
+                    return false;
+                }
                 if(!dryRun) setId(tmp);
                 return true;
             }
         //move in home
         }else if(getId() >= 40 && getId()+delta < getHomeStartId()+4){
-            if(!dryRun) setId(getId()+delta);
+            int tmp = getId()+delta;
+            if(isFieldOccupied(tmp)) {
+                return false;
+            }
+            if(!dryRun) setId(tmp);
         }
 
         return false;
@@ -88,6 +99,15 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     public boolean move(int delta) {
         return move(delta, false);
+    }
+
+    public boolean isFieldOccupied(int id) {
+        for(GameFigure gameFigure : this.getOwner().getGameFigures()) {
+            if(gameFigure.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean canMove(int delta) {
@@ -111,6 +131,15 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     @Override
     protected void setId(int id) {
+
+        //kick figures on the same place
+        if(id > 0) {
+            for(GameFigure gameFigure : Board.getInstance().getGameFigures()) {
+                if(gameFigure.getId() == id) {
+                    gameFigure.kick();
+                }
+            }
+        }
 
         super.setId(id);
     }
