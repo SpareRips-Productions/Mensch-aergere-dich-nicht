@@ -1,5 +1,6 @@
 package de.spareripsproduction.tinyengine.logic;
 
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 import de.spareripsproduction.tinyengine.gui.TELabel;
@@ -25,7 +26,7 @@ public class Fps implements RenderInterface {
         this.lastUpdated = Timer.getTime();
         this.framesCount = 0;
         this.fps = 0;
-        this.fpsLabel = new TELabel("100FPS", 1, 15, new Font("PressStart2P-Regular", Font.PLAIN, 12));
+        this.fpsLabel = new TELabel("100FPS", 1, 1, FontManager.getFont(FontManager.FONT_PRESS_START_2P, 12));
     }
 
     public void render(Graphics2D context) {

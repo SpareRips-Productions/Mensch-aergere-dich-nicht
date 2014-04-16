@@ -9,26 +9,21 @@ import java.util.List;
 
 import de.spareripsproduction.madn.client.logic.Dice;
 import de.spareripsproduction.tinyengine.GameWindow;
+import de.spareripsproduction.tinyengine.entity.Entity;
 
 /**
  * Created by marian on 12/03/14.
  */
 public class GameScene extends Scene {
 
-    public List<Player> playerList = new ArrayList<Player>();
-    public Dice dice;
-
     private Board board;
 
+    private Entity backgroundImage;
+
     public void load() {
-        //playerList.add(new Player());
-        //playerList.add(new Player());
-        //playerList.add(new Player());
-        //playerList.add(new Player());
-        this.board = new Board(5, 5);
-        this.dice = new Dice(0,0);
-        this.dice.setX((int) this.board.getWidth()/2 - this.dice.getWidth()/2);
-        this.dice.setY((int) this.board.getHeight()/2 - this.dice.getHeight()/2);
+        this.board = Board.getInstance();
+        this.backgroundImage = new Entity("sprites/title.png", 0, 0);
+
     }
     public void unload() {
 
@@ -36,13 +31,14 @@ public class GameScene extends Scene {
 
     @Override
     public void update() {
-
+        this.backgroundImage.update();
+        this.board.update();
     }
 
     @Override
     public void render(Graphics2D g) {
+        this.backgroundImage.render(g);
         this.board.render(g);
-        this.dice.render(g);
     }
 
     public Board getBoard() { return this.board; }

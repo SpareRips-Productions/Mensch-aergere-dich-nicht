@@ -3,6 +3,8 @@ package de.spareripsproduction.tinyengine;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The FontManager Class is responsible loading fonts
@@ -13,19 +15,24 @@ import java.net.URL;
  */
 public class FontManager {
 
+    public static final String FONT_PRESS_START_2P = "fonts/PressStart2P-Regular.ttf";
+    public static final String FONT_ARIZONIA = "fonts/Arizonia-Regular.ttf";
+    public static final String FONT_DROID_SANS = "fonts/DroidSans.ttf";
+
+    private static HashMap<String, Font> fonts = new HashMap<String, Font>();
+
     /**
      * loads a TrueType font
+     *  @param resourceRef reference to the TrueTypeFont
      *
-     * @param resourceRef reference to the TrueTypeFont
-     * @param name name of the font
      */
-    public static void loadFont(String resourceRef, String name) {
+    private static Font loadFont(String resourceRef) {
         URL url = FontManager.class.getClassLoader().getResource(resourceRef);
         if (url != null) {
             try {
                 Font font = Font.createFont(Font.TRUETYPE_FONT, url.openStream());
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(font);
+                return font;
             } catch (FontFormatException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -34,7 +41,15 @@ public class FontManager {
         } else {
             Core.log(String.format("Font not found %s", resourceRef));
         }
-
+        return null;
     }
 
+    public static Font getFont(String resourceRef, int fontSize)
+    {
+        if(!fonts.containsKey(resourceRef)) {
+            Font  font = loadFont(resourceRef);
+            fonts.put(resourceRef, font);
+        }
+        return fonts.get(resourceRef).deriveFont((float) fontSize);
+    }
 }

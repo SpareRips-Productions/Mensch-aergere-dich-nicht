@@ -2,6 +2,7 @@ package de.spareripsproduction.madn.client.scene;
 
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.logic.Settings;
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.TEButton;
@@ -20,15 +21,18 @@ public class SettingsScene extends Scene {
     public void load() {
         this.backgroundImage = new Entity("sprites/menu.png", 0, 0);
 
-        Font menuFont = new Font("PressStart2P-Regular", Font.PLAIN, 30);
-        this.pLabel1 = new TELabel("Spieler 1: ",50,20,menuFont);
-        this.pLabel2 = new TELabel("Spieler 2: ",50,40,menuFont);
-        this.pLabel3 = new TELabel("Spieler 3: ",50,60,menuFont);
-        this.pLabel4 = new TELabel("Spieler 4: ",50,80,menuFont);
-        this.p1Text = new TETextField(Settings.Player1Name,100,100,200,50,menuFont,10,5);
-        this.p2Text = new TETextField(Settings.Player2Name,100,100,200,50,menuFont,10,5);
-        this.p3Text = new TETextField(Settings.Player3Name,100,100,200,50,menuFont,10,5);
-        this.p4Text = new TETextField(Settings.Player4Name,100,100,200,50,menuFont,10,5);
+        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 30);
+        Font menuFont = FontManager.getFont(FontManager.FONT_DROID_SANS, 30);
+
+
+        this.pLabel1 = new TELabel("Spieler 1: ",50,20,titleFont);
+        this.pLabel2 = new TELabel("Spieler 2: ",50,40,titleFont);
+        this.pLabel3 = new TELabel("Spieler 3: ",50,60,titleFont);
+        this.pLabel4 = new TELabel("Spieler 4: ",50,80,titleFont);
+        this.p1Text = new TETextField(Settings.Player1Name,100,100,200,50,menuFont,10,2);
+        this.p2Text = new TETextField(Settings.Player2Name,100,100,200,50,menuFont,10,2);
+        this.p3Text = new TETextField(Settings.Player3Name,100,100,200,50,menuFont,10,2);
+        this.p4Text = new TETextField(Settings.Player4Name,100,100,200,50,menuFont,10,2);
 
         LabelCollection = new TECollectionVertical(0,0,15);
 
@@ -41,7 +45,7 @@ public class SettingsScene extends Scene {
         LabelCollection.addView(this.pLabel4);
         LabelCollection.addView(this.p4Text);
 
-        this.backButton = new TEButton("Back", 130,LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 5, menuFont);
+        this.backButton = new TEButton("Back", 130,LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 2, menuFont);
     }
 
     private TELabel pLabel1;
@@ -81,9 +85,9 @@ public class SettingsScene extends Scene {
     @Override
     public void render(Graphics2D g) {
         g.setColor(Color.black);
-        this.backgroundImage.render((Graphics2D) g);
-        this.backButton.render((Graphics2D)g);
-        this.LabelCollection.render((Graphics2D)g);
+        this.backgroundImage.render(g);
+        this.backButton.render(g);
+        this.LabelCollection.render(g);
     }
 
     private TETextField validNames(){

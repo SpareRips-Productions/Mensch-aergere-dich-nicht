@@ -1,6 +1,7 @@
 package de.spareripsproduction.madn.client.scene;
 
 import de.spareripsproduction.madn.client.Game;
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.*;
 
@@ -21,15 +22,17 @@ public class MenuScene extends Scene implements ActionListener {
 
     public void load() {
 
-        int fontSize = 30;
-        Font menuFont = new Font("PressStart2P-Regular", Font.PLAIN, fontSize);
+        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 50);
+        Font menuFont = FontManager.getFont(FontManager.FONT_DROID_SANS, 30);
 
         this.backgroundImage = new Entity("sprites/menu.png", 0, 0);
-        this.header = new TELabel("Menu", 0, 100, menuFont);
+        this.header = new TELabel("Menu", 0, 50, titleFont);
+
 
         this.btnCollection = new TECollectionVertical(0,0, 20);
-        this.btnCollection.addView(new TEButton("Join Game", 0, 0, 300, 50, 5, menuFont, Color.black, Color.blue, Color.red));
-        this.btnCollection.addView(new TEButton("Settings", 0, 0, 300, 50, 5, menuFont, Color.black, Color.blue, Color.red));
+        this.btnCollection.addView(new TEButton("Join Game", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
+        this.btnCollection.addView(new TEButton("Settings", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
+        this.btnCollection.addView(new TEButton("Credits", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
     }
     public void unload() {
         this.header = null;
@@ -56,6 +59,9 @@ public class MenuScene extends Scene implements ActionListener {
                         return;
                     case 1:
                         Game.getInstance().loadScene(SCENE_SETTINGS);
+                        return;
+                    case 2:
+                        Game.getInstance().loadScene(SCENE_CREDITS);
                         return;
                 }
             }

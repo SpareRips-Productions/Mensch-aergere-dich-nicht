@@ -8,7 +8,7 @@ import org.junit.*;
 public class DiceTest {
     @Test
     public void testGetNextNumber() throws Exception {
-        Dice dice = new Dice();
+        Dice dice = new Dice(0, 0);
 
         int nextNumber;
         for(int i = 0; i < 300; i++) {
