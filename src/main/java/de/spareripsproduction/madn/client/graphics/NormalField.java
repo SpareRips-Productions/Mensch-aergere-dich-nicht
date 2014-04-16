@@ -6,13 +6,12 @@ import java.awt.*;
  * Created by marian on 12/03/14.
  */
 public class NormalField extends Field {
-    @Override
-    public void update() {
-
+    public NormalField(int x, int y) {
+        this("sprites/normalField.png", x, y);
     }
 
-    @Override
-    public void render(Graphics g) {
-
+    public NormalField(String spriteRef, int x, int y) {
+        super(spriteRef, x, y);
     }
+
 }

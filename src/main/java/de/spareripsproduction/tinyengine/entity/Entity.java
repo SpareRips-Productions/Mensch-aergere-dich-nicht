@@ -39,6 +39,22 @@ public class Entity implements RenderInterface, UpdateInterface {
         this.setSize(width, height);
     }
 
+    public int getIntX() {
+        return (int)this.x;
+    }
+
+    public int getIntY() {
+        return (int)this.y;
+    }
+
+    public int getIntHeight() {
+        return (int)this.height;
+    }
+
+    public int getIntWidth() {
+        return (int)this.width;
+    }
+
     public float getX() {
         return this.x;
     }
