@@ -30,14 +30,14 @@ public class BoardEntity extends Entity {
     public float getX() {
         Point p = getBoardPosition();
         int width = (Board.getInstance().getIntWidth() - 11 * FIELD_SIZE) / 2;
-        return Board.getInstance().getIntX()+p.x*FIELD_SIZE + width;
+        return Board.getInstance().getIntX() + p.x * FIELD_SIZE + width;
     }
 
     @Override
     public float getY() {
         Point p = getBoardPosition();
         int width = (Board.getInstance().getIntHeight() - 11 * FIELD_SIZE) / 2;
-        return Board.getInstance().getIntY()+p.y*FIELD_SIZE + width;
+        return Board.getInstance().getIntY() + p.y * FIELD_SIZE + width;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BoardEntity extends Entity {
     }
 
     public Point getBoardPosition() {
-        if(boardPosition == null) {
+        if (boardPosition == null) {
             boardPosition = updateBoardPosition();
         }
         return boardPosition;
@@ -69,28 +69,28 @@ public class BoardEntity extends Entity {
     }
 
     protected Point updateBoardPosition() {
-        int corner = id/10;
-        int positionInCorner = id - (10*corner);
-        int x = 0,y = 0;
+        int corner = id / 10;
+        int positionInCorner = id - (10 * corner);
+        int x = 0, y = 0;
         switch (corner) {
             case 0:
-                if(positionInCorner <= 4) {
+                if (positionInCorner <= 4) {
                     x = positionInCorner;
                     y = 4;
-                }else if(positionInCorner <= 8){
+                } else if (positionInCorner <= 8) {
                     x = 4;
-                    y = 4-positionInCorner+4;
+                    y = 4 - positionInCorner + 4;
                 } else {
                     x = 5;
                     y = 0;
                 }
                 break;
             case 1:
-                if(positionInCorner <= 4) {
+                if (positionInCorner <= 4) {
                     x = 6;
                     y = positionInCorner;
-                }else if(positionInCorner <= 8){
-                    x = 6+positionInCorner-4;
+                } else if (positionInCorner <= 8) {
+                    x = 6 + positionInCorner - 4;
                     y = 4;
                 } else {
                     x = 10;
@@ -98,12 +98,12 @@ public class BoardEntity extends Entity {
                 }
                 break;
             case 2:
-                if(positionInCorner <= 4) {
-                    x = 10-positionInCorner;
+                if (positionInCorner <= 4) {
+                    x = 10 - positionInCorner;
                     y = 6;
-                }else if(positionInCorner <= 8){
+                } else if (positionInCorner <= 8) {
                     x = 6;
-                    y = 6+positionInCorner-4;
+                    y = 6 + positionInCorner - 4;
                 } else {
                     x = 5;
                     y = 10;
@@ -111,11 +111,11 @@ public class BoardEntity extends Entity {
 
                 break;
             case 3:
-                if(positionInCorner <= 4) {
+                if (positionInCorner <= 4) {
                     x = 4;
                     y = 10 - positionInCorner;
-                }else if(positionInCorner <= 8) {
-                    x = 4 - positionInCorner +4;
+                } else if (positionInCorner <= 8) {
+                    x = 4 - positionInCorner + 4;
                     y = 6;
                 } else {
                     x = 0;
@@ -124,14 +124,14 @@ public class BoardEntity extends Entity {
                 break;
             case 4:
                 //home fields blue
-                x = positionInCorner+1;
+                x = positionInCorner + 1;
                 y = 5;
                 break;
 
             case 5:
                 //home fields red
                 x = 5;
-                y = positionInCorner+1;
+                y = positionInCorner + 1;
                 break;
             case 6:
                 //home fields green
@@ -146,7 +146,7 @@ public class BoardEntity extends Entity {
                 break;
         }
 
-        return new Point(x,y);
+        return new Point(x, y);
     }
 
     protected boolean isHover() {

@@ -9,7 +9,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2014-04-13
  */
-public class GreenFigure extends GameFigure{
+public class GreenFigure extends GameFigure {
 
     protected int startId = 20;
     protected int homeStartId = 60;
@@ -20,11 +20,11 @@ public class GreenFigure extends GameFigure{
 
     @Override
     public Point updateBoardPosition() {
-        Point p = new Point(0,0);
-        if(id < 0) {
+        Point p = new Point(0, 0);
+        if (id < 0) {
             p.y = 10;
-            p.x = 7+index;
-        }else {
+            p.x = 7 + index;
+        } else {
             p = super.updateBoardPosition();
         }
         return p;

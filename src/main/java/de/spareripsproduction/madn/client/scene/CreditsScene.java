@@ -28,7 +28,7 @@ public class CreditsScene extends Scene {
 
     protected TEButton backButton;
 
-    protected  TELabel title;
+    protected TELabel title;
 
     protected TECollectionVertical creditsCollection;
 
@@ -38,22 +38,23 @@ public class CreditsScene extends Scene {
         Font menuFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, 30);
         Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, 50);
 
-        this.backButton = new TEButton("Back", 130, GameWindow.getInstance().getHeight()-100, 120, 50, 2, menuFont, Color.white, Color.red, Color.red);
+        this.backButton = new TEButton("Back", 130, GameWindow.getInstance().getHeight() - 100, 120, 50, 2, menuFont, Color.white, Color.red, Color.red);
 
         this.title = new TELabel("Credits", 0, 50, titleFont);
         this.title.verticalAlignCenter(0, GameWindow.getInstance().getWidth());
 
         this.creditsCollection = new TECollectionVertical(0, 0, 15);
-        this.creditsCollection.addView(new TELabel("Jan Böckmann", 0,0, menuFont));
-        this.creditsCollection.addView(new TELabel("Thomas Hampe", 0,0, menuFont));
-        this.creditsCollection.addView(new TELabel("Sebastian Mathea", 0,0, menuFont));
-        this.creditsCollection.addView(new TELabel("Marian Sievers", 0,0, menuFont));
-        this.creditsCollection.addView(new TELabel("Arthur Tissen", 0,0, menuFont));
+        this.creditsCollection.addView(new TELabel("Jan Böckmann", 0, 0, menuFont));
+        this.creditsCollection.addView(new TELabel("Thomas Hampe", 0, 0, menuFont));
+        this.creditsCollection.addView(new TELabel("Sebastian Mathea", 0, 0, menuFont));
+        this.creditsCollection.addView(new TELabel("Marian Sievers", 0, 0, menuFont));
+        this.creditsCollection.addView(new TELabel("Arthur Tissen", 0, 0, menuFont));
 
         this.creditsCollection.horizontalAlignCenter(0, GameWindow.getInstance().getHeight());
         this.creditsCollection.verticalAlignCenter(0, GameWindow.getInstance().getWidth());
 
     }
+
     public void unload() {
 
     }
@@ -62,10 +63,10 @@ public class CreditsScene extends Scene {
     public void update() {
         this.backButton.update();
         this.background.update();
-        if (this.backButton.isClicked()){
+        if (this.backButton.isClicked()) {
             Game.getInstance().loadScene(SCENE_MENU);
         }
-        if(Keyboard.isPressed(KeyEvent.VK_R)) {
+        if (Keyboard.isPressed(KeyEvent.VK_R)) {
             this.showRaccoon = true;
         }
         this.creditsCollection.update();
@@ -79,8 +80,8 @@ public class CreditsScene extends Scene {
         this.background.render(g);
         g.setColor(Color.white);
         this.title.render(g);
-        if(showRaccoon) {
-            fatRaccoon.paintIcon(GameWindow.getInstance().getFrame(),g,GameWindow.getInstance().getWidth()/2-fatRaccoon.getIconWidth()/2,25);
+        if (showRaccoon) {
+            fatRaccoon.paintIcon(GameWindow.getInstance().getFrame(), g, GameWindow.getInstance().getWidth() / 2 - fatRaccoon.getIconWidth() / 2, 25);
         }
 
         this.backButton.render(g);

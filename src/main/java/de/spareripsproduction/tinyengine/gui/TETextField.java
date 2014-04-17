@@ -4,7 +4,6 @@ import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.input.Mouse;
 
 import java.awt.*;
-import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -34,7 +33,7 @@ public class TETextField extends TEView implements KeyListener {
 
     protected Color textColor;
 
-    public  TETextField(
+    public TETextField(
             String text,
             int x,
             int y,
@@ -114,10 +113,9 @@ public class TETextField extends TEView implements KeyListener {
 
         //text
         context.setColor(this.textColor);
-        this.label.horizontalAlignCenter(this.getY() + this.getBorderSize()-8, this.getY() + this.getHeight() - this.getBorderSize());
+        this.label.horizontalAlignCenter(this.getY() + this.getBorderSize() - 8, this.getY() + this.getHeight() - this.getBorderSize());
         this.label.setX(this.getX() + this.borderSize + 5);
         this.label.render(context);
-
 
 
         context.setColor(color);
@@ -167,14 +165,14 @@ public class TETextField extends TEView implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-        if(this.isActive()) {
+        if (this.isActive()) {
             char c = keyEvent.getKeyChar();
             String text = this.label.getText();
-            if(c > 31 && c != KeyEvent.VK_DELETE && text.length() < this.getSize()) {
-                this.label.setText(text+c);
-            }else if(c == KeyEvent.VK_BACK_SPACE && text.length() > 0) {
-                this.label.setText(text.substring(0, text.length()-1));
-            }else if(c == KeyEvent.VK_ENTER){
+            if (c > 31 && c != KeyEvent.VK_DELETE && text.length() < this.getSize()) {
+                this.label.setText(text + c);
+            } else if (c == KeyEvent.VK_BACK_SPACE && text.length() > 0) {
+                this.label.setText(text.substring(0, text.length() - 1));
+            } else if (c == KeyEvent.VK_ENTER) {
                 this.active = false;
             }
         }
@@ -189,7 +187,7 @@ public class TETextField extends TEView implements KeyListener {
     public void keyReleased(KeyEvent keyEvent) {
     }
 
-    public String getText(){
+    public String getText() {
         return this.label.getText();
     }
 }

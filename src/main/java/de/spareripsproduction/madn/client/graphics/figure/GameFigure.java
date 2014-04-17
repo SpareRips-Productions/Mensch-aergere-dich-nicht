@@ -29,21 +29,20 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     protected Player owner;
 
     /**
-     *
      * @param spriteRef sprite of the figure
-     * @param id position on the field
-     * @param index figure index 0 to 3
+     * @param id        position on the field
+     * @param index     figure index 0 to 3
      */
     public GameFigure(String spriteRef, int id, int index) {
-        super(spriteRef+".png", id);
+        super(spriteRef + ".png", id);
         this.index = index;
-        this.hoverSprite = SpriteStore.getInstance().get(spriteRef+"Hover.png");
+        this.hoverSprite = SpriteStore.getInstance().get(spriteRef + "Hover.png");
     }
 
     @Override
     public float getY() {
         float y = super.getY();
-        y -= this.getHeight()-FIELD_SIZE;
+        y -= this.getHeight() - FIELD_SIZE;
         return y;
     }
 
@@ -52,46 +51,46 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     }
 
     public boolean move(int delta, boolean dryRun) {
-        if(delta == 0) {
+        if (delta == 0) {
             return false;
         }
         boolean result = true;
-        if(delta > 6 || delta < 0) {
+        if (delta > 6 || delta < 0) {
             System.out.println("Cheat attempt");
             System.exit(0);
         }
 
         //move out
-        if(getId() < 0 && delta == 6) {
-            if(!dryRun) setId(getStartId());
+        if (getId() < 0 && delta == 6) {
+            if (!dryRun) setId(getStartId());
             return true;
-        //move on board
-        }else if(getId() >= 0 && getId() < 40) {
-            int tmp = (getId() + delta)%40;
+            //move on board
+        } else if (getId() >= 0 && getId() < 40) {
+            int tmp = (getId() + delta) % 40;
             // go home
-            if(tmp >= getStartId() && ((getId() < getStartId()) || (getStartId() == 0 && (getId()+delta) >= 40) /* hacky solution for red */) ) {
-                if(tmp-getStartId() < 4) {
-                    tmp = getHomeStartId()+tmp-getStartId();
-                    if(isFieldOccupied(tmp)) {
+            if (tmp >= getStartId() && ((getId() < getStartId()) || (getStartId() == 0 && (getId() + delta) >= 40) /* hacky solution for red */)) {
+                if (tmp - getStartId() < 4) {
+                    tmp = getHomeStartId() + tmp - getStartId();
+                    if (isFieldOccupied(tmp)) {
                         return false;
                     }
-                    if(!dryRun) setId(tmp);
+                    if (!dryRun) setId(tmp);
                     return true;
                 }
             } else {
-                if(isFieldOccupied(tmp)) {
+                if (isFieldOccupied(tmp)) {
                     return false;
                 }
-                if(!dryRun) setId(tmp);
+                if (!dryRun) setId(tmp);
                 return true;
             }
-        //move in home
-        }else if(getId() >= 40 && getId()+delta < getHomeStartId()+4){
-            int tmp = getId()+delta;
-            if(isFieldOccupied(tmp)) {
+            //move in home
+        } else if (getId() >= 40 && getId() + delta < getHomeStartId() + 4) {
+            int tmp = getId() + delta;
+            if (isFieldOccupied(tmp)) {
                 return false;
             }
-            if(!dryRun) setId(tmp);
+            if (!dryRun) setId(tmp);
         }
 
         return false;
@@ -102,8 +101,8 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     }
 
     public boolean isFieldOccupied(int id) {
-        for(GameFigure gameFigure : this.getOwner().getGameFigures()) {
-            if(gameFigure.getId() == id) {
+        for (GameFigure gameFigure : this.getOwner().getGameFigures()) {
+            if (gameFigure.getId() == id) {
                 return true;
             }
         }
@@ -122,9 +121,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     @Override
     public void render(Graphics2D g) {
-        if(isHover() && canMove(Board.getInstance().getDice().getLastNumber())) {
+        if (isHover() && canMove(Board.getInstance().getDice().getLastNumber())) {
             hoverSprite.render(g, this.getIntX(), this.getIntY());
-        }else {
+        } else {
             super.render(g);
         }
     }
@@ -133,9 +132,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     protected void setId(int id) {
 
         //kick figures on the same place
-        if(id > 0) {
-            for(GameFigure gameFigure : Board.getInstance().getGameFigures()) {
-                if(gameFigure.getId() == id) {
+        if (id > 0) {
+            for (GameFigure gameFigure : Board.getInstance().getGameFigures()) {
+                if (gameFigure.getId() == id) {
                     gameFigure.kick();
                 }
             }
@@ -145,9 +144,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     }
 
     protected Player getOwner() {
-        if(owner == null) {
-            for(Player player : Board.getInstance().getPlayers()) {
-                if(player.getType() == getPlayerType()) {
+        if (owner == null) {
+            for (Player player : Board.getInstance().getPlayers()) {
+                if (player.getType() == getPlayerType()) {
                     owner = player;
                     break;
                 }

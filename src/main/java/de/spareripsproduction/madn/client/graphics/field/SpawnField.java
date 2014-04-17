@@ -6,7 +6,6 @@ package de.spareripsproduction.madn.client.graphics.field;
 public class SpawnField extends Field {
 
 
-
     public SpawnField(String spriteRef, int id) {
         super(spriteRef, id);
     }

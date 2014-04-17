@@ -1,7 +1,6 @@
 package de.spareripsproduction.madn.client;
 
 import de.spareripsproduction.madn.client.scene.*;
-import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 import de.spareripsproduction.tinyengine.logic.Fps;
 import de.spareripsproduction.tinyengine.logic.GitVersion;
@@ -15,7 +14,7 @@ import java.util.HashMap;
  */
 public class Game
         extends de.spareripsproduction.tinyengine.Game
-    implements RenderInterface, UpdateInterface
+        implements RenderInterface, UpdateInterface
 
 {
     public static final String ENV_DEV = "dev";
@@ -27,7 +26,7 @@ public class Game
 
     private Fps fps;
 
-    private HashMap<String,Scene> scenes;
+    private HashMap<String, Scene> scenes;
 
     private Scene activeScene;
 
@@ -53,14 +52,14 @@ public class Game
     }
 
     public static Game getInstance() {
-        if(Game.instance == null) {
+        if (Game.instance == null) {
             Game.instance = new Game();
         }
         return Game.instance;
     }
 
     public static Game getInstance(String environment) {
-        if(Game.instance == null) {
+        if (Game.instance == null) {
             Game.instance = new Game(environment);
         }
         return Game.instance;
@@ -68,7 +67,7 @@ public class Game
 
     public void render(Graphics2D context) {
         this.activeScene.render(context);
-        if(this.environment.equals(Game.ENV_DEV)) {
+        if (this.environment.equals(Game.ENV_DEV)) {
             this.fps.render(context);
             this.version.render(context);
         }
@@ -80,9 +79,9 @@ public class Game
     }
 
     public boolean loadScene(String sceneName) {
-        if(this.scenes.containsKey(sceneName)) {
+        if (this.scenes.containsKey(sceneName)) {
             // check for the first scene
-            if(this.activeScene != null) {
+            if (this.activeScene != null) {
                 this.activeScene.unload();
             }
             this.activeScene = this.scenes.get(sceneName);
@@ -100,8 +99,8 @@ public class Game
         this.scenes.put(Scene.SCENE_INTRO, new IntroScene());
         this.scenes.put(Scene.SCENE_MENU, new MenuScene());
         this.scenes.put(Scene.SCENE_SCORE, new ScoreScene());
-        this.scenes.put(Scene.SCENE_SETTINGS,new SettingsScene());
-        this.scenes.put(Scene.SCENE_CREDITS,new CreditsScene());
+        this.scenes.put(Scene.SCENE_SETTINGS, new SettingsScene());
+        this.scenes.put(Scene.SCENE_CREDITS, new CreditsScene());
     }
 
     public Scene getScene(String sceneName) {

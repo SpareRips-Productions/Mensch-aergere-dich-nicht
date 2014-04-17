@@ -10,6 +10,7 @@ public class ScoreScene extends Scene {
     public void load() {
 
     }
+
     public void unload() {
 
     }

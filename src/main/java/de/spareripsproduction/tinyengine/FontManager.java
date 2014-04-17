@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The FontManager Class is responsible loading fonts
@@ -26,8 +25,8 @@ public class FontManager {
 
     /**
      * loads a TrueType font
-     *  @param resourceRef reference to the TrueTypeFont
      *
+     * @param resourceRef reference to the TrueTypeFont
      */
     private static Font loadFont(String resourceRef) {
         URL url = FontManager.class.getClassLoader().getResource(resourceRef);
@@ -47,10 +46,9 @@ public class FontManager {
         return null;
     }
 
-    public static Font getFont(String resourceRef, int fontSize)
-    {
-        if(!fonts.containsKey(resourceRef)) {
-            Font  font = loadFont(resourceRef);
+    public static Font getFont(String resourceRef, int fontSize) {
+        if (!fonts.containsKey(resourceRef)) {
+            Font font = loadFont(resourceRef);
             fonts.put(resourceRef, font);
         }
         return fonts.get(resourceRef).deriveFont((float) fontSize);

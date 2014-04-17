@@ -6,7 +6,10 @@ import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.entity.Entity;
-import de.spareripsproduction.tinyengine.gui.*;
+import de.spareripsproduction.tinyengine.gui.TEButton;
+import de.spareripsproduction.tinyengine.gui.TECollectionVertical;
+import de.spareripsproduction.tinyengine.gui.TELabel;
+import de.spareripsproduction.tinyengine.gui.TETextField;
 
 import java.awt.*;
 
@@ -44,16 +47,16 @@ public class SettingsScene extends Scene {
         Font menuFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, 25);
 
 
-        this.pLabel1 = new TELabel("Spieler 1: ",50,20,titleFont);
-        this.pLabel2 = new TELabel("Spieler 2: ",50,40,titleFont);
-        this.pLabel3 = new TELabel("Spieler 3: ",50,60,titleFont);
-        this.pLabel4 = new TELabel("Spieler 4: ",50,80,titleFont);
-        this.p1Text = new TETextField(Settings.Player1Name,100,100,200,50,menuFont,14,2);
-        this.p2Text = new TETextField(Settings.Player2Name,100,100,200,50,menuFont,14,2);
-        this.p3Text = new TETextField(Settings.Player3Name,100,100,200,50,menuFont,14,2);
-        this.p4Text = new TETextField(Settings.Player4Name,100,100,200,50,menuFont,14,2);
+        this.pLabel1 = new TELabel("Spieler 1: ", 50, 20, titleFont);
+        this.pLabel2 = new TELabel("Spieler 2: ", 50, 40, titleFont);
+        this.pLabel3 = new TELabel("Spieler 3: ", 50, 60, titleFont);
+        this.pLabel4 = new TELabel("Spieler 4: ", 50, 80, titleFont);
+        this.p1Text = new TETextField(Settings.Player1Name, 100, 100, 200, 50, menuFont, 14, 2);
+        this.p2Text = new TETextField(Settings.Player2Name, 100, 100, 200, 50, menuFont, 14, 2);
+        this.p3Text = new TETextField(Settings.Player3Name, 100, 100, 200, 50, menuFont, 14, 2);
+        this.p4Text = new TETextField(Settings.Player4Name, 100, 100, 200, 50, menuFont, 14, 2);
 
-        LabelCollection = new TECollectionVertical(0,0,15);
+        LabelCollection = new TECollectionVertical(0, 0, 15);
 
         LabelCollection.addView(this.pLabel1);
         LabelCollection.addView(this.p1Text);
@@ -64,13 +67,13 @@ public class SettingsScene extends Scene {
         LabelCollection.addView(this.pLabel4);
         LabelCollection.addView(this.p4Text);
 
-        this.backButton = new TEButton("< Back", 130,LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 2, menuFont);
-        this.playButton = new TEButton("Play >", GameWindow.getInstance().getWidth()-250,LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 2, menuFont);
+        this.backButton = new TEButton("< Back", 130, LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 2, menuFont);
+        this.playButton = new TEButton("Play >", GameWindow.getInstance().getWidth() - 250, LabelCollection.getCollection().get(7).getY() + 100, 120, 50, 2, menuFont);
 
-        this.counterCollection = new TECollectionVertical(0,0, 15);
-        this.upCount = new TEButton("+",0,0,50,50,2, menuFont);
-        this.downCount = new TEButton("-",0,0,50,50,2, menuFont);
-        this.countLabel = new TELabel(String.format("%d", Settings.playerCount), 0,0, menuFont);
+        this.counterCollection = new TECollectionVertical(0, 0, 15);
+        this.upCount = new TEButton("+", 0, 0, 50, 50, 2, menuFont);
+        this.downCount = new TEButton("-", 0, 0, 50, 50, 2, menuFont);
+        this.countLabel = new TELabel(String.format("%d", Settings.playerCount), 0, 0, menuFont);
         this.counterCollection.addView(this.upCount);
         this.counterCollection.addView(this.countLabel);
         this.counterCollection.addView(this.downCount);
@@ -86,19 +89,19 @@ public class SettingsScene extends Scene {
         this.backButton.update();
         this.playButton.update();
 
-        LabelCollection.horizontalAlignCenter(0,GameWindow.getInstance().getHeight());
-        LabelCollection.verticalAlignCenter(0,GameWindow.getInstance().getWidth());
+        LabelCollection.horizontalAlignCenter(0, GameWindow.getInstance().getHeight());
+        LabelCollection.verticalAlignCenter(0, GameWindow.getInstance().getWidth());
 
         counterCollection.update();
         counterCollection.setX(LabelCollection.getX() - 150);
         counterCollection.horizontalAlignCenter(LabelCollection.getY(), LabelCollection.getY() + LabelCollection.getHeight());
         countLabel.verticalAlignCenter(counterCollection.getX(), counterCollection.getX() + counterCollection.getWidth());
 
-        if(Timer.getTime() - last > 500 && (upCount.isClicked() || downCount.isClicked())) {
-            if(upCount.isClicked() && Settings.playerCount < 4) {
+        if (Timer.getTime() - last > 500 && (upCount.isClicked() || downCount.isClicked())) {
+            if (upCount.isClicked() && Settings.playerCount < 4) {
                 Settings.playerCount++;
             }
-            if(downCount.isClicked() && Settings.playerCount > 2) {
+            if (downCount.isClicked() && Settings.playerCount > 2) {
                 Settings.playerCount--;
             }
 
@@ -108,13 +111,14 @@ public class SettingsScene extends Scene {
 
 
         LabelCollection.update();
-        if (this.playButton.isClicked()){
-            if(validNames() != null){
+        if (this.playButton.isClicked()) {
+            if (validNames() != null) {
                 validNames().active = true;
-            }else{
-            Game.getInstance().loadScene(SCENE_GAME);}
+            } else {
+                Game.getInstance().loadScene(SCENE_GAME);
+            }
         }
-        if(this.backButton.isClicked()) {
+        if (this.backButton.isClicked()) {
             Game.getInstance().loadScene(SCENE_MENU);
         }
 
@@ -131,19 +135,24 @@ public class SettingsScene extends Scene {
         this.backButton.render(g);
         this.playButton.render(g);
         this.counterCollection.render(g);
-        for(int i = 0; i < Settings.playerCount*2; i+=2) {
+        for (int i = 0; i < Settings.playerCount * 2; i += 2) {
             this.LabelCollection.get(i).render(g);
-            this.LabelCollection.get(i+1).render(g);
+            this.LabelCollection.get(i + 1).render(g);
         }
     }
 
-    private TETextField validNames(){
+    private TETextField validNames() {
         TETextField retVal = null;
 
-        if(this.p1Text.getText().length() < 1){ retVal = this.p1Text;}
-        else if(this.p2Text.getText().length() < 1){ retVal = this.p2Text;}
-        else if(this.p3Text.getText().length() < 1){ retVal = this.p3Text;}
-        else if(this.p4Text.getText().length() < 1){ retVal = this.p4Text;}
+        if (this.p1Text.getText().length() < 1) {
+            retVal = this.p1Text;
+        } else if (this.p2Text.getText().length() < 1) {
+            retVal = this.p2Text;
+        } else if (this.p3Text.getText().length() < 1) {
+            retVal = this.p3Text;
+        } else if (this.p4Text.getText().length() < 1) {
+            retVal = this.p4Text;
+        }
 
         return retVal;
     }

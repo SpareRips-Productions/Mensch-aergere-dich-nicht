@@ -2,7 +2,6 @@ package de.spareripsproduction.madn.client.logic;
 
 import de.spareripsproduction.madn.client.graphics.Board;
 import de.spareripsproduction.madn.client.graphics.RenderAndUpdateable;
-import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 import de.spareripsproduction.tinyengine.input.Mouse;
 
 import java.awt.*;
@@ -19,9 +18,9 @@ public class Dice implements RenderAndUpdateable {
 
     private int lastNumber;
 
-    private int x,y;
+    private int x, y;
 
-    private int width,height;
+    private int width, height;
 
     protected boolean hover, clicked, locked;
 
@@ -74,10 +73,10 @@ public class Dice implements RenderAndUpdateable {
         Color color = g.getColor();
         Stroke stroke = g.getStroke();
 
-        if(isHover()) {
+        if (isHover()) {
             g.setColor(Color.magenta);
 
-        }else {
+        } else {
             switch (Board.getInstance().getActivePlayer().getType()) {
                 case Player.RED_PLAYER:
                     g.setColor(Color.RED);
@@ -96,15 +95,13 @@ public class Dice implements RenderAndUpdateable {
         }
 
 
-
         g.setStroke(new BasicStroke(2));
         g.drawRect(
-                this.getX()-1,
-                this.getY()-1,
-                this.getWidth()-2,
-                this.getHeight()-2
+                this.getX() - 1,
+                this.getY() - 1,
+                this.getWidth() - 2,
+                this.getHeight() - 2
         );
-
 
 
         g.setColor(Color.black);
@@ -138,15 +135,15 @@ public class Dice implements RenderAndUpdateable {
         int radius = 5;
         this.renderCircle(
                 g,
-                this.getX()-1+(this.getWidth()-2)/2-radius,
-                this.getY()-1+(this.getHeight()-2)/2-radius,
+                this.getX() - 1 + (this.getWidth() - 2) / 2 - radius,
+                this.getY() - 1 + (this.getHeight() - 2) / 2 - radius,
                 radius
         );
     }
 
     protected void renderTwo(Graphics2D g) {
-        this.renderCircle(g, this.getX()+1-2+5, this.getY()+1-2+5, 5);
-        this.renderCircle(g, this.getX()+this.getWidth()-2-15, this.getY()+this.getWidth()-2-15, 5);
+        this.renderCircle(g, this.getX() + 1 - 2 + 5, this.getY() + 1 - 2 + 5, 5);
+        this.renderCircle(g, this.getX() + this.getWidth() - 2 - 15, this.getY() + this.getWidth() - 2 - 15, 5);
     }
 
     protected void renderThree(Graphics2D g) {
@@ -156,8 +153,8 @@ public class Dice implements RenderAndUpdateable {
 
     protected void renderFour(Graphics2D g) {
         this.renderTwo(g);
-        this.renderCircle(g, this.getX()+1-2+5, this.getY()+this.getWidth()-2-15, 5);
-        this.renderCircle(g, this.getX()+this.getWidth()-2-15, this.getY()+1-2+5, 5);
+        this.renderCircle(g, this.getX() + 1 - 2 + 5, this.getY() + this.getWidth() - 2 - 15, 5);
+        this.renderCircle(g, this.getX() + this.getWidth() - 2 - 15, this.getY() + 1 - 2 + 5, 5);
 
     }
 
@@ -171,20 +168,20 @@ public class Dice implements RenderAndUpdateable {
         this.renderFour(g);
         this.renderCircle(
                 g,
-                this.getX()-1+(this.getWidth()-2)/2-radius,
-                this.getY()+this.getWidth()-2-15,
+                this.getX() - 1 + (this.getWidth() - 2) / 2 - radius,
+                this.getY() + this.getWidth() - 2 - 15,
                 radius
         );
         this.renderCircle(
                 g,
-                this.getX()-1+(this.getWidth()-2)/2-radius,
-                this.getY()+1-2+5,
+                this.getX() - 1 + (this.getWidth() - 2) / 2 - radius,
+                this.getY() + 1 - 2 + 5,
                 radius
         );
     }
 
     protected void renderCircle(Graphics2D g, int x, int y, int radius) {
-        g.fillOval(x, y, radius*2, radius*2);
+        g.fillOval(x, y, radius * 2, radius * 2);
     }
 
     public int getLastNumber() {

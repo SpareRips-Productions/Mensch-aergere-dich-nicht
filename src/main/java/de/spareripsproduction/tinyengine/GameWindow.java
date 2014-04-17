@@ -42,8 +42,8 @@ public class GameWindow extends Canvas {
     /**
      * Single method should be used for creating a new Window
      *
-     * @param title of the Window
-     * @param width of the Window in px
+     * @param title  of the Window
+     * @param width  of the Window in px
      * @param height of the Window in px
      * @return Window singleton
      */
@@ -57,8 +57,8 @@ public class GameWindow extends Canvas {
     /**
      * Constructor for the Game Window, should not be used, use getInstance() instead
      *
-     * @param title of the Window
-     * @param width of the Window in px
+     * @param title  of the Window
+     * @param width  of the Window in px
      * @param height of the Window in px
      */
     public GameWindow(String title, int width, int height) {
@@ -111,6 +111,7 @@ public class GameWindow extends Canvas {
 
     /**
      * Sets the Title of the window
+     *
      * @param title new Title
      */
     public void setTitle(String title) {
@@ -118,7 +119,6 @@ public class GameWindow extends Canvas {
     }
 
     /**
-     *
      * @return the frame of the Window
      */
     public JFrame getFrame() {

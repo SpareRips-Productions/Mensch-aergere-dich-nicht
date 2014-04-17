@@ -3,7 +3,10 @@ package de.spareripsproduction.madn.client.scene;
 import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.entity.Entity;
-import de.spareripsproduction.tinyengine.gui.*;
+import de.spareripsproduction.tinyengine.gui.TEButton;
+import de.spareripsproduction.tinyengine.gui.TECollectionVertical;
+import de.spareripsproduction.tinyengine.gui.TELabel;
+import de.spareripsproduction.tinyengine.gui.TEView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,10 +32,11 @@ public class MenuScene extends Scene implements ActionListener {
         this.header = new TELabel("Menu", 0, 50, titleFont);
 
 
-        this.btnCollection = new TECollectionVertical(0,0, 20);
+        this.btnCollection = new TECollectionVertical(0, 0, 20);
         this.btnCollection.addView(new TEButton("Play", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
         this.btnCollection.addView(new TEButton("Credits", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
     }
+
     public void unload() {
         this.header = null;
         this.btnCollection = null;
@@ -49,9 +53,9 @@ public class MenuScene extends Scene implements ActionListener {
         this.btnCollection.horizontalAlignCenter(0, height);
         int counter = 0;
         this.btnCollection.update();
-        for(TEView view : this.btnCollection.getCollection()) {
+        for (TEView view : this.btnCollection.getCollection()) {
             TEButton btn = (TEButton) view;
-            if(btn.isClicked()) {
+            if (btn.isClicked()) {
                 switch (counter) {
                     case 0:
                         Game.getInstance().loadScene(Scene.SCENE_SETTINGS);
