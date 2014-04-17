@@ -36,15 +36,15 @@ public class IntroScene extends Scene {
 
     public void load() {
 
-        this.backgroundImage = new Entity("sprites/title.png", 0, 0);
+        this.backgroundImage = new Entity("sprites/intro.png", 0, 0);
 
-        int fontSize = 100;
-        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, fontSize);
+        int fontSize = 90;
+        Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, fontSize);
         this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 100, titleFont);
         this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
 
-        fontSize = 35;
-        Font pressSpaceFont = FontManager.getFont(FontManager.FONT_DROID_SANS, fontSize);
+        fontSize = 40;
+        Font pressSpaceFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, fontSize);
         this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
 
     }
@@ -57,19 +57,19 @@ public class IntroScene extends Scene {
 
     @Override
     public void update() {
-        if(this.lastAlphaUpdate == 0) {
+        if (this.lastAlphaUpdate == 0) {
             this.lastAlphaUpdate = Timer.getTime();
         }
-        if(Timer.getTime() - this.lastAlphaUpdate >= 75) {
-            if(this.increaseAlpha) {
+        if (Timer.getTime() - this.lastAlphaUpdate >= 75) {
+            if (this.increaseAlpha) {
                 this.alpha += 0.04f;
-                if(this.alpha >= 1.0f) {
+                if (this.alpha >= 1.0f) {
                     this.alpha = 1.0f;
                     this.increaseAlpha = false;
                 }
-            }else {
+            } else {
                 this.alpha -= 0.04f;
-                if(this.alpha <= 0.0f) {
+                if (this.alpha <= 0.0f) {
                     this.alpha = 0.0f;
                     this.increaseAlpha = true;
                 }
@@ -86,10 +86,10 @@ public class IntroScene extends Scene {
         this.secondTitleLabel.setY(this.firstTitleLabel.getY() + 10);
         this.secondTitleLabel.verticalAlignCenter(0, width);
 
-        this.pressSpaceLabel.setY(height*9/10 - this.pressSpaceLabel.getHeight()/2);
+        this.pressSpaceLabel.setY(height * 9 / 10 - this.pressSpaceLabel.getHeight() / 2);
         this.pressSpaceLabel.verticalAlignCenter(0, width);
 
-        if(Keyboard.isPressed(KeyEvent.VK_SPACE)) {
+        if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
             Game.getInstance().loadScene(Scene.SCENE_MENU);
         }
 

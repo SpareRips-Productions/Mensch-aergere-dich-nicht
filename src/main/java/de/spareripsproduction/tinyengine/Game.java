@@ -42,8 +42,8 @@ public class Game {
     /**
      * Default constructor
      *
-     * @param title of the Window
-     * @param width of the Window in px
+     * @param title  of the Window
+     * @param width  of the Window in px
      * @param height of the Window in px
      */
     public Game(String title, int width, int height) {
@@ -55,10 +55,10 @@ public class Game {
     /**
      * Constructor with update und render objects
      *
-     * @param title of the Window
-     * @param width of the Window in px
-     * @param height of the Window in px
-     * @param updater Updates the Logic
+     * @param title    of the Window
+     * @param width    of the Window in px
+     * @param height   of the Window in px
+     * @param updater  Updates the Logic
      * @param renderer Renders the window
      */
     public Game(String title, int width, int height, UpdateInterface updater, RenderInterface renderer) {
@@ -127,7 +127,6 @@ public class Game {
     public GameWindow getWindow() {
         return window;
     }
-
 
 
 }

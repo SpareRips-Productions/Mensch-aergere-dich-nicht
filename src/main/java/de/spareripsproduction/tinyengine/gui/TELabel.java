@@ -45,9 +45,10 @@ public class TELabel extends TEView {
         return font;
     }
 
-    public int getY(){
+    public int getY() {
         return super.getY() + this.getHeight();
     }
+
     public void setFont(Font font) {
         this.font = font;
     }

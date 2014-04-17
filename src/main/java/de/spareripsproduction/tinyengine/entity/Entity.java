@@ -40,19 +40,19 @@ public class Entity implements RenderInterface, UpdateInterface {
     }
 
     public int getIntX() {
-        return (int)this.getX();
+        return (int) this.getX();
     }
 
     public int getIntY() {
-        return (int)this.getY();
+        return (int) this.getY();
     }
 
     public int getIntHeight() {
-        return (int)this.height;
+        return (int) this.height;
     }
 
     public int getIntWidth() {
-        return (int)this.width;
+        return (int) this.width;
     }
 
     public float getX() {

@@ -20,11 +20,11 @@ public class YellowFigure extends GameFigure {
 
     @Override
     public Point updateBoardPosition() {
-        Point p = new Point(0,0);
-        if(id < 0) {
+        Point p = new Point(0, 0);
+        if (id < 0) {
             p.y = 10;
             p.x = index;
-        }else {
+        } else {
             p = super.updateBoardPosition();
         }
         return p;
