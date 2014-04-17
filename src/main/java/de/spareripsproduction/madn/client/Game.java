@@ -69,7 +69,7 @@ public class Game
         this.activeScene.render(context);
         if (this.environment.equals(Game.ENV_DEV)) {
             this.fps.render(context);
-            this.version.render(context);
+            //this.version.render(context);
         }
 
     }
