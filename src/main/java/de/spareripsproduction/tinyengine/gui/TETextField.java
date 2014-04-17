@@ -53,7 +53,7 @@ public class TETextField extends TEView implements KeyListener {
         this.size = size;
         this.borderSize = borderSize;
         this.borderColor = borderColor;
-        this.activeBorderColor = Color.gray;
+        this.activeBorderColor = Color.lightGray;
         this.hoverBorderColor = Color.red;
         this.backgroundColor = backgroundColor;
         this.textColor = textColor;
@@ -114,8 +114,8 @@ public class TETextField extends TEView implements KeyListener {
 
         //text
         context.setColor(this.textColor);
-        this.label.horizontalAlignCenter(this.getY() + this.getBorderSize(), this.getY() + this.getHeight() - this.getBorderSize());
-        this.label.setX(this.getX() + this.borderSize + 1);
+        this.label.horizontalAlignCenter(this.getY() + this.getBorderSize()-8, this.getY() + this.getHeight() - this.getBorderSize());
+        this.label.setX(this.getX() + this.borderSize + 5);
         this.label.render(context);
 
 

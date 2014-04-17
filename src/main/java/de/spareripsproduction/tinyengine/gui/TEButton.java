@@ -81,7 +81,7 @@ public class TEButton extends TEView {
 
         context.setColor(this.color);
         this.label.verticalAlignCenter(this.getX(), this.getX() + this.getWidth());
-        this.label.horizontalAlignCenter(this.getY(),this.getY()+ this.getHeight());
+        this.label.horizontalAlignCenter(this.getY()-8,this.getY()+ this.getHeight());
         this.label.render(context);
 
         context.setColor(color);
@@ -92,8 +92,8 @@ public class TEButton extends TEView {
         super.update();
 
         // check if clicked inside in mouse
-        if (Mouse.isClicked(MouseEvent.BUTTON1)) {
-            Point p = Mouse.position(MouseEvent.BUTTON1);
+        if (Mouse.isClicked(MouseEvent.BUTTON1) ) {
+            Point p = Mouse.location();
             this.clicked = this.insideView(p);
         } else {
             this.clicked = false;

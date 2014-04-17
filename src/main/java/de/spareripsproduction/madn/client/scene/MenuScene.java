@@ -22,16 +22,15 @@ public class MenuScene extends Scene implements ActionListener {
 
     public void load() {
 
-        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 50);
-        Font menuFont = FontManager.getFont(FontManager.FONT_DROID_SANS, 30);
+        Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, 50);
+        Font menuFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, 35);
 
         this.backgroundImage = new Entity("sprites/menu.png", 0, 0);
         this.header = new TELabel("Menu", 0, 50, titleFont);
 
 
         this.btnCollection = new TECollectionVertical(0,0, 20);
-        this.btnCollection.addView(new TEButton("Join Game", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
-        this.btnCollection.addView(new TEButton("Settings", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
+        this.btnCollection.addView(new TEButton("Play", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
         this.btnCollection.addView(new TEButton("Credits", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
     }
     public void unload() {
@@ -55,12 +54,9 @@ public class MenuScene extends Scene implements ActionListener {
             if(btn.isClicked()) {
                 switch (counter) {
                     case 0:
-                        Game.getInstance().loadScene(Scene.SCENE_GAME);
+                        Game.getInstance().loadScene(Scene.SCENE_SETTINGS);
                         return;
                     case 1:
-                        Game.getInstance().loadScene(SCENE_SETTINGS);
-                        return;
-                    case 2:
                         Game.getInstance().loadScene(SCENE_CREDITS);
                         return;
                 }

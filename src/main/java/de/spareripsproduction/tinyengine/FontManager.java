@@ -16,8 +16,11 @@ import java.util.Map;
 public class FontManager {
 
     public static final String FONT_PRESS_START_2P = "fonts/PressStart2P-Regular.ttf";
-    public static final String FONT_ARIZONIA = "fonts/Arizonia-Regular.ttf";
-    public static final String FONT_DROID_SANS = "fonts/DroidSans.ttf";
+    public static final String FONT_ARIZONIA = "fonts/SignPainter-HouseScript.ttf";
+    public static final String FONT_COMIC_NEUE = "fonts/ComicNeue-Regular.ttf";
+    public static final String FONT_COMIC_NEUE_BOLD = "fonts/ComicNeue-Bold-Oblique.ttf";
+
+    public static final String FONT_DROID_SANS = "fonts/SignPainter-HouseScript.ttf";
 
     private static HashMap<String, Font> fonts = new HashMap<String, Font>();
 

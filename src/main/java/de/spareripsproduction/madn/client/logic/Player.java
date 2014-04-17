@@ -2,7 +2,9 @@ package de.spareripsproduction.madn.client.logic;
 
 import de.spareripsproduction.madn.client.graphics.*;
 import de.spareripsproduction.madn.client.graphics.figure.*;
+import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.Timer;
+import de.spareripsproduction.tinyengine.gui.TELabel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,11 +31,14 @@ public class Player implements RenderAndUpdateable {
 
     protected static long last = Timer.getTime();
 
+    protected TELabel nameLabel;
+
     public Player(int type) {
         this.type = type;
         switch (type) {
             case RED_PLAYER:
                 name = Settings.Player1Name;
+
                 break;
             case BLUE_PLAYER:
                 name = Settings.Player2Name;
@@ -45,6 +50,9 @@ public class Player implements RenderAndUpdateable {
                 name = Settings.Player4Name;
                 break;
         }
+
+
+        this.nameLabel = new TELabel(this.name, 0, 0, FontManager.getFont(FontManager.FONT_COMIC_NEUE, 20));
     }
 
 
@@ -60,6 +68,9 @@ public class Player implements RenderAndUpdateable {
                         }
                         if(this.getDice().getLastNumber() != 0) {
                             rollCount--;
+                            if(rollCount == 0) {
+                                getDice().lock();
+                            }
                         }
 
 
@@ -70,7 +81,7 @@ public class Player implements RenderAndUpdateable {
 
             }else {
                 for(GameFigure gameFigure : getGameFigures()) {
-                    if(gameFigure.isClicked()) {
+                    if(gameFigure.isClicked() && gameFigure.canMove(getDice().getLastNumber())) {
                         gameFigure.move(getDice().getLastNumber());
 
                         rollCount--;
@@ -91,6 +102,35 @@ public class Player implements RenderAndUpdateable {
     }
 
     public void update() {
+        Board board = Board.getInstance();
+        int x = board.getIntX() + (board.getIntWidth() - 11 * BoardEntity.FIELD_SIZE) / 2;
+        int y = board.getIntY() + (board.getIntHeight() - 11 * BoardEntity.FIELD_SIZE) / 2;
+        switch (getType()) {
+            case RED_PLAYER:
+                y += BoardEntity.FIELD_SIZE;
+                break;
+            case BLUE_PLAYER:
+                x += BoardEntity.FIELD_SIZE*7;
+                y += BoardEntity.FIELD_SIZE;
+                break;
+            case GREEN_PLAYER:
+                x += BoardEntity.FIELD_SIZE*7;
+                y += BoardEntity.FIELD_SIZE*9;
+                break;
+            case YELLOW_PLAYER:
+                y += BoardEntity.FIELD_SIZE*9;
+                break;
+        }
+
+        nameLabel.verticalAlignCenter(x, x + 4 * BoardEntity.FIELD_SIZE);
+        nameLabel.setY(y);
+
+        nameLabel.update();
+        if(isActive()) {
+            nameLabel.setText(String.format("%s (%d)",this.name, this.rollCount));
+        }else {
+            nameLabel.setText(this.name);
+        }
 
 
     }
@@ -136,7 +176,13 @@ public class Player implements RenderAndUpdateable {
     }
 
     public void render(Graphics2D g) {
+        Color color = g.getColor();
+        if(isActive()) {
+            g.setColor(Color.magenta);
+        }
+        nameLabel.render(g);
 
+        g.setColor(color);
     }
 
     public ArrayList<GameFigure> getGameFigures() {

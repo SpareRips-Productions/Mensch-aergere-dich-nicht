@@ -227,4 +227,8 @@ public class Dice implements RenderAndUpdateable {
     public boolean isLocked() {
         return locked;
     }
+
+    public void lock() {
+        this.locked = true;
+    }
 }

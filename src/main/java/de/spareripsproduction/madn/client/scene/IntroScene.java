@@ -36,15 +36,15 @@ public class IntroScene extends Scene {
 
     public void load() {
 
-        this.backgroundImage = new Entity("sprites/title.png", 0, 0);
+        this.backgroundImage = new Entity("sprites/intro.png", 0, 0);
 
-        int fontSize = 100;
-        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, fontSize);
+        int fontSize = 90;
+        Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, fontSize);
         this.firstTitleLabel = new TELabel("Mensch ärgere", 0, 100, titleFont);
         this.secondTitleLabel = new TELabel("dich nicht!", 0, 0, titleFont);
 
-        fontSize = 35;
-        Font pressSpaceFont = FontManager.getFont(FontManager.FONT_DROID_SANS, fontSize);
+        fontSize = 40;
+        Font pressSpaceFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, fontSize);
         this.pressSpaceLabel = new TELabel(">Press Space", 0, 0, pressSpaceFont);
 
     }

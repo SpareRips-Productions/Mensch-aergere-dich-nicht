@@ -35,8 +35,8 @@ public class CreditsScene extends Scene {
     public void load() {
         this.background = new Entity("sprites/title.png", 0, 0);
         fatRaccoon = new ImageIcon(this.getClass().getClassLoader().getResource("raccoon.gif"));
-        Font menuFont = FontManager.getFont(FontManager.FONT_DROID_SANS, 30);
-        Font titleFont = FontManager.getFont(FontManager.FONT_ARIZONIA, 50);
+        Font menuFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE, 30);
+        Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, 50);
 
         this.backButton = new TEButton("Back", 130, GameWindow.getInstance().getHeight()-100, 120, 50, 2, menuFont, Color.white, Color.red, Color.red);
 
