@@ -60,7 +60,7 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     @Override
     public float getY() {
         float y = super.getY();
-        y -= this.getHeight() - FIELD_SIZE;
+        y -= this.getHeight() - FIELD_SIZE + 5;
         return y;
     }
 
@@ -80,6 +80,30 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
             System.out.println("Cheat attempt");
             System.exit(0);
         }
+
+        //clean Start ID Field always
+        if(getId() != getStartId() && isStartIdOccupied()) {
+            GameFigure gameFigure = null;
+            for(GameFigure gf : getOwner().getGameFigures()) {
+                if(gf.getId() == getStartId()) {
+                    gameFigure = gf;
+                    break;
+                }
+            }
+            if(gameFigure != null && gameFigure.canMove(delta)) {
+                return false;
+            }
+        }
+
+        //force move when ever possible (let only)
+        if(delta == 6 && getId() != IN_HOUSE_ID && !isStartIdOccupied()) {
+            for(GameFigure gf : getOwner().getGameFigures()) {
+                if(gf.getId() == IN_HOUSE_ID) {
+                    return false;
+                }
+            }
+        }
+
 
         //move out
         if (getId() < 0 && delta == 6) {
@@ -139,6 +163,10 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
             }
         }
         return false;
+    }
+
+    public boolean isStartIdOccupied() {
+        return isFieldOccupied(getStartId());
     }
 
     /**

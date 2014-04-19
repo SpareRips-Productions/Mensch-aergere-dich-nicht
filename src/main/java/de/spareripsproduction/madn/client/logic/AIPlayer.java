@@ -19,7 +19,7 @@ public class AIPlayer extends Player
 
     public void makeMove() {
         if (isActive()) {
-            if(Timer.getTime()-last > 100) {
+            if(Timer.getTime()-last > 50) {
                 if (!canMove()) {
                     if (getDice().isLocked()) {
                         this.getDice().unlock();

@@ -158,12 +158,22 @@ public class Player implements RenderAndUpdateable {
     }
 
     protected boolean canRollDiceThreeTimes() {
-        boolean result = true;
-        for (GameFigure gameFigure : getGameFigures()) {
-            result = result && gameFigure.getId() == GameFigure.IN_HOUSE_ID;
-        }
 
-        return result;
+        int inHouseCounter = 0;
+        boolean inDestination[] = {false,false,false,false};
+        for (GameFigure gameFigure : getGameFigures()) {
+            if(gameFigure.getId() == GameFigure.IN_HOUSE_ID) {
+                inHouseCounter++;
+            }
+            if(gameFigure.getId() >= gameFigure.getHomeStartId()) {
+                inDestination[(gameFigure.getId()-gameFigure.getHomeStartId())%4] = true;
+            }
+        }
+        boolean result = true;
+        for(int i = inHouseCounter; i < 4; i++) {
+            result = result && inDestination[i];
+        }
+        return inHouseCounter == 4 || result;
     }
 
     protected boolean canRollDiceAgain() {
@@ -188,7 +198,6 @@ public class Player implements RenderAndUpdateable {
      */
     public void activate() {
         this.rollCount = (canRollDiceThreeTimes()) ? 3 : 1;
-        System.out.println("Player: " + name + "(" + rollCount + ") is now active");
         this.active = true;
     }
 
