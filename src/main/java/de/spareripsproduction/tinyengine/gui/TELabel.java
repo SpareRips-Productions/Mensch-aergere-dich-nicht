@@ -5,6 +5,8 @@ import de.spareripsproduction.tinyengine.GameWindow;
 import java.awt.*;
 
 /**
+ * Label
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-21
@@ -17,6 +19,13 @@ public class TELabel extends TEView {
 
     private Font font;
 
+    /**
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param font
+     */
     public TELabel(String text, int x, int y, Font font) {
         super(x, y, 0, 0);
         this.text = text;
@@ -24,10 +33,16 @@ public class TELabel extends TEView {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public int getHeight() {
         return this.getFont().getSize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public int getWidth() {
         Graphics context = this.getContext();
         return context.getFontMetrics(this.getFont()).stringWidth(this.text);
@@ -53,6 +68,9 @@ public class TELabel extends TEView {
         this.font = font;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D context) {
         Font contextFont = context.getFont();
         context.setColor(this.textColor);

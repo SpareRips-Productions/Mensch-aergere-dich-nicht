@@ -5,6 +5,12 @@ import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
 
 /**
+ * Keeps track of the Keyboard Input
+ * <p>
+ * Provides central access to <i>Keyboard Input</i>, without additional binding to the <code>Keyboard Events</code>
+ * </p>
+ *
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-10
@@ -27,6 +33,12 @@ public class Keyboard implements AWTEventListener {
         return Keyboard.instance;
     }
 
+    /**
+     * Checks if a certain key is pressed
+     *
+     * @param key <code>KeyEvent</code> Code
+     * @return <code>true</code> if pressed, <code>false</code> if not
+     */
     public static boolean isPressed(int key) {
 
         return Keyboard.getInstance().isKeyPressed(key);
@@ -43,7 +55,7 @@ public class Keyboard implements AWTEventListener {
      *
      * @param e The event details
      */
-    public void keyPressed(KeyEvent e) {
+    protected void keyPressed(KeyEvent e) {
         if (e.isConsumed()) {
             return;
         }
@@ -55,7 +67,7 @@ public class Keyboard implements AWTEventListener {
      *
      * @param e The event details
      */
-    public void keyReleased(KeyEvent e) {
+    protected void keyReleased(KeyEvent e) {
         if (e.isConsumed()) {
             return;
         }
@@ -68,13 +80,8 @@ public class Keyboard implements AWTEventListener {
 
     }
 
-    public void keyTyped(KeyEvent e) {
-        //@Todo something useful add listener or so;
-    }
-
     /**
-     * Notification that an event has occured in the AWT event
-     * system
+     * Notification of an AWT event
      *
      * @param e The event details
      */
@@ -84,9 +91,6 @@ public class Keyboard implements AWTEventListener {
         }
         if (e.getID() == KeyEvent.KEY_RELEASED) {
             this.keyReleased((KeyEvent) e);
-        }
-        if (e.getID() == KeyEvent.KEY_TYPED) {
-            this.keyTyped((KeyEvent) e);
         }
     }
 

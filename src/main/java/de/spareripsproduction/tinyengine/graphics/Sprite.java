@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
+ * Responsible for drawing simple images
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-09

@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 /**
+ * The Dice
+ *
  * Created by marian on 12/03/14.
  */
 public class Dice implements RenderAndUpdateable {
@@ -24,6 +26,12 @@ public class Dice implements RenderAndUpdateable {
 
     protected boolean hover, clicked, locked;
 
+    /**
+     * Default Constructor
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     */
     public Dice(int x, int y) {
         this.x = x;
         this.y = y;
@@ -35,16 +43,26 @@ public class Dice implements RenderAndUpdateable {
         this.locked = false;
     }
 
+    /**
+     * Rolls the dice again
+     *
+     * @return the next randomly generated number
+     */
     public int getNextNumber() {
         this.lastNumber = this.random.nextInt(6) + 1;
         return lastNumber;
     }
 
+    /**
+     * Resets the dice, so no number is displayed
+     */
     public void reset() {
         this.lastNumber = 0;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
 
@@ -68,6 +86,9 @@ public class Dice implements RenderAndUpdateable {
         this.y = y;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
         Color color = g.getColor();
@@ -217,10 +238,18 @@ public class Dice implements RenderAndUpdateable {
                 && (p.getY() >= this.getY() && p.getY() <= this.getY() + this.getHeight());
     }
 
+    /**
+     * frees the dice, then the dice can be rolled again
+     */
     public void unlock() {
         this.locked = false;
     }
 
+    /**
+     * checks if the dice can be rolled
+     *
+     * @return true if dice can be rolled false if not
+     */
     public boolean isLocked() {
         return locked;
     }

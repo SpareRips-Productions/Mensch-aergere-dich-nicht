@@ -15,11 +15,29 @@ import java.awt.*;
  */
 public abstract class GameFigure extends BoardEntity implements RenderAndUpdateable {
 
+    /**
+     * Reference to the sprite image of the red <code>GameFigure</code>
+     */
     public static final String SPRITE_RED = "sprites/figureRed";
+
+    /**
+     * Reference to the sprite image of the yellow <code>GameFigure</code>
+     */
     public static final String SPRITE_YELLOW = "sprites/figureYellow";
+
+    /**
+     * Reference to the sprite image of the red <code>GameFigure</code>
+     */
     public static final String SPRITE_BLUE = "sprites/figureBlue";
+
+    /**
+     * Reference to the sprite image of the green <code>GameFigure</code>
+     */
     public static final String SPRITE_GREEN = "sprites/figureGreen";
 
+    /**
+     * id-position for GameFigures in house
+     */
     public static final int IN_HOUSE_ID = -1;
 
     protected int index;
@@ -42,23 +60,50 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     @Override
     public float getY() {
         float y = super.getY();
-        y -= this.getHeight() - FIELD_SIZE;
+        y -= this.getHeight() - FIELD_SIZE + 5;
         return y;
     }
 
+    /**
+     * Gamefigure gets place into the beginning house
+     */
     public void kick() {
         super.setId(IN_HOUSE_ID);
     }
 
-    public boolean move(int delta, boolean dryRun) {
+
+    protected boolean move(int delta, boolean dryRun) {
         if (delta == 0) {
             return false;
         }
-        boolean result = true;
         if (delta > 6 || delta < 0) {
             System.out.println("Cheat attempt");
             System.exit(0);
         }
+
+        //clean Start ID Field always
+        if(getId() != getStartId() && isStartIdOccupied()) {
+            GameFigure gameFigure = null;
+            for(GameFigure gf : getOwner().getGameFigures()) {
+                if(gf.getId() == getStartId()) {
+                    gameFigure = gf;
+                    break;
+                }
+            }
+            if(gameFigure != null && gameFigure.canMove(delta)) {
+                return false;
+            }
+        }
+
+        //force move when ever possible (let only)
+        if(delta == 6 && getId() != IN_HOUSE_ID && !isStartIdOccupied()) {
+            for(GameFigure gf : getOwner().getGameFigures()) {
+                if(gf.getId() == IN_HOUSE_ID) {
+                    return false;
+                }
+            }
+        }
+
 
         //move out
         if (getId() < 0 && delta == 6) {
@@ -91,15 +136,26 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
                 return false;
             }
             if (!dryRun) setId(tmp);
+            return true;
         }
 
         return false;
     }
 
+    /**
+     *
+     * @param delta number of fields to move (1-6)
+     * @return true if move is successful, false if not
+     */
     public boolean move(int delta) {
         return move(delta, false);
     }
 
+    /**
+     * Checks if Field is occupied by <code>GameFigure</code> from the same Owner
+     * @param id id-position
+     * @return true if the field is occupied, false if not
+     */
     public boolean isFieldOccupied(int id) {
         for (GameFigure gameFigure : this.getOwner().getGameFigures()) {
             if (gameFigure.getId() == id) {
@@ -109,16 +165,28 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
         return false;
     }
 
+    public boolean isStartIdOccupied() {
+        return isFieldOccupied(getStartId());
+    }
+
+    /**
+     *
+     * @param delta number of fields to move (1-6)
+     * @return true if <code>GameFigure</code> can make the move of <code>delta</code> steps, false if not
+     */
     public boolean canMove(int delta) {
         return isActive() && move(delta, true);
     }
 
     protected abstract int getStartId();
 
-    protected abstract int getHomeStartId();
+    public abstract int getHomeStartId();
 
     protected abstract int getPlayerType();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
         if (isHover() && canMove(Board.getInstance().getDice().getLastNumber())) {
@@ -128,6 +196,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void setId(int id) {
 

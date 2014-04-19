@@ -8,6 +8,8 @@ import de.spareripsproduction.tinyengine.gui.TELabel;
 import java.awt.*;
 
 /**
+ * Objects from this Class, can measure the current <b>FPS</b> of the Game
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-11
@@ -22,6 +24,9 @@ public class Fps implements RenderInterface {
 
     private TELabel fpsLabel;
 
+    /**
+     * Constructs the FPS-Meter
+     */
     public Fps() {
         this.lastUpdated = Timer.getTime();
         this.framesCount = 0;
@@ -29,6 +34,9 @@ public class Fps implements RenderInterface {
         this.fpsLabel = new TELabel("100FPS", 1, 1, FontManager.getFont(FontManager.FONT_PRESS_START_2P, 12));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D context) {
         this.updateFps();
         //remember old states
@@ -41,9 +49,15 @@ public class Fps implements RenderInterface {
         context.setColor(color);
     }
 
+    /**
+     * Calculates the current <i>Frame per Seconds</i> of the Game
+     *
+     * @return Frames Per Second
+     */
     public int getFps() {
         return this.fps != 0 ? this.fps : 100;
     }
+
 
     private void updateFps() {
         long now = Timer.getTime();

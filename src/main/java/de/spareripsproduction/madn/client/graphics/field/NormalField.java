@@ -5,7 +5,7 @@ package de.spareripsproduction.madn.client.graphics.field;
  */
 public class NormalField extends Field {
     public NormalField(int id) {
-        this("sprites/normalField.png", id);
+        this(Field.SPRITE_NORMAL, id);
     }
 
     public NormalField(String spriteRef, int id) {

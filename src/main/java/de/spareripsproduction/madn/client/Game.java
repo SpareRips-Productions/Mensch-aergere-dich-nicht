@@ -3,24 +3,37 @@ package de.spareripsproduction.madn.client;
 import de.spareripsproduction.madn.client.scene.*;
 import de.spareripsproduction.tinyengine.graphics.RenderInterface;
 import de.spareripsproduction.tinyengine.logic.Fps;
-import de.spareripsproduction.tinyengine.logic.GitVersion;
 import de.spareripsproduction.tinyengine.logic.UpdateInterface;
 
 import java.awt.*;
 import java.util.HashMap;
 
 /**
+ * This Class is responsible for showing the correct Scene (Game, Settings, Credits, etc)
+ *
  * Created by marian on 12/03/14.
+ *
+ *
  */
 public class Game
         extends de.spareripsproduction.tinyengine.Game
         implements RenderInterface, UpdateInterface
 
 {
-    public static final String ENV_DEV = "dev";
-    public static final String ENV_PROD = "prod";
+    /**
+     * DEV environment shows FPS
+     */
+    public static final String ENV_DEV = "DEV";
 
-    private GitVersion version;
+    /**
+     * PROD does not show FPS
+     */
+    public static final String ENV_PROD = "PROD";
+
+    /**
+     * for testing purposes
+     */
+    public static final String ENV_TEST = "TEST";
 
     private String environment = ENV_DEV;
 
@@ -32,11 +45,13 @@ public class Game
 
     private static Game instance;
 
+    /**
+     * Default Constructor
+     */
     public Game() {
         super("Mensch ärgere dich nicht", 800, 600);
 
 
-        this.version = new GitVersion();
         this.fps = new Fps();
         this.setRenderer(this);
         this.setUpdater(this);
@@ -51,6 +66,11 @@ public class Game
         this.environment = environment;
     }
 
+    /**
+     * Singleton of the Game
+     *
+     * @return Singleton
+     */
     public static Game getInstance() {
         if (Game.instance == null) {
             Game.instance = new Game();
@@ -58,6 +78,11 @@ public class Game
         return Game.instance;
     }
 
+    /**
+     * Singleton of the Game with environment variable
+     *
+     * @return Singleton
+     */
     public static Game getInstance(String environment) {
         if (Game.instance == null) {
             Game.instance = new Game(environment);
@@ -65,19 +90,30 @@ public class Game
         return Game.instance;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D context) {
         this.activeScene.render(context);
-        if (this.environment.equals(Game.ENV_DEV)) {
+        if (this.environment.equals(Game.ENV_DEV) || this.environment.equals(Game.ENV_TEST)) {
             this.fps.render(context);
-            //this.version.render(context);
         }
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void update() {
         this.activeScene.update();
     }
 
+    /**
+     * Loads a specific scene, and unloads the old one
+     *
+     * @param sceneName Name of the Scene
+     * @return true if Scene was found false if not
+     */
     public boolean loadScene(String sceneName) {
         if (this.scenes.containsKey(sceneName)) {
             // check for the first scene
@@ -103,7 +139,11 @@ public class Game
         this.scenes.put(Scene.SCENE_CREDITS, new CreditsScene());
     }
 
-    public Scene getScene(String sceneName) {
-        return this.scenes.get(sceneName);
+    /**
+     *
+     * @return current environment
+     */
+    public String getEnvironment() {
+        return environment;
     }
 }

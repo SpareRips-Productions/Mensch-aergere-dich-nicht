@@ -9,7 +9,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by developer on 25.03.14.
+ * Textfield
+ *
+ * @author Thomas Hampe <thomas@hampe.co>
+ * @version 1.0
+ * @since 2014-03-25
  */
 public class TETextField extends TEView implements KeyListener {
 
@@ -33,6 +37,21 @@ public class TETextField extends TEView implements KeyListener {
 
     protected Color textColor;
 
+    /**
+     * Default Constructor
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param font
+     * @param size
+     * @param borderSize
+     * @param borderColor
+     * @param backgroundColor
+     * @param textColor
+     */
     public TETextField(
             String text,
             int x,
@@ -61,6 +80,18 @@ public class TETextField extends TEView implements KeyListener {
         GameWindow.getInstance().addKeyListener(this);
     }
 
+    /**
+     * constructor with default colors
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param font
+     * @param size
+     * @param borderSize
+     */
     public TETextField(
             String text,
             int x,
@@ -74,6 +105,9 @@ public class TETextField extends TEView implements KeyListener {
         this(text, x, y, width, height, font, size, borderSize, Color.black, Color.white, Color.black);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void update() {
         if (Mouse.isClicked(MouseEvent.BUTTON1)) {
             Point p = Mouse.position(MouseEvent.BUTTON1);
@@ -84,6 +118,10 @@ public class TETextField extends TEView implements KeyListener {
 
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D context) {
         Color color = context.getColor();
         Stroke stroke = context.getStroke();
@@ -123,16 +161,22 @@ public class TETextField extends TEView implements KeyListener {
     }
 
 
+    /**
+     * currently selected and accepts input
+     *
+     * @return true if active
+     */
     public boolean isActive() {
         return this.active;
     }
 
+    /**
+     * returns borderthickness
+     *
+     * @return in pixel
+     */
     public int getBorderSize() {
         return borderSize;
-    }
-
-    public Color getBorderColor() {
-        return borderColor;
     }
 
     public Color getBackgroundColor() {
@@ -143,24 +187,17 @@ public class TETextField extends TEView implements KeyListener {
         return activeBorderColor;
     }
 
-    public Color getHoverBorderColor() {
-        return hoverBorderColor;
-    }
-
-    public Color getTextColor() {
-        return textColor;
-    }
-
+    /**
+     * currently hovered by the mouse
+     *
+     * @return true if hovered
+     */
     public boolean isHover() {
         return this.hover;
     }
 
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     @Override
@@ -187,6 +224,11 @@ public class TETextField extends TEView implements KeyListener {
     public void keyReleased(KeyEvent keyEvent) {
     }
 
+    /**
+     * Text in the textfield
+     *
+     * @return textfield text
+     */
     public String getText() {
         return this.label.getText();
     }

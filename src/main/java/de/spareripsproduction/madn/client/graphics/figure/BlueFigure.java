@@ -19,7 +19,7 @@ public class BlueFigure extends GameFigure {
     }
 
     @Override
-    public Point updateBoardPosition() {
+    protected Point updateBoardPosition() {
         Point p = new Point(0, 0);
         if (id < 0) {
             p.y = 0;

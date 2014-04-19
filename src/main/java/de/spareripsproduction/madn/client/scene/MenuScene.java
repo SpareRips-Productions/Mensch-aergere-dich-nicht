@@ -13,9 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Menu Scene
  * Created by marian on 12/03/14.
+ *
  */
-public class MenuScene extends Scene implements ActionListener {
+public class MenuScene extends Scene {
 
     private TELabel header;
 
@@ -23,6 +25,9 @@ public class MenuScene extends Scene implements ActionListener {
 
     private Entity backgroundImage;
 
+    /**
+     * {@inheritDoc}
+     */
     public void load() {
 
         Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, 50);
@@ -37,11 +42,17 @@ public class MenuScene extends Scene implements ActionListener {
         this.btnCollection.addView(new TEButton("Credits", 0, 0, 300, 50, 2, menuFont, Color.black, Color.blue, Color.red));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void unload() {
         this.header = null;
         this.btnCollection = null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         int width = Game.getInstance().getWindow().getWidth();
@@ -70,6 +81,9 @@ public class MenuScene extends Scene implements ActionListener {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
 
@@ -84,7 +98,4 @@ public class MenuScene extends Scene implements ActionListener {
 
     }
 
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Action!!!");
-    }
 }
