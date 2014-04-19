@@ -152,7 +152,7 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     protected abstract int getStartId();
 
-    protected abstract int getHomeStartId();
+    public abstract int getHomeStartId();
 
     protected abstract int getPlayerType();
 

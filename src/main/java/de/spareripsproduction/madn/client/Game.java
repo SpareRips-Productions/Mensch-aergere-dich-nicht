@@ -23,12 +23,17 @@ public class Game
     /**
      * DEV environment shows FPS
      */
-    public static final String ENV_DEV = "dev";
+    public static final String ENV_DEV = "DEV";
 
     /**
      * PROD does not show FPS
      */
-    public static final String ENV_PROD = "prod";
+    public static final String ENV_PROD = "PROD";
+
+    /**
+     * for testing purposes
+     */
+    public static final String ENV_TEST = "TEST";
 
     private String environment = ENV_DEV;
 
@@ -90,7 +95,7 @@ public class Game
      */
     public void render(Graphics2D context) {
         this.activeScene.render(context);
-        if (this.environment.equals(Game.ENV_DEV)) {
+        if (this.environment.equals(Game.ENV_DEV) || this.environment.equals(Game.ENV_TEST)) {
             this.fps.render(context);
         }
 
@@ -134,4 +139,11 @@ public class Game
         this.scenes.put(Scene.SCENE_CREDITS, new CreditsScene());
     }
 
+    /**
+     *
+     * @return current environment
+     */
+    public String getEnvironment() {
+        return environment;
+    }
 }

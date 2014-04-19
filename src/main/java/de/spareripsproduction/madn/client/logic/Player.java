@@ -37,6 +37,10 @@ public class Player implements RenderAndUpdateable {
 
     protected TELabel nameLabel;
 
+    protected int position = 0;
+
+    protected static int winner = 0;
+
     /**
      *
      * @param type PlayerType:
@@ -142,7 +146,9 @@ public class Player implements RenderAndUpdateable {
         nameLabel.setY(y);
 
         nameLabel.update();
-        if (isActive()) {
+        if(position != 0) {
+            nameLabel.setText(scoreLabelStr());
+        }else if (isActive()) {
             nameLabel.setText(String.format("%s (%d)", this.name, this.rollCount));
         } else {
             nameLabel.setText(this.name);
@@ -194,7 +200,13 @@ public class Player implements RenderAndUpdateable {
         Board.getInstance().getDice().reset();
         ArrayList<Player> players = Board.getInstance().getPlayers();
         int playerIndex = players.indexOf(this);
-        players.get((playerIndex + 1) % players.size()).activate();
+        for(int i = 1; i < players.size(); i++) {
+            Player player = players.get((playerIndex+i)%players.size());
+            if(!player.isFinished()) {
+                player.activate();
+                break;
+            }
+        }
     }
 
     /**
@@ -262,5 +274,29 @@ public class Player implements RenderAndUpdateable {
      */
     public int getType() {
         return type;
+    }
+
+    public boolean isFinished() {
+        boolean finished = true;
+        for(GameFigure gameFigure : getGameFigures()) {
+            finished = finished && gameFigure.getId() >= gameFigure.getHomeStartId();
+        }
+        if(finished && position == 0) {
+            winner++;
+            position = winner;
+        }
+        return finished;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public String scoreLabelStr() {
+        String score = String.format("%d. %s", this.getPosition(), this.name);
+        if(position == 0) {
+            score = String.format("DNF %s", this.name);
+        }
+        return score;
     }
 }

@@ -5,10 +5,12 @@ import de.spareripsproduction.madn.client.graphics.field.HomeEntryField;
 import de.spareripsproduction.madn.client.graphics.field.NormalField;
 import de.spareripsproduction.madn.client.graphics.field.SpawnField;
 import de.spareripsproduction.madn.client.graphics.figure.*;
+import de.spareripsproduction.madn.client.logic.AIPlayer;
 import de.spareripsproduction.madn.client.logic.Dice;
 import de.spareripsproduction.madn.client.logic.Player;
 import de.spareripsproduction.madn.client.logic.Settings;
 import de.spareripsproduction.tinyengine.FontManager;
+import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.TELabel;
@@ -104,10 +106,15 @@ public class Board extends Entity implements RenderAndUpdateable {
         }
 
         this.players = new ArrayList<Player>();
-        for (int i = 0; i < Settings.playerCount; i++) {
-            this.players.add(new Player(i));
+        if(Game.getInstance().getEnvironment().equals(Game.ENV_TEST)) {
+            for (int i = 0; i < Settings.playerCount; i++) {
+                this.players.add(new AIPlayer(i));
+            }
+        } else {
+            for (int i = 0; i < Settings.playerCount; i++) {
+                this.players.add(new Player(i));
+            }
         }
-
 
         Font titleFont = FontManager.getFont(FontManager.FONT_COMIC_NEUE_BOLD, 40);
 
@@ -214,6 +221,14 @@ public class Board extends Entity implements RenderAndUpdateable {
      */
     public Dice getDice() {
         return dice;
+    }
+
+    public boolean isGameOver() {
+        int finishedCounter = 0;
+        for(Player player : getPlayers()) {
+            if(player.isFinished()) finishedCounter++;
+        }
+        return finishedCounter == getPlayers().size()-1;
     }
 
 

@@ -1,5 +1,6 @@
 package de.spareripsproduction.madn.client.scene;
 
+import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.Board;
 import de.spareripsproduction.tinyengine.entity.Entity;
 
@@ -35,6 +36,12 @@ public class GameScene extends Scene {
      */
     @Override
     public void update() {
+
+        if(this.board.isGameOver()) {
+            Game.getInstance().loadScene(SCENE_SCORE);
+
+            return;
+        }
         this.backgroundImage.update();
         this.board.update();
     }
