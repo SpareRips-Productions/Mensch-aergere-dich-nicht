@@ -1,7 +1,6 @@
 /**
- * Lorem ipsum
+ * This Package contains the <code>GameFigure</code> related code
  *
- * @TODO change this
  * @since 1.0
  *
  */

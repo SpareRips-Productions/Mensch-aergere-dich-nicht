@@ -1,8 +1,5 @@
 /**
- * Lorem ipsum
- *
- * @TODO change this
- * @since 1.0
+ * This package contains some logic heavy entities
  *
  */
 package de.spareripsproduction.madn.client.logic;

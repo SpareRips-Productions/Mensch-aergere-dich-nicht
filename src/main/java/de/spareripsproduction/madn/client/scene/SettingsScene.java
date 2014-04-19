@@ -38,8 +38,11 @@ public class SettingsScene extends Scene {
     private TEButton downCount;
     private TELabel countLabel;
 
-    long last = Timer.getTime();
+    private long last = Timer.getTime();
 
+    /**
+     * {@inheritDoc}
+     */
     public void load() {
         this.backgroundImage = new Entity("sprites/menu.png", 0, 0);
 
@@ -80,10 +83,16 @@ public class SettingsScene extends Scene {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void unload() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         this.backButton.update();
@@ -128,6 +137,9 @@ public class SettingsScene extends Scene {
         Settings.Player4Name = this.p4Text.getText();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
         g.setColor(Color.black);

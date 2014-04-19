@@ -1,8 +1,5 @@
 /**
- *<p>
- * @TODO write package info
- * Lorem ipsum
- *</p>
+ * Contains the Entity related things
  *
  * @since 1.0
  *

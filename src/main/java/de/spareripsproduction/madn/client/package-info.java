@@ -1,7 +1,9 @@
 /**
- * Lorem ipsum
+ * "Mensch aergere dich nicht" Package
+ * <p>
+ *     Contains all the stuff that is necessary, for a computer version of "Mensch aergere dich nicht"
+ * </p>
  *
- * @TODO change this
  * @since 1.0
  *
  */

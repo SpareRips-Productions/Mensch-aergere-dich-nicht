@@ -7,19 +7,31 @@ import java.awt.*;
  */
 public class ScoreScene extends Scene {
 
+    /**
+     * {@inheritDoc}
+     */
     public void load() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void unload() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
 

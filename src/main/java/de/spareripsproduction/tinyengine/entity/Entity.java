@@ -8,6 +8,8 @@ import de.spareripsproduction.tinyengine.logic.UpdateInterface;
 import java.awt.*;
 
 /**
+ * Entity Object
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-08
@@ -76,28 +78,51 @@ public class Entity implements RenderInterface, UpdateInterface {
         this.y = y;
     }
 
+    /**
+     * Sets the Size
+     *
+     * @param width in pixel
+     * @param height in pixel
+     */
     public void setSize(float width, float height) {
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * Moves
+     *
+     * @param dX delta length
+     * @param dY delta height
+     */
     public void move(float dX, float dY) {
         this.setLocation(this.getX() + dX, this.getY() + dY);
     }
 
-    public Rectangle getHitBox() {
+    protected Rectangle getHitBox() {
         return new Rectangle((int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight());
     }
 
+    /**
+     * Collision detection
+     *
+     * @param e other entity
+     * @return true if entities collide, false if not
+     */
     public boolean collidesWith(Entity e) {
         return this.getHitBox().intersects(e.getHitBox());
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D context) {
         this.sprite.render(context, (int) this.getX(), (int) this.getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void update() {
 
     }

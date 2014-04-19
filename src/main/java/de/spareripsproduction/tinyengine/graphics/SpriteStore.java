@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.HashMap;
 
 /**
+ * Holds all sprites in a HashMap, so they don't need to be created more than once
+ *
  * @author Thomas Hampe <thomas@hampe.co>
  * @version 1.0
  * @since 2014-03-09
@@ -20,6 +22,12 @@ public class SpriteStore {
         store = new HashMap<String, Sprite>();
     }
 
+
+    /**
+     * Get the singleton SpriteStore
+     *
+     * @return singleton
+     */
     public static SpriteStore getInstance() {
         if (SpriteStore.instance == null) {
             SpriteStore.instance = new SpriteStore();
@@ -27,6 +35,12 @@ public class SpriteStore {
         return SpriteStore.instance;
     }
 
+    /**
+     * get a Sprite from the store
+     *
+     * @param ref Reference to the spriteImage
+     * @return Sprite
+     */
     public Sprite get(String ref) {
 
         // check if Sprite exists

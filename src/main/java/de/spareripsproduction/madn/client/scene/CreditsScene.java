@@ -32,6 +32,9 @@ public class CreditsScene extends Scene {
 
     protected TECollectionVertical creditsCollection;
 
+    /**
+     * {@inheritDoc}
+     */
     public void load() {
         this.background = new Entity("sprites/title.png", 0, 0);
         fatRaccoon = new ImageIcon(this.getClass().getClassLoader().getResource("raccoon.gif"));
@@ -55,10 +58,16 @@ public class CreditsScene extends Scene {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void unload() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         this.backButton.update();
@@ -74,6 +83,9 @@ public class CreditsScene extends Scene {
         this.title.update();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
 

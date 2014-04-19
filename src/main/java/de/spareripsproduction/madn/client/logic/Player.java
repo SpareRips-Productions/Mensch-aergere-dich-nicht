@@ -12,6 +12,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * Player Class
+ *
  * Created by marian on 12/03/14.
  */
 public class Player implements RenderAndUpdateable {
@@ -35,6 +37,14 @@ public class Player implements RenderAndUpdateable {
 
     protected TELabel nameLabel;
 
+    /**
+     *
+     * @param type PlayerType:
+     *             Player.RED_PLAYER,
+     *             Player.BLUE_PLAYER,
+     *             Player.GREEN_PLAYER,
+     *             Player.YELLOW_PLAYER
+     */
     public Player(int type) {
         this.type = type;
         switch (type) {
@@ -57,7 +67,9 @@ public class Player implements RenderAndUpdateable {
         this.nameLabel = new TELabel(this.name, 0, 0, FontManager.getFont(FontManager.FONT_COMIC_NEUE, 20));
     }
 
-
+    /**
+     * called when player is active, process player input to make next move
+     */
     public void makeMove() {
         if (isActive()) {
             if (!canMove()) {
@@ -102,6 +114,9 @@ public class Player implements RenderAndUpdateable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void update() {
         Board board = Board.getInstance();
         int x = board.getIntX() + (board.getIntWidth() - 11 * BoardEntity.FIELD_SIZE) / 2;
@@ -162,12 +177,18 @@ public class Player implements RenderAndUpdateable {
         return Board.getInstance().getDice();
     }
 
+    /**
+     * Activates player, so he can roll the dice and move
+     */
     public void activate() {
         this.rollCount = (canRollDiceThreeTimes()) ? 3 : 1;
         System.out.println("Player: " + name + "(" + rollCount + ") is now active");
         this.active = true;
     }
 
+    /**
+     * Activates next player
+     */
     public void nextPlayer() {
         this.active = false;
         Board.getInstance().getDice().reset();
@@ -176,6 +197,9 @@ public class Player implements RenderAndUpdateable {
         players.get((playerIndex + 1) % players.size()).activate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void render(Graphics2D g) {
         Color color = g.getColor();
         if (isActive()) {
@@ -186,6 +210,10 @@ public class Player implements RenderAndUpdateable {
         g.setColor(color);
     }
 
+    /**
+     *
+     * @return a list of gameFigures from this player
+     */
     public ArrayList<GameFigure> getGameFigures() {
         if (gameFigures == null) {
             gameFigures = new ArrayList<GameFigure>();
@@ -217,10 +245,21 @@ public class Player implements RenderAndUpdateable {
         return gameFigures;
     }
 
+    /**
+     *
+     * @return true if active, false if not
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     *
+     * @return Player.RED_PLAYER or
+     *         Player.BLUE_PLAYER or
+     *         Player.GREEN_PLAYER or
+     *         Player.YELLOW_PLAYER
+     */
     public int getType() {
         return type;
     }

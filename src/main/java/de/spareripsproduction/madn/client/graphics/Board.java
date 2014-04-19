@@ -36,6 +36,10 @@ public class Board extends Entity implements RenderAndUpdateable {
     private TELabel gameLabelDich;
     private TELabel gameLabelNicht;
 
+    /**
+     *
+     * @return Singleton instance of the game
+     */
     public static Board getInstance() {
         if (instance == null) {
             instance = new Board(0, 0);
@@ -43,6 +47,11 @@ public class Board extends Entity implements RenderAndUpdateable {
         return instance;
     }
 
+    /**
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     */
     public Board(int x, int y) {
         super("sprites/board.png", x, y);
         // center the board
@@ -120,6 +129,9 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
 
@@ -143,6 +155,9 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
         super.render(g);
@@ -166,10 +181,18 @@ public class Board extends Entity implements RenderAndUpdateable {
 
     }
 
+    /**
+     *
+     * @return a list of all GameFigures
+     */
     public ArrayList<GameFigure> getGameFigures() {
         return gameFigures;
     }
 
+    /**
+     *
+     * @return a list of all players
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -185,6 +208,10 @@ public class Board extends Entity implements RenderAndUpdateable {
         return activePlayer;
     }
 
+    /**
+     *
+     * @return the dice for this board
+     */
     public Dice getDice() {
         return dice;
     }

@@ -1,8 +1,6 @@
 /**
- * Lorem ipsum
+ * This Package contains functionality, to respond to ser input (Keyboard, Mouse Interaction)
  *
- * @TODO change this
  * @since 1.0
- *
  */
 package de.spareripsproduction.tinyengine.input;

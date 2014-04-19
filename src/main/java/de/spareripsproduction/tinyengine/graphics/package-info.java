@@ -1,7 +1,6 @@
 /**
- * Lorem ipsum
+ * This package contians graphic elements
  *
- * @TODO change this
  * @since 1.0
  *
  */

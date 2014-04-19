@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
  */
 public class BoardEntity extends Entity {
 
+    /**
+     * Field Size in px
+     */
     public static final int FIELD_SIZE = 48;
 
     protected int id;
@@ -21,11 +24,19 @@ public class BoardEntity extends Entity {
 
     protected boolean hover, clicked;
 
+    /**
+     *
+     * @param spriteRef path to a sprite image
+     * @param id id-position of the board
+     */
     public BoardEntity(String spriteRef, int id) {
         super(spriteRef, 0, 0);
         this.id = id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public float getX() {
         Point p = getBoardPosition();
@@ -33,6 +44,9 @@ public class BoardEntity extends Entity {
         return Board.getInstance().getIntX() + p.x * FIELD_SIZE + width;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public float getY() {
         Point p = getBoardPosition();
@@ -40,6 +54,9 @@ public class BoardEntity extends Entity {
         return Board.getInstance().getIntY() + p.y * FIELD_SIZE + width;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         super.update();
@@ -52,6 +69,10 @@ public class BoardEntity extends Entity {
 
     }
 
+    /**
+     *
+     * @return the position of this entity, in a matrix of fields
+     */
     public Point getBoardPosition() {
         if (boardPosition == null) {
             boardPosition = updateBoardPosition();
@@ -59,11 +80,21 @@ public class BoardEntity extends Entity {
         return boardPosition;
     }
 
+    /**
+     * Every accessible Field on the board has a unique id
+     *
+     * @param id id-position
+     */
     protected void setId(int id) {
         this.id = id;
         this.boardPosition = updateBoardPosition();
     }
 
+    /**
+     * Every accessible Field on the board has a unique id
+     *
+     * @return id-position of the this entity
+     */
     public int getId() {
         return id;
     }
@@ -149,10 +180,18 @@ public class BoardEntity extends Entity {
         return new Point(x, y);
     }
 
+    /**
+     *
+     * @return true if the entity is hovered by the mouse
+     */
     protected boolean isHover() {
         return hover;
     }
 
+    /**
+     *
+     * @return true if this entity is clicked
+     */
     public boolean isClicked() {
         return clicked;
     }

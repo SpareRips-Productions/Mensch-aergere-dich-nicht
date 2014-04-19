@@ -1,8 +1,6 @@
 /**
- * Lorem ipsum
+ * Tis package contains the logic of TinyEngine
  *
- * @TODO change this
  * @since 1.0
- *
  */
 package de.spareripsproduction.tinyengine.logic;

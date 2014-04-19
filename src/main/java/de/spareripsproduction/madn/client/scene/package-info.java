@@ -1,7 +1,10 @@
 /**
- * Lorem ipsum
+ * This package holds the scenes.
+ * <p>
+ *     A scene is responsible for displaying a certain part of the game. For instance the Settings or the Intro.
+ * </p>
  *
- * @TODO change this
+ *
  * @since 1.0
  *
  */

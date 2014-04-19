@@ -1,14 +1,13 @@
 /**
- * Provides the classes necessary to create an
- * applet and the classes an applet uses
- * to communicate with its applet context.
+ * Provides the basic functionality to display graphics and ui,
+ * typically used by a 2D Game.
  * <p>
- * The applet framework involves two entities:
- * the applet and the applet context.
- * An applet is an embeddable window (see the
- * {@link java.awt.Panel} class) with a few extra
- * methods that the applet context can use to
- * initialize, start, and stop the applet.
+ *    <a href="https://github.com/thampe/TinyEngine">TinyEngine on Github</a>
+ * </p>
+ * <p>
+ *     Initial purpose for this library was the Game "Mensch ärgere dich nicht"
+ * </p>
+ *
  *
  * @since 1.0
  *

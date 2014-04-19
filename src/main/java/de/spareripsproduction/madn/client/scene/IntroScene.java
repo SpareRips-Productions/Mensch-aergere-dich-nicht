@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
  * @since 2014-03-19
  */
 public class IntroScene extends Scene {
+
     /**
      * Transparency for fade effect
      */
@@ -34,6 +35,9 @@ public class IntroScene extends Scene {
 
     private Entity backgroundImage;
 
+    /**
+     * {@inheritDoc}
+     */
     public void load() {
 
         this.backgroundImage = new Entity("sprites/intro.png", 0, 0);
@@ -49,12 +53,18 @@ public class IntroScene extends Scene {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void unload() {
         this.firstTitleLabel = null;
         this.secondTitleLabel = null;
         this.pressSpaceLabel = null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         if (this.lastAlphaUpdate == 0) {
@@ -95,6 +105,9 @@ public class IntroScene extends Scene {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics2D g) {
         this.renderStart(g);
