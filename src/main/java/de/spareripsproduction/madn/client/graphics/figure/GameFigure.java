@@ -68,8 +68,8 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
             float dx = 0;
             float dy = 0;
             long tmp = Timer.getTime()-last;
-            dx = (float) easeInOut(tmp, getX(),destination.x-getX(), 450);
-            dy = (float) easeInOut(tmp, getY(),destination.y-getY(), 450);
+            dx = (float) easeInOut(tmp, getX(),destination.x-getX(), 600);
+            dy = (float) easeInOut(tmp, getY(),destination.y-getY(), 600);
             setLocation(dx,dy);
 
 
@@ -217,9 +217,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     @Override
     public void render(Graphics2D g) {
         if (isHover() && canMove(Board.getInstance().getDice().getLastNumber())) {
-            hoverSprite.render(g, this.getIntX(), this.getIntY());
+            this.hoverSprite.render(g, this.getIntX(), this.getIntY()-5);
         } else {
-            super.render(g);
+            this.sprite.render(g, (int) this.getX(), (int) this.getY()-5);
         }
     }
 
