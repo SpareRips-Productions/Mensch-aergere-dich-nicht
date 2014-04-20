@@ -4,7 +4,7 @@
 
     <groupId>de.spareribsproduction.madn</groupId>
     <artifactId>Mensch-aergere-dich-nicht</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>Maven Quick Start Archetype</name>

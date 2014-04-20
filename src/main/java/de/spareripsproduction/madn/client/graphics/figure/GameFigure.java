@@ -5,6 +5,7 @@ import de.spareripsproduction.madn.client.graphics.Board;
 import de.spareripsproduction.madn.client.graphics.BoardEntity;
 import de.spareripsproduction.madn.client.graphics.RenderAndUpdateable;
 import de.spareripsproduction.madn.client.logic.Player;
+import de.spareripsproduction.tinyengine.Timer;
 import de.spareripsproduction.tinyengine.graphics.Sprite;
 import de.spareripsproduction.tinyengine.graphics.SpriteStore;
 
@@ -46,6 +47,8 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     protected Player owner;
 
+    protected long last = Timer.getTime();
+
     /**
      * @param spriteRef sprite of the figure
      * @param id        position on the field
@@ -58,10 +61,34 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     }
 
     @Override
+    public  void update() {
+        super.update();
+        Point destination = toPixel(getBoardPosition());
+        if(Math.abs(destination.x - getX()) > 1 || Math.abs(destination.y - getY()) > 1) {
+            float dx = 0;
+            float dy = 0;
+            long tmp = Timer.getTime()-last;
+            dx = (float) easeInOut(tmp, getX(),destination.x-getX(), 600);
+            dy = (float) easeInOut(tmp, getY(),destination.y-getY(), 600);
+            setLocation(dx,dy);
+
+
+        }else {
+            setLocation(destination.x, destination.y);
+            last = 0;
+        }
+
+    }
+
+    @Override
     public float getY() {
-        float y = super.getY();
-        y -= this.getHeight() - FIELD_SIZE + 5;
+        float y = this.y;
         return y;
+    }
+
+   @Override
+    public float getX() {
+        return this.x;
     }
 
     /**
@@ -190,9 +217,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
     @Override
     public void render(Graphics2D g) {
         if (isHover() && canMove(Board.getInstance().getDice().getLastNumber())) {
-            hoverSprite.render(g, this.getIntX(), this.getIntY());
+            this.hoverSprite.render(g, this.getIntX(), this.getIntY()-5);
         } else {
-            super.render(g);
+            this.sprite.render(g, (int) this.getX(), (int) this.getY()-5);
         }
     }
 
@@ -210,7 +237,9 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
                 }
             }
         }
-
+        if(last == 0) {
+            last = Timer.getTime();
+        }
         super.setId(id);
     }
 
@@ -228,5 +257,23 @@ public abstract class GameFigure extends BoardEntity implements RenderAndUpdatea
 
     protected boolean isActive() {
         return this.getOwner().isActive();
+    }
+
+
+    protected double easeInOut(float time, float start, float diff, float duration) {
+        time /= duration/2;
+        if (time < 1) return diff/2 * Math.pow( 2, 10 * (time - 1) ) + start;
+        time--;
+        return diff/2 * ( -Math.pow( 2, -10 * time) + 2 ) + start;
+    }
+
+    protected Point toPixel(Point boardPosition) {
+        int width = (Board.getInstance().getIntWidth() - 11 * FIELD_SIZE) / 2;
+        int x =  Board.getInstance().getIntX() + boardPosition.x * FIELD_SIZE + width;
+
+        int height = (Board.getInstance().getIntHeight() - 11 * FIELD_SIZE) / 2;
+        int y = Board.getInstance().getIntY() + boardPosition.y * FIELD_SIZE + height;
+
+        return new Point(x,y);
     }
 }
