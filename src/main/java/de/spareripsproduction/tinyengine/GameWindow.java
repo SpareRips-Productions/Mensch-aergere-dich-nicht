@@ -72,7 +72,7 @@ public class GameWindow extends Canvas {
         //ignore refresh
         this.setIgnoreRepaint(true);
 
-        this.frame.pack();
+
         this.frame.setResizable(false);
         this.frame.setVisible(true);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -80,6 +80,9 @@ public class GameWindow extends Canvas {
                 System.exit(0);
             }
         });
+
+        this.frame.pack();
+
         this.frame.setLocationRelativeTo(null);
 
         this.requestFocus();

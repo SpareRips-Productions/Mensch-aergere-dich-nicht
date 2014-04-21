@@ -1,5 +1,6 @@
 package de.spareripsproduction.madn.client.graphics;
 
+import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.field.Field;
 import de.spareripsproduction.madn.client.graphics.field.HomeEntryField;
 import de.spareripsproduction.madn.client.graphics.field.NormalField;
@@ -10,7 +11,6 @@ import de.spareripsproduction.madn.client.logic.Dice;
 import de.spareripsproduction.madn.client.logic.Player;
 import de.spareripsproduction.madn.client.logic.Settings;
 import de.spareripsproduction.tinyengine.FontManager;
-import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.entity.Entity;
 import de.spareripsproduction.tinyengine.gui.TELabel;

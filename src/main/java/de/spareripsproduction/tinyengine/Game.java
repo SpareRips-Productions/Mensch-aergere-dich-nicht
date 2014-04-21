@@ -83,9 +83,14 @@ public class Game {
             int height = this.getWindow().getHeight();
             int width = this.getWindow().getWidth();
             Graphics2D context = this.getWindow().getGraphicsContext();
+            context.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
             context.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            context.setRenderingHint(
+                    RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
             context.setColor(Color.black);
             context.fillRect(0, 0, width, height);
 

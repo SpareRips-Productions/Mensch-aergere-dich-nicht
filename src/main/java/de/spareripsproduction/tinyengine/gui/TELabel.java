@@ -1,6 +1,7 @@
 package de.spareripsproduction.tinyengine.gui;
 
 import de.spareripsproduction.tinyengine.GameWindow;
+import de.spareripsproduction.tinyengine.Os;
 
 import java.awt.*;
 
@@ -74,6 +75,16 @@ public class TELabel extends TEView {
     public void render(Graphics2D context) {
         Font contextFont = context.getFont();
         context.setColor(this.textColor);
+        if(Os.isWindows()) {
+            this.setText(this.getText().replace("ä", "ae"));
+            this.setText(this.getText().replace("ü", "ue"));
+            this.setText(this.getText().replace("ö", "oe"));
+            this.setText(this.getText().replace("ß", "ss"));
+
+            this.setText(this.getText().replace("Ä", "Ae"));
+            this.setText(this.getText().replace("Ü", "Ue"));
+            this.setText(this.getText().replace("Ö", "Oe"));
+        }
 
         context.setFont(this.getFont());
         context.drawString(this.text, this.getX(), this.getY());

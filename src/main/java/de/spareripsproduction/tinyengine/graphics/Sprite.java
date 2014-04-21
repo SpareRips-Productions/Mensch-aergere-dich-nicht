@@ -43,7 +43,7 @@ public class Sprite {
             image.getGraphics().drawImage(sourceImage, 0, 0, null);
         } catch (NullPointerException e) {
             //should never because of sourceImage is surrounded by try catch
-            Core.log("You failed, go home!!!");
+            System.exit(-1);
         }
 
 
