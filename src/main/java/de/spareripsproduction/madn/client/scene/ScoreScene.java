@@ -1,12 +1,10 @@
 package de.spareripsproduction.madn.client.scene;
 
-import de.spareripsproduction.madn.client.Game;
 import de.spareripsproduction.madn.client.graphics.Board;
 import de.spareripsproduction.madn.client.logic.Player;
 import de.spareripsproduction.tinyengine.FontManager;
 import de.spareripsproduction.tinyengine.GameWindow;
 import de.spareripsproduction.tinyengine.entity.Entity;
-import de.spareripsproduction.tinyengine.gui.TECollection;
 import de.spareripsproduction.tinyengine.gui.TECollectionVertical;
 import de.spareripsproduction.tinyengine.gui.TELabel;
 
