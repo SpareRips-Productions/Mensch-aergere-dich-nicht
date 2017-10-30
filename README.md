@@ -1,6 +1,7 @@
 # Mensch-aergere-dich-nicht
 
 A little game made for school.
+__Attention:__ This project is old and not supported.
 
 ## Build project
 
